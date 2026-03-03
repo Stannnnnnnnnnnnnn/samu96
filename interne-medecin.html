@@ -28,6 +28,8 @@
     .tree-box { background:var(--bg2,#f0f2f5); border:1px solid var(--border-dim,#ddd);
       border-radius:4px; padding:10px 16px; margin:4px 0; font-size:12px; font-family:var(--mono,monospace); }
     .tree-arrow { text-align:center; color:var(--primary,#003087); font-size:18px; margin:2px 0; }
+    .main,
+    .main * { color:#000 !important; }
   </style>
 </head>
 <body>
@@ -302,8 +304,8 @@ function showModule(id) {
   event.target.classList.add('active');
 }
 </script>
-<script src="js/nav.js"></script>
-<script src="js/main.js"></script>
+<script src="nav.js"></script>
+<script src="main.js"></script>
 <script>renderNav('formations.html');</script>
 </body>
 </html>
