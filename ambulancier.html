@@ -5,24 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formations — Ambulancier</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .module-nav { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+    .mod-btn { font-family:var(--mono,monospace); font-size:11px; padding:6px 14px;
+      background:var(--bg3,#f4f6f9); color:var(--text-dim,#666);
+      border:1px solid var(--border-dim,#ddd); border-radius:3px; cursor:pointer; transition:all .2s; }
+    .mod-btn.active { background:var(--primary,#003087); color:#fff; border-color:var(--primary,#003087); }
+    .module-content { display:none; }
+    .module-content.active { display:block; }
+    .step-list { list-style:none; padding:0; }
+    .step-item { display:flex; gap:14px; align-items:flex-start; padding:12px 16px;
+      background:var(--bg3,#f8f9fa); border:1px solid var(--border-dim,#e0e0e0);
+      border-radius:4px; margin-bottom:8px; }
+    .step-num { font-family:var(--mono,monospace); font-size:13px; font-weight:700;
+      color:var(--primary,#003087); min-width:28px; }
+    .step-text { font-size:13px; line-height:1.6; }
+    .step-text strong { color:var(--text-bright,#1a1a2e); }
+    .info-box { background:rgba(0,48,135,0.06); border-left:3px solid var(--primary,#003087);
+      padding:14px 18px; border-radius:0 4px 4px 0; margin-bottom:16px; font-size:13px; }
+    .warn-box { background:rgba(234,179,8,0.08); border-left:3px solid #eab308;
+      padding:14px 18px; border-radius:0 4px 4px 0; margin-bottom:16px; font-size:13px; }
+  </style>
 </head>
 <body>
 
 <header class="topbar">
   <div class="topbar-left">
     <a href="index.html" class="logo">
-      <img src="assets/logo-samu96.png" alt="Logo SAMU 96" class="logo-img">
+      <div class="logo-badge">SAMU</div>
       <span class="logo-name"><span>96</span> · SUPPORT</span>
     </a>
-    <div class="topbar-status">
-      <div class="status-dot"></div>
-      SYSTÈME EN LIGNE
-    </div>
+    <div class="topbar-status"><div class="status-dot"></div>SYSTÈME EN LIGNE</div>
   </div>
   <nav class="topbar-nav"></nav>
   <div class="topbar-right">
     <span class="topbar-clock"></span>
-    <span class="badge badge-yellow">PARCOURS AMBULANCIER</span>
     <button class="hamburger">☰</button>
   </div>
 </header>
@@ -30,6 +47,7 @@
 <div class="layout">
   <aside class="sidebar"></aside>
   <main class="main">
+
     <div class="page-header">
       <div class="breadcrumb">/ <span>FORMATIONS</span> / <span>AMBULANCIER</span></div>
       <h1 class="page-title">Parcours <span>Ambulancier</span></h1>
@@ -38,50 +56,176 @@
 
     <div class="section-title">Objectifs de formation</div>
     <table class="data-table">
-      <thead>
-        <tr><th>Objectif</th><th>Niveau visé</th><th>Évaluation</th></tr>
-      </thead>
+      <thead><tr><th>Objectif</th><th>Niveau visé</th><th>Évaluation</th></tr></thead>
       <tbody>
-        <tr><td>Conduire un bilan primaire ABCDE rapide et hiérarchisé.</td><td>Intermédiaire</td><td>Mise en situation chronométrée</td></tr>
-        <tr><td>Réaliser les techniques d'immobilisation et de brancardage sans perte de sécurité.</td><td>Expert</td><td>Atelier pratique + validation manœuvres</td></tr>
-        <tr><td>Appliquer la conduite d'urgence et les communications radio.</td><td>Intermédiaire</td><td>Parcours simulation + debriefing radio</td></tr>
-        <tr><td>Mettre en œuvre les gestes de premiers secours vitaux.</td><td>Débutant</td><td>QCM + atelier pratique secourisme</td></tr>
+        <tr><td>Conduire un bilan primaire ABCDE rapide et hiérarchisé.</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td><td>Mise en situation chronométrée</td></tr>
+        <tr><td>Réaliser les techniques d'immobilisation et de brancardage.</td><td><span class="badge badge-red">EXPERT</span></td><td>Atelier pratique + validation manœuvres</td></tr>
+        <tr><td>Appliquer la conduite d'urgence et les communications radio.</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td><td>Simulation + debriefing radio</td></tr>
+        <tr><td>Mettre en œuvre les gestes de premiers secours vitaux.</td><td><span class="badge badge-yellow">DÉBUTANT</span></td><td>QCM + atelier pratique</td></tr>
       </tbody>
     </table>
 
-    <div class="section-title">Chapitres</div>
-    <div class="cards-grid">
-      <a href="#" class="card">
-        <span class="card-icon">01</span>
-        <div class="card-title">Bilan primaire ABCDE</div>
-        <div class="card-desc">Évaluation rapide, priorisation des menaces vitales et packaging initial du patient.</div>
-        <div class="card-meta"><span class="card-tag">Durée : 3h00</span><span class="badge badge-green">DISPONIBLE</span></div>
-      </a>
-      <a href="#" class="card">
-        <span class="card-icon">02</span>
-        <div class="card-title">Immobilisation et brancardage</div>
-        <div class="card-desc">Matelas coquille, plan dur, collier cervical et transferts sécurisés.</div>
-        <div class="card-meta"><span class="card-tag">Durée : 3h30</span><span class="badge badge-yellow">EN COURS</span></div>
-      </a>
-      <a href="#" class="card">
-        <span class="card-icon">03</span>
-        <div class="card-title">Conduite en situation d'urgence</div>
-        <div class="card-desc">Règles de priorité, anticipation des risques et communication radio opérationnelle.</div>
-        <div class="card-meta"><span class="card-tag">Durée : 2h30</span><span class="badge badge-green">DISPONIBLE</span></div>
-      </a>
-      <a href="#" class="card">
-        <span class="card-icon">04</span>
-        <div class="card-title">Gestes de premiers secours</div>
-        <div class="card-desc">PLS, obstruction des voies aériennes, compression et contrôle des hémorragies.</div>
-        <div class="card-meta"><span class="card-tag">Durée : 2h15</span><span class="badge badge-yellow">EN COURS</span></div>
-      </a>
+    <div class="section-title">Modules</div>
+    <div class="module-nav">
+      <button class="mod-btn active" onclick="showModule('abcde')">01 · Bilan ABCDE</button>
+      <button class="mod-btn" onclick="showModule('immobilisation')">02 · Immobilisation</button>
+      <button class="mod-btn" onclick="showModule('conduite')">03 · Conduite urgence</button>
+      <button class="mod-btn" onclick="showModule('secours')">04 · Gestes de secours</button>
     </div>
 
-    <div class="section-title">Tableau des compétences visées</div>
+    <!-- MODULE 1 : ABCDE -->
+    <div id="mod-abcde" class="module-content active">
+      <div class="panel">
+        <div class="panel-header">🔍 Module 01 — Bilan primaire ABCDE · Durée : 3h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-body">
+          <div class="info-box">Le bilan ABCDE est une approche systématique et priorisée de l'évaluation du patient en urgence. Chaque lettre doit être évaluée ET traitée avant de passer à la suivante.</div>
+
+          <div class="section-title">A — Airway (Voies aériennes)</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">A</span><span class="step-text"><strong>Évaluation</strong> — le patient parle ? Bruit anormal (stridor, ronflement) ? Corps étranger visible ?</span></li>
+            <li class="step-item"><span class="step-num">→</span><span class="step-text"><strong>Actions</strong> — subluxation mandibulaire · aspirateur de mucosités · canule de Guédel si inconscient · PLS si ventilation présente.</span></li>
+          </ul>
+
+          <div class="section-title">B — Breathing (Ventilation)</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">B</span><span class="step-text"><strong>Évaluation</strong> — fréquence respiratoire · amplitude · symétrie thoracique · SpO2 · tirage · cyanose.</span></li>
+            <li class="step-item"><span class="step-num">→</span><span class="step-text"><strong>Actions</strong> — O2 si SpO2 &lt; 94% · MHC 15 L/min si détresse · ventilation au BAVU si apnée · appel médecin régulateur.</span></li>
+          </ul>
+
+          <div class="section-title">C — Circulation</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">C</span><span class="step-text"><strong>Évaluation</strong> — pouls radial/carotidien · fréquence · PA · TRC (temps de recoloration capillaire) · hémorragie extériorisée.</span></li>
+            <li class="step-item"><span class="step-num">→</span><span class="step-text"><strong>Actions</strong> — compressions directes sur hémorragie · CAT si artère de membre · allonger jambes surélevées si choc · DSA si ACR.</span></li>
+          </ul>
+
+          <div class="section-title">D — Disability (Neurologie)</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">D</span><span class="step-text"><strong>Évaluation</strong> — Glasgow (yeux/verbal/moteur) · réactivité pupilles · déficit moteur · glycémie capillaire.</span></li>
+            <li class="step-item"><span class="step-num">→</span><span class="step-text"><strong>Actions</strong> — glucose oral si GHD et conscient · position latérale si vomissements · signaler déficit au médecin.</span></li>
+          </ul>
+
+          <div class="section-title">E — Exposition</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">E</span><span class="step-text"><strong>Évaluation</strong> — déshabillage complet · recherche lésions cachées · brûlures · température.</span></li>
+            <li class="step-item"><span class="step-num">→</span><span class="step-text"><strong>Actions</strong> — couverture de survie contre l'hypothermie · recouvririmmédiatement après examen · respecter la dignité.</span></li>
+          </ul>
+
+          <div class="section-title">Critères de gravité immédiate</div>
+          <table class="data-table">
+            <thead><tr><th>Signe</th><th>Valeur</th><th>Priorité</th></tr></thead>
+            <tbody>
+              <tr><td>Absence de pouls</td><td>—</td><td><span class="badge badge-red">P0 — ACR</span></td></tr>
+              <tr><td>SpO2</td><td class="mono">&lt; 90%</td><td><span class="badge badge-red">P0/P1</span></td></tr>
+              <tr><td>PA systolique</td><td class="mono">&lt; 90 mmHg</td><td><span class="badge badge-red">P1 — Choc</span></td></tr>
+              <tr><td>Glasgow</td><td class="mono">≤ 8</td><td><span class="badge badge-red">P1</span></td></tr>
+              <tr><td>FR</td><td class="mono">&lt; 8 ou &gt; 30</td><td><span class="badge badge-red">P1</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 2 : IMMOBILISATION -->
+    <div id="mod-immobilisation" class="module-content">
+      <div class="panel">
+        <div class="panel-header">🦴 Module 02 — Immobilisation & Brancardage · Durée : 3h30 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
+        <div class="panel-body">
+
+          <div class="section-title">Collier cervical — Indications & Pose</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">IND</span><span class="step-text"><strong>Indications</strong> — tout traumatisme avec mécanisme à risque rachidien : AVP haute cinétique, chute > 3m, plongeon, sport de contact, patient inconscient traumatique.</span></li>
+            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Maintien tête</strong> — équipier 1 maintient la tête en position neutre dans l'axe. Ne pas corriger une déformation.</span></li>
+            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Mesure taille</strong> — 4 doigts de l'épaule au lobe d'oreille = taille du collier.</span></li>
+            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Pose</strong> — équipier 2 glisse la partie postérieure, positionne l'appui mentonnier, ferme velcro. Vérifier l'espace 2 doigts sous menton.</span></li>
+          </ul>
+
+          <div class="section-title">Matelas à dépression (coquille)</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Préparation</strong> — matelas à plat, granules répartis uniformément. Poser à côté du patient.</span></li>
+            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Transfert</strong> — technique du pont ou roulade en bloc (3 équipiers minimum). Garder l'axe tête-tronc-membres.</span></li>
+            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Moulage</strong> — modeler le matelas autour du patient, particulièrement la tête et le cou.</span></li>
+            <li class="step-item"><span class="step-num">04</span><span class="step-text"><strong>Aspiration</strong> — pompe jusqu'à rigidité complète. Vérifier maintien de la tête. Sangles de maintien.</span></li>
+          </ul>
+
+          <div class="section-title">Plan dur — Technique de relevage</div>
+          <table class="data-table">
+            <thead><tr><th>Équipier</th><th>Position</th><th>Rôle</th></tr></thead>
+            <tbody>
+              <tr><td>Chef (E1)</td><td>À la tête</td><td>Maintien tête + commandes + contrôle alignement</td></tr>
+              <tr><td>E2</td><td>Côté thorax</td><td>Épaules + bassin</td></tr>
+              <tr><td>E3</td><td>Côté jambes</td><td>Bassin + membres inférieurs</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 3 : CONDUITE -->
+    <div id="mod-conduite" class="module-content">
+      <div class="panel">
+        <div class="panel-header">🚑 Module 03 — Conduite en urgence · Durée : 2h30 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-body">
+          <div class="warn-box"><strong>⚠ Rappel légal :</strong> Les dérogations au Code de la Route (feux rouges, sens interdits) ne sont autorisées qu'avec gyrophares ET avertisseur sonore activés, et après vérification de la sécurité.</div>
+
+          <div class="section-title">Règles de circulation prioritaire</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Double signal obligatoire</strong> — gyrophare + deux-tons simultanément pour bénéficier de la priorité de passage.</span></li>
+            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Intersections</strong> — ralentir systématiquement, vérifier dégagement de tous les axes avant de s'engager même avec feu vert.</span></li>
+            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Vitesse adaptée</strong> — la priorité ne dispense pas d'adapter sa vitesse aux conditions (météo, visibilité, densité trafic).</span></li>
+            <li class="step-item"><span class="step-num">04</span><span class="step-text"><strong>Responsabilité</strong> — le conducteur reste responsable de tout accident causé. Priorité ne = pas immunité.</span></li>
+          </ul>
+
+          <div class="section-title">Communication radio en déplacement</div>
+          <table class="data-table">
+            <thead><tr><th>Situation</th><th>Message type</th></tr></thead>
+            <tbody>
+              <tr><td>Départ intervention</td><td class="mono">"SAMU 96-1 de Régulation, départ pour [adresse], terminé."</td></tr>
+              <tr><td>Arrivée sur scène</td><td class="mono">"SAMU 96-1 de Régulation, arrivée sur les lieux, bilan dans 5 min, terminé."</td></tr>
+              <tr><td>Bilan terrain</td><td class="mono">"SAMU 96-1 de Régulation, bilan : [SBAR], demande [mesure], terminé."</td></tr>
+              <tr><td>Départ vers hôpital</td><td class="mono">"SAMU 96-1 de Régulation, départ CHU avec [patient], ETA [X] min, terminé."</td></tr>
+              <tr><td>Disponibilité</td><td class="mono">"SAMU 96-1 de Régulation, disponible, terminé."</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 4 : GESTES DE SECOURS -->
+    <div id="mod-secours" class="module-content">
+      <div class="panel">
+        <div class="panel-header">🩹 Module 04 — Gestes de premiers secours · Durée : 2h15 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
+        <div class="panel-body">
+
+          <div class="section-title">Position Latérale de Sécurité (PLS)</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">IND</span><span class="step-text"><strong>Indications</strong> — patient inconscient, ventilation présente, absence de traumatisme rachidien suspecté.</span></li>
+            <li class="step-item"><span class="step-num">01</span><span class="step-text">Bras côté rotation à 90° · plier genou opposé · rotation douce en bloc · stabiliser avec genou plié · tête en extension · bouche vers le bas.</span></li>
+          </ul>
+
+          <div class="section-title">Obstruction des voies aériennes</div>
+          <table class="data-table">
+            <thead><tr><th>Type</th><th>Signe clinique</th><th>Geste</th></tr></thead>
+            <tbody>
+              <tr><td>Partielle (adulte/enfant)</td><td>Toux efficace, peut parler</td><td>Encourager la toux — NE PAS INTERVENIR</td></tr>
+              <tr><td>Totale (adulte)</td><td>Toux inefficace, cyanose, aphonie</td><td>5 claques dorsales → 5 compressions abdominales (Heimlich)</td></tr>
+              <tr><td>Totale (nourrisson)</td><td>Idem</td><td>5 claques dorsales → 5 compressions thoraciques (pas Heimlich)</td></tr>
+              <tr><td>Inconscient</td><td>Absence ventilation</td><td>RCP immédiate + retirer CE visible</td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">Contrôle hémorragie externe</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Compression directe</strong> — gants + compresse épaisse + pression ferme et continue ≥ 10 min. 1ère intention dans tous les cas.</span></li>
+            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Garrot (CAT)</strong> — uniquement si membre et compression impossible ou inefficace. 5 cm au-dessus de la plaie. Noter l'heure. <strong>Max 2h.</strong></span></li>
+            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Packing</strong> — plaie cavitaire non accessible (aine, aisselle, cou) : menottage avec compresses hémostatiques si disponibles.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:32px;">Tableau des compétences visées</div>
     <table class="data-table">
-      <thead>
-        <tr><th>Compétence</th><th>Domaine</th><th>Niveau</th></tr>
-      </thead>
+      <thead><tr><th>Compétence</th><th>Domaine</th><th>Niveau</th></tr></thead>
       <tbody>
         <tr><td>Repérer et traiter les détresses vitales initiales</td><td>Évaluation clinique</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
         <tr><td>Installer un patient traumatique en sécurité</td><td>Traumatologie</td><td><span class="badge badge-red">EXPERT</span></td></tr>
@@ -89,6 +233,7 @@
         <tr><td>Réaliser les gestes secouristes de base</td><td>Secourisme</td><td><span class="badge badge-yellow">DÉBUTANT</span></td></tr>
       </tbody>
     </table>
+
   </main>
 </div>
 
@@ -97,8 +242,16 @@
   <span class="topbar-clock"></span>
 </footer>
 
-<script src="nav.js"></script>
-<script src="main.js"></script>
+<script>
+function showModule(id) {
+  document.querySelectorAll('.module-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.mod-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('mod-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+<script src="js/nav.js"></script>
+<script src="js/main.js"></script>
 <script>renderNav('formations.html');</script>
 </body>
 </html>

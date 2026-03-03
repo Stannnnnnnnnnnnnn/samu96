@@ -5,24 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formations — Interne / Médecin</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .module-nav { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+    .mod-btn { font-family:var(--mono,monospace); font-size:11px; padding:6px 14px;
+      background:var(--bg3,#f4f6f9); color:var(--text-dim,#666);
+      border:1px solid var(--border-dim,#ddd); border-radius:3px; cursor:pointer; transition:all .2s; }
+    .mod-btn.active { background:var(--primary,#003087); color:#fff; border-color:var(--primary,#003087); }
+    .module-content { display:none; }
+    .module-content.active { display:block; }
+    .step-list { list-style:none; padding:0; }
+    .step-item { display:flex; gap:14px; align-items:flex-start; padding:12px 16px;
+      background:var(--bg3,#f8f9fa); border:1px solid var(--border-dim,#e0e0e0);
+      border-radius:4px; margin-bottom:8px; }
+    .step-num { font-family:var(--mono,monospace); font-size:13px; font-weight:700;
+      color:var(--primary,#003087); min-width:28px; }
+    .step-text { font-size:13px; line-height:1.6; }
+    .step-text strong { color:var(--text-bright,#1a1a2e); }
+    .info-box { background:rgba(0,48,135,0.06); border-left:3px solid var(--primary,#003087);
+      padding:14px 18px; border-radius:0 4px 4px 0; margin-bottom:16px; font-size:13px; }
+    .warn-box { background:rgba(234,179,8,0.08); border-left:3px solid #eab308;
+      padding:14px 18px; border-radius:0 4px 4px 0; margin-bottom:16px; font-size:13px; }
+    .tree-box { background:var(--bg2,#f0f2f5); border:1px solid var(--border-dim,#ddd);
+      border-radius:4px; padding:10px 16px; margin:4px 0; font-size:12px; font-family:var(--mono,monospace); }
+    .tree-arrow { text-align:center; color:var(--primary,#003087); font-size:18px; margin:2px 0; }
+  </style>
 </head>
 <body>
 
 <header class="topbar">
   <div class="topbar-left">
     <a href="index.html" class="logo">
-      <img src="assets/logo-samu96.png" alt="Logo SAMU 96" class="logo-img">
+      <div class="logo-badge">SAMU</div>
       <span class="logo-name"><span>96</span> · SUPPORT</span>
     </a>
-    <div class="topbar-status">
-      <div class="status-dot"></div>
-      SYSTÈME EN LIGNE
-    </div>
+    <div class="topbar-status"><div class="status-dot"></div>SYSTÈME EN LIGNE</div>
   </div>
   <nav class="topbar-nav"></nav>
   <div class="topbar-right">
     <span class="topbar-clock"></span>
-    <span class="badge badge-red">PARCOURS INTERNE / MÉDECIN</span>
     <button class="hamburger">☰</button>
   </div>
 </header>
@@ -30,6 +50,7 @@
 <div class="layout">
   <aside class="sidebar"></aside>
   <main class="main">
+
     <div class="page-header">
       <div class="breadcrumb">/ <span>FORMATIONS</span> / <span>INTERNE / MÉDECIN</span></div>
       <h1 class="page-title">Parcours <span>Interne / Médecin</span></h1>
@@ -38,57 +59,233 @@
 
     <div class="section-title">Objectifs de formation</div>
     <table class="data-table">
-      <thead>
-        <tr><th>Objectif</th><th>Niveau visé</th><th>Évaluation</th></tr>
-      </thead>
+      <thead><tr><th>Objectif</th><th>Niveau visé</th><th>Évaluation</th></tr></thead>
       <tbody>
-        <tr><td>Prioriser les appels selon niveaux P0 à P4.</td><td>Intermédiaire</td><td>Audit d'appels régulation simulés</td></tr>
-        <tr><td>Prendre une décision rapide sur critères cliniques et différentiels.</td><td>Expert</td><td>Cas progressifs chronométrés</td></tr>
-        <tr><td>Maîtriser les procédures médicales préhospitalières avancées.</td><td>Expert</td><td>Simulation procédurale + revue collégiale</td></tr>
-        <tr><td>Coordonner l'action inter-services en contexte crise.</td><td>Intermédiaire</td><td>Exercice ORSAN multi-acteurs</td></tr>
+        <tr><td>Prioriser les appels selon niveaux P0 à P4.</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td><td>Audit d'appels régulation simulés</td></tr>
+        <tr><td>Prendre une décision rapide sur critères cliniques et différentiels.</td><td><span class="badge badge-red">EXPERT</span></td><td>Cas progressifs chronométrés</td></tr>
+        <tr><td>Maîtriser les procédures médicales préhospitalières avancées.</td><td><span class="badge badge-red">EXPERT</span></td><td>Simulation procédurale + revue collégiale</td></tr>
+        <tr><td>Coordonner l'action inter-services en contexte de crise.</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td><td>Exercice ORSAN multi-acteurs</td></tr>
       </tbody>
     </table>
 
-    <div class="section-title">Chapitres</div>
-    <div class="cards-grid">
-      <a href="#" class="card">
-        <span class="card-icon">01</span>
-        <div class="card-title">Régulation médicale</div>
-        <div class="card-desc">Priorités P0-P4, critères d'engagement SMUR et gestion des flux d'appels.</div>
-        <div class="card-meta"><span class="card-tag">Durée : 3h30</span><span class="badge badge-green">DISPONIBLE</span></div>
-      </a>
-      <a href="#" class="card">
-        <span class="card-icon">02</span>
-        <div class="card-title">Prise de décision en urgence</div>
-        <div class="card-desc">Arbres décisionnels, diagnostics différentiels et stratégie thérapeutique initiale.</div>
-        <div class="card-meta"><span class="card-tag">Durée : 3h00</span><span class="badge badge-yellow">EN COURS</span></div>
-      </a>
-      <a href="#" class="card">
-        <span class="card-icon">03</span>
-        <div class="card-title">Procédures médicales avancées</div>
-        <div class="card-desc">Anesthésie pré-hospitalière, sédation procédurale, thoracotomie d'urgence.</div>
-        <div class="card-meta"><span class="card-tag">Durée : 4h00</span><span class="badge badge-yellow">EN COURS</span></div>
-      </a>
-      <a href="#" class="card">
-        <span class="card-icon">04</span>
-        <div class="card-title">Coordination inter-services</div>
-        <div class="card-desc">SDIS, hôpital, forces de l'ordre et activation plan ORSAN.</div>
-        <div class="card-meta"><span class="card-tag">Durée : 2h45</span><span class="badge badge-green">DISPONIBLE</span></div>
-      </a>
+    <div class="section-title">Modules</div>
+    <div class="module-nav">
+      <button class="mod-btn active" onclick="showModule('regulation')">01 · Régulation médicale</button>
+      <button class="mod-btn" onclick="showModule('decision')">02 · Décision en urgence</button>
+      <button class="mod-btn" onclick="showModule('procedures')">03 · Procédures avancées</button>
+      <button class="mod-btn" onclick="showModule('coordination')">04 · Coordination inter-services</button>
     </div>
 
-    <div class="section-title">Tableau des compétences visées</div>
+    <!-- MODULE 1 : RÉGULATION -->
+    <div id="mod-regulation" class="module-content active">
+      <div class="panel">
+        <div class="panel-header">📞 Module 01 — Régulation médicale · Durée : 3h30 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-body">
+          <div class="info-box">Le médecin régulateur est le pivot du SAMU. Il évalue, priorise et décide des moyens à engager pour chaque appel entrant, 24h/24. Sa décision est médicale et engage sa responsabilité.</div>
+
+          <div class="section-title">Niveaux de priorité P0 → P4</div>
+          <table class="data-table">
+            <thead><tr><th>Niveau</th><th>Définition</th><th>Exemples</th><th>Moyen</th><th>Délai</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-red">P0</span></td>
+                <td>Détresse vitale immédiate</td>
+                <td>ACR, détresse respi sévère, coma</td>
+                <td>SMUR</td>
+                <td class="mono text-red">&lt; 8 min</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-red">P1</span></td>
+                <td>Urgence vitale potentielle</td>
+                <td>Douleur thoracique, AVC, trauma grave</td>
+                <td>SMUR ± VSAV</td>
+                <td class="mono text-red">&lt; 15 min</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-yellow">P2</span></td>
+                <td>Urgence relative</td>
+                <td>Fracture, douleur abdominale, fièvre haute</td>
+                <td>VSAV</td>
+                <td class="mono">&lt; 30 min</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-yellow">P3</span></td>
+                <td>Urgence différable</td>
+                <td>Plaie mineure, malaise résolu, chute sans trauma</td>
+                <td>VSAV / VSL</td>
+                <td class="mono">&lt; 60 min</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-dim">P4</span></td>
+                <td>Conseil médical</td>
+                <td>Conseil médicamenteux, orientation médecin ville</td>
+                <td>Téléphone</td>
+                <td class="mono">Différé</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">Critères d'engagement SMUR vs VSAV</div>
+          <div class="grid-2">
+            <div>
+              <div style="background:rgba(230,48,48,0.08);border:1px solid rgba(230,48,48,0.2);border-radius:4px;padding:16px;">
+                <div style="font-family:var(--mono,monospace);font-size:11px;color:#e63030;letter-spacing:2px;margin-bottom:10px;">SMUR — CRITÈRES</div>
+                <ul style="font-size:13px;padding-left:16px;line-height:2;">
+                  <li>Détresse vitale confirmée ou fortement suspectée</li>
+                  <li>Geste médical invasif prévisible (IOT, IOO, thrombolyse)</li>
+                  <li>Traitement médicamenteux spécialisé nécessaire</li>
+                  <li>Transfert secondaire médicalisé (TIHM)</li>
+                  <li>Doute diagnostique à fort risque vital</li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div style="background:rgba(234,179,8,0.08);border:1px solid rgba(234,179,8,0.2);border-radius:4px;padding:16px;">
+                <div style="font-family:var(--mono,monospace);font-size:11px;color:#eab308;letter-spacing:2px;margin-bottom:10px;">VSAV — CRITÈRES</div>
+                <ul style="font-size:13px;padding-left:16px;line-height:2;">
+                  <li>Urgence relative sans critère de gravité immédiate</li>
+                  <li>Surveillance de paramètres stables</li>
+                  <li>Transport programmé vers structure adaptée</li>
+                  <li>Bilan et conditionnement sans geste invasif</li>
+                  <li>Renfort bilan en attente du SMUR</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 2 : DÉCISION -->
+    <div id="mod-decision" class="module-content">
+      <div class="panel">
+        <div class="panel-header">🧠 Module 02 — Prise de décision en urgence · Durée : 3h00 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
+        <div class="panel-body">
+          <div class="info-box">La décision médicale en urgence préhospitalière s'appuie sur une évaluation rapide, des arbres décisionnels éprouvés et une gestion du risque d'erreur dans un environnement contraignant.</div>
+
+          <div class="section-title">Douleur thoracique — Arbre décisionnel</div>
+          <div style="max-width:500px;">
+            <div class="tree-box" style="background:rgba(230,48,48,0.08);border-color:rgba(230,48,48,0.3);">Douleur thoracique → ECG 12 dérivations immédiat</div>
+            <div class="tree-arrow">↓</div>
+            <div style="display:flex;gap:8px;">
+              <div style="flex:1;">
+                <div class="tree-box" style="background:rgba(230,48,48,0.1);border-color:rgba(230,48,48,0.4);"><strong>Sus-ST ≥ 2mm</strong></div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box">SCA-ST+ → Activation coronarographie → Aspirine 250mg + Héparine → Transport direct USIC</div>
+              </div>
+              <div style="flex:1;">
+                <div class="tree-box"><strong>Pas de sus-ST</strong></div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box">Clinique + PA + auscultation → SCA-NSTEMI ? EP ? Dissection ? → Orientation adaptée</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-title" style="margin-top:20px;">Diagnostics différentiels — Douleur thoracique</div>
+          <table class="data-table">
+            <thead><tr><th>Diagnostic</th><th>Signe discriminant</th><th>Action clé</th></tr></thead>
+            <tbody>
+              <tr><td>SCA-ST+</td><td>Sus-ST ECG + douleur irradiante + sueurs</td><td>Coronarographie urgente</td></tr>
+              <tr><td>EP massive</td><td>Hypoxie + tachycardie + signes droits ECG + contexte</td><td>Thrombolyse si choc</td></tr>
+              <tr><td>Dissection aortique</td><td>Douleur déchirante + asymétrie PA bras</td><td>Chirurgie vasculaire urgente — pas d'anticoagulants</td></tr>
+              <tr><td>Pneumothorax suffocant</td><td>Silence auscultatoire unilatéral + déviation trachée</td><td>Exsufflation immédiate</td></tr>
+              <tr><td>OAP</td><td>Crépitants bilatéraux + orthopnée + SpO2 basse</td><td>O2 + Furosémide + VNI</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 3 : PROCÉDURES AVANCÉES -->
+    <div id="mod-procedures" class="module-content">
+      <div class="panel">
+        <div class="panel-header">⚕️ Module 03 — Procédures médicales avancées · Durée : 4h00 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
+        <div class="panel-body">
+
+          <div class="section-title">Anesthésie préhospitalière — Séquence rapide</div>
+          <table class="data-table">
+            <thead><tr><th>Étape</th><th>Médicament</th><th>Dose</th><th>Délai d'action</th></tr></thead>
+            <tbody>
+              <tr><td>Prémédication vagolytique</td><td>Atropine</td><td class="mono">0,5 mg IV</td><td>1–2 min</td></tr>
+              <tr><td>Induction hypnotique</td><td>Kétamine</td><td class="mono">1,5–2 mg/kg IV</td><td>30–60 sec</td></tr>
+              <tr><td>Curarisation</td><td>Succinylcholine</td><td class="mono">1 mg/kg IV</td><td>60 sec</td></tr>
+              <tr><td>Alternative curarisation</td><td>Rocuronium</td><td class="mono">1,2 mg/kg IV</td><td>60–90 sec</td></tr>
+              <tr><td>Entretien sédation</td><td>Midazolam + Sufentanil</td><td class="mono">0,05–0,1 mg/kg/h + 0,2 µg/kg/h</td><td>Continu</td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">Thrombolyse préhospitalière — STEMI</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">IND</span><span class="step-text"><strong>Indications</strong> — STEMI confirmé + délai coronarographie > 120 min + pas de contre-indication.</span></li>
+            <li class="step-item"><span class="step-num">CI</span><span class="step-text"><strong>Contre-indications absolues</strong> — AVC récent &lt; 6 mois · chirurgie majeure &lt; 3 sem · hémorragie active · PA &gt; 180/110 incontrôlée · dissection aortique suspectée.</span></li>
+            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Ténectéplase (TNK)</strong> — dose selon poids IV bolus. Aspiriné 250 mg + Énoxaparine selon protocole local.</span></li>
+            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Surveillance post-thrombolyse</strong> — ECG toutes les 30 min · reperfusion si sus-ST réduit ≥ 50% · transfert coronarographie dans les 3–24h.</span></li>
+          </ul>
+
+          <div class="section-title">Sédation procédurale</div>
+          <table class="data-table">
+            <thead><tr><th>Procédure</th><th>Agent</th><th>Dose</th><th>Monitoring requis</th></tr></thead>
+            <tbody>
+              <tr><td>Cardioversion électrique</td><td>Midazolam ± Kétamine</td><td class="mono">1–3 mg IV + 0,5 mg/kg</td><td>ECG continu + SpO2 + PA</td></tr>
+              <tr><td>Réduction luxation</td><td>Kétamine</td><td class="mono">1 mg/kg IV ou 4 mg/kg IM</td><td>SpO2 + PA + scope</td></tr>
+              <tr><td>Pansement brûlure étendue</td><td>Kétamine + Midazolam</td><td class="mono">1 mg/kg + 0,05 mg/kg</td><td>SpO2 + PA + EtCO2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 4 : COORDINATION -->
+    <div id="mod-coordination" class="module-content">
+      <div class="panel">
+        <div class="panel-header">🤝 Module 04 — Coordination inter-services · Durée : 2h45 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-body">
+          <div class="info-box">En situation de crise ou de multi-victimes, la coordination entre SAMU, SDIS, forces de l'ordre et hôpitaux est déterminante. Le médecin régulateur SAMU coordonne le volet médical.</div>
+
+          <div class="section-title">Niveaux ORSAN</div>
+          <table class="data-table">
+            <thead><tr><th>Niveau</th><th>Déclenchement</th><th>Effectifs engagés</th><th>Commandement</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-green">ORSAN 1</span></td><td>Afflux ponctuel modéré (5–15 patients)</td><td>Renfort équipes en place</td><td>Médecin régulateur</td></tr>
+              <tr><td><span class="badge badge-yellow">ORSAN 2</span></td><td>Afflux important (15–50 patients)</td><td>Rappel de personnel, ouverture lits</td><td>Directeur médical de crise</td></tr>
+              <tr><td><span class="badge badge-red">ORSAN 3</span></td><td>Catastrophe (> 50 patients)</td><td>Mobilisation totale, plan blanc</td><td>Cellule de crise ARS + préfecture</td></tr>
+              <tr><td><span class="badge badge-red">ORSAN 4</span></td><td>Crise sanitaire majeure</td><td>Dispositif national</td><td>DGS + Gouvernement</td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">Triage multi-victimes — Méthode SIEVE</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">M</span><span class="step-text"><strong>Marche</strong> — les victimes qui marchent seules = urgence relative. Les diriger vers un point de rassemblement.</span></li>
+            <li class="step-item"><span class="step-num">V</span><span class="step-text"><strong>Ventilation</strong> — ouvrir les voies aériennes. Ventilation absente après ouverture = décédé (T4). Présente → étape suivante.</span></li>
+            <li class="step-item"><span class="step-num">FR</span><span class="step-text"><strong>FR &gt; 30 ou &lt; 10</strong> → Urgence absolue T1 (rouge). FR 10–29 → étape suivante.</span></li>
+            <li class="step-item"><span class="step-num">TRC</span><span class="step-text"><strong>TRC &gt; 2 secondes ou pouls radial absent</strong> → T1 (rouge). TRC ≤ 2s → T2 (jaune) urgence relative.</span></li>
+          </ul>
+
+          <div class="section-title">Interfaces inter-services</div>
+          <table class="data-table">
+            <thead><tr><th>Service</th><th>Rôle en préhospitalier</th><th>Canal de communication</th></tr></thead>
+            <tbody>
+              <tr><td>SDIS</td><td>Premiers secours, sécurisation, désincarcération</td><td>ANTARES + téléphone direct COZ</td></tr>
+              <tr><td>Police / Gendarmerie</td><td>Sécurisation scène, périmètre, identification victimes</td><td>Téléphone direct + radio ACROPOL</td></tr>
+              <tr><td>SAMU voisins</td><td>Renfort en cas de saturation</td><td>Téléphone direct régulation à régulation</td></tr>
+              <tr><td>ARS</td><td>Activation plans nationaux, ressources hospitalières</td><td>Astreinte ARS 24h/24</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:32px;">Tableau des compétences visées</div>
     <table class="data-table">
-      <thead>
-        <tr><th>Compétence</th><th>Domaine</th><th>Niveau</th></tr>
-      </thead>
+      <thead><tr><th>Compétence</th><th>Domaine</th><th>Niveau</th></tr></thead>
       <tbody>
         <tr><td>Arbitrer une priorité d'engagement médicalisée</td><td>Régulation</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
         <tr><td>Choisir une stratégie diagnostique/thérapeutique en incertitude</td><td>Décision clinique</td><td><span class="badge badge-red">EXPERT</span></td></tr>
         <tr><td>Réaliser une procédure avancée en sécurité</td><td>Médecine d'urgence</td><td><span class="badge badge-red">EXPERT</span></td></tr>
-        <tr><td>Piloter la coordination avec acteurs externes</td><td>Gestion de crise</td><td><span class="badge badge-yellow">DÉBUTANT</span></td></tr>
+        <tr><td>Piloter la coordination avec acteurs externes</td><td>Gestion de crise</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
       </tbody>
     </table>
+
   </main>
 </div>
 
@@ -97,8 +294,16 @@
   <span class="topbar-clock"></span>
 </footer>
 
-<script src="nav.js"></script>
-<script src="main.js"></script>
+<script>
+function showModule(id) {
+  document.querySelectorAll('.module-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.mod-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('mod-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+<script src="js/nav.js"></script>
+<script src="js/main.js"></script>
 <script>renderNav('formations.html');</script>
 </body>
 </html>
