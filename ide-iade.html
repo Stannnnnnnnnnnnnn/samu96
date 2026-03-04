@@ -90,24 +90,34 @@
 
           <div class="section-title">Médicaments de réanimation</div>
           <table class="data-table">
-            <thead><tr><th>Médicament</th><th>Indication principale</th><th>Dose adulte</th><th>Voie</th><th>Surveillance</th></tr></thead>
+            <thead><tr><th>Médicament</th><th>Indication</th><th>Dose</th><th>Voie</th><th>Surveillance</th></tr></thead>
             <tbody>
-              <tr><td><strong>Adrénaline</strong></td><td>ACR, anaphylaxie</td><td class="mono">1 mg (ACR) · 0,5 mg IM (anaph.)</td><td>IV/IO/IM</td><td>FC, PA, rythme ECG</td></tr>
-              <tr><td><strong>Amiodarone</strong></td><td>FV/TV réfractaire</td><td class="mono">300 mg IVL (puis 150 mg)</td><td>IV</td><td>PA, bradycardie, phléb.</td></tr>
-              <tr><td><strong>Atropine</strong></td><td>Bradycardie symptomatique</td><td class="mono">1 mg IV (max 3 mg)</td><td>IV</td><td>FC, sécheresse buccale</td></tr>
-              <tr><td><strong>Morphine</strong></td><td>Douleur intense</td><td class="mono">2–4 mg IV titration</td><td>IV/SC</td><td>FR, SpO2, conscience</td></tr>
-              <tr><td><strong>Kétamine</strong></td><td>Analgésie dissociative, induction</td><td class="mono">1–2 mg/kg IV (induction)</td><td>IV/IM</td><td>PA, FC, émergence</td></tr>
-              <tr><td><strong>Midazolam</strong></td><td>Sédation, convulsions</td><td class="mono">1–5 mg IV titration</td><td>IV/IM/IN</td><td>FR, SpO2, conscience</td></tr>
-              <tr><td><strong>Naloxone</strong></td><td>Intoxication opioïdes</td><td class="mono">0,4 mg IV titration</td><td>IV/IM/IN</td><td>FR, conscience, re-sédation</td></tr>
-              <tr><td><strong>Furosémide</strong></td><td>OAP, surcharge hydrique</td><td class="mono">40–80 mg IV</td><td>IV</td><td>Diurèse, PA, ionogramme</td></tr>
+              <tr><td><strong>Adrénaline</strong></td><td>ACR, anaphylaxie</td><td class="mono">1 mg (ACR) · 0,5 mg IM</td><td>IV/IO/IM</td><td>FC, PA, rythme</td></tr>
+              <tr><td><strong>Morphine</strong></td><td>Douleur intense</td><td class="mono">2–4 mg IV</td><td>IV</td><td>FR, SpO2</td></tr>
+              <tr><td><strong>Paracétamol</strong></td><td>Douleur, fièvre</td><td class="mono">1 g IV</td><td>IV</td><td>Tolérance</td></tr>
+              <tr><td><strong>Naloxone</strong></td><td>Overdose stupéfiants</td><td class="mono">0,4 mg IV titration</td><td>IV/IM/IN</td><td>FR, conscience, vigilance</td></tr>
+              <tr><td><strong>Coma éthylique</strong></td><td>Ivresse profonde, coma alcoolique</td><td class="mono">—</td><td>—</td><td>FR, conscience, ne pas laisser seul</td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">Thérapeutiques non-médicamenteuses</div>
+          <table class="data-table">
+            <thead><tr><th>Thérapeutique</th><th>Indication</th><th>Remarques</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Défibrillateur</strong></td><td>FV, TV sans pouls</td><td>Disponible en SMUR et ambulances</td></tr>
+              <tr><td><strong>Oxygénothérapie</strong></td><td>Hypoxémie SpO2 &lt; 94%</td><td>Cible SpO2 94-98% post-ROSC</td></tr>
+              <tr><td><strong>ECMO</strong></td><td>ACR réfractaire, support circulatoire</td><td>Coordination CHU dédiée</td></tr>
+              <tr><td><strong>Biafine</strong></td><td>Brûlures superficielles</td><td>Pansement local</td></tr>
+              <tr><td><strong>Bandage hémostatique</strong></td><td>Hémorragie externe incontrôlable</td><td>Technique de compression</td></tr>
+              <tr><td><strong>Trousse premiers soins</strong></td><td>Plaies, blessures mineures</td><td>Kit de base SMUR</td></tr>
             </tbody>
           </table>
 
           <div class="section-title">Règles de sécurité médicamenteuse</div>
           <ul class="step-list">
             <li class="step-item"><span class="step-num">5B</span><span class="step-text"><strong>Bon patient · Bon médicament · Bonne dose · Bonne voie · Bon moment</strong> — vérification systématique avant tout acte.</span></li>
-            <li class="step-item"><span class="step-num">⚠</span><span class="step-text"><strong>Ne jamais associer</strong> Morphine + Midazolam sans surveillance respiratoire continue. Risque de dépression respiratoire grave.</span></li>
-            <li class="step-item"><span class="step-num">⚠</span><span class="step-text"><strong>Amiodarone</strong> : toujours diluée dans G5%, jamais en IV directe hors ACR. Incompatible avec sérum physiologique.</span></li>
+            <li class="step-item"><span class="step-num">⚠</span><span class="step-text"><strong>Morphine</strong> : respecter titration lente. Valider absence allergie avant administration.</span></li>
+            <li class="step-item"><span class="step-num">⚠</span><span class="step-text"><strong>Naloxone</strong> : obligatoire en cas d'overdose stupéfiants. Réversible, effet court (30–90 min).</span></li>
           </ul>
         </div>
       </div>
@@ -119,23 +129,13 @@
         <div class="panel-header">🩺 Module 02 — Gestes techniques · Durée : 5h00 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
         <div class="panel-body">
 
-          <div class="section-title">Check-list IOT (Intubation Oro-Trachéale)</div>
+          <div class="section-title">Check-list VVP (Voie Veineuse Périphérique)</div>
           <ul class="step-list">
-            <li class="step-item"><span class="step-num">P</span><span class="step-text"><strong>Préoxygénation</strong> — O2 15 L/min au masque haute concentration pendant 3 min. SpO2 cible ≥ 95% avant induction.</span></li>
-            <li class="step-item"><span class="step-num">I</span><span class="step-text"><strong>Induction</strong> — Kétamine 1–2 mg/kg IV + Succinylcholine 1 mg/kg IV ou Rocuronium 1,2 mg/kg IV.</span></li>
-            <li class="step-item"><span class="step-num">P</span><span class="step-text"><strong>Pression cricoïdienne</strong> — Manœuvre de Sellick si risque d'inhalation. Maintenue jusqu'au ballonnet gonflé.</span></li>
-            <li class="step-item"><span class="step-num">L</span><span class="step-text"><strong>Laryngoscopie</strong> — lame courbe en bouche, refoulement base de langue vers gauche, exposition glotte. <span class="alert-tag">Tentative ≤ 30s</span></span></li>
-            <li class="step-item"><span class="step-num">T</span><span class="step-text"><strong>Tube</strong> — sonde ID 7,5 femme / 8,0 homme. Passage corde vocale. Ballonnet gonflé à 20–30 cmH2O.</span></li>
-            <li class="step-item"><span class="step-num">V</span><span class="step-text"><strong>Vérification</strong> — auscultation épigastre + 4 champs pulmonaires. EtCO2 si disponible. Fixation + radio si possible.</span></li>
-          </ul>
-
-          <div class="section-title">Voie Intra-Osseuse (VIO) — EZ-IO</div>
-          <ul class="step-list">
-            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Indications</strong> — VVP impossible après 2 tentatives ou urgence vitale immédiate (ACR, choc grave).</span></li>
-            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Sites</strong> — tibia proximal (1ère intention) · humérus proximal · sternum (adulte uniquement, aiguille spécifique).</span></li>
-            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Technique tibia</strong> — repère : 2 cm sous la tubérosité tibiale, face médiale. Aiguille EZ-IO à 90°, appui et rotation. Aspiration de moelle = confirmation.</span></li>
-            <li class="step-item"><span class="step-num">04</span><span class="step-text"><strong>Flush obligatoire</strong> — 10 mL NaCl 0,9% avec pression (seringue ou poche sous pression). <span class="alert-tag">Lidocaïne 40mg si conscient</span></span></li>
-            <li class="step-item"><span class="step-num">05</span><span class="step-text"><strong>Durée max</strong> — 24h. Remplacer par VVP dès que possible.</span></li>
+            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Choix du site</strong> — pli du coude (1ère intention), avant-bras, dos de la main. Éviter membres en insuffisance lymphatique.</span></li>
+            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Désinfection</strong> — Asepsie cutanée avec antiseptique alcoolique. Laisser sécher.</span></li>
+            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Pose cathéter</strong> — pénétration transversale, retrait du mandrin à l'apparition du reflux sanguin. Progression cathéter seul.</span></li>
+            <li class="step-item"><span class="step-num">04</span><span class="step-text"><strong>Fixation + flush</strong> — pansement transparent stérile, stabilisation cathéter. Flush 5 mL NaCl 0,9% pour vérifier perméabilité.</span></li>
+            <li class="step-item"><span class="step-num">05</span><span class="step-text"><strong>Connexion perfusion</strong> — raccordement valve/tubulure si prescription médicale. Documenter heure, site, calibre.</span></li>
           </ul>
 
           <div class="section-title">VVP — Points clés</div>
@@ -162,22 +162,15 @@
             <thead><tr><th>Paramètre</th><th>Fréquence standard</th><th>Fréquence si instable</th><th>Seuil d'alerte</th></tr></thead>
             <tbody>
               <tr><td>SpO2</td><td>Continue</td><td>Continue</td><td class="text-red">&lt; 94%</td></tr>
-              <tr><td>FC</td><td>Continue (scope)</td><td>Continue</td><td class="text-red">&lt; 40 ou &gt; 150/min</td></tr>
-              <tr><td>PA</td><td>Toutes les 5 min</td><td>Continue (PICCO/artère)</td><td class="text-red">PAS &lt; 90 mmHg</td></tr>
+              <tr><td>FC</td><td>Continue</td><td>Continue</td><td class="text-red">&lt; 40 ou &gt; 150/min</td></tr>
+              <tr><td>PA</td><td>Toutes les 5 min</td><td>Toutes les 5 min</td><td class="text-red">PAS &lt; 90 mmHg</td></tr>
               <tr><td>FR</td><td>Toutes les 15 min</td><td>Toutes les 5 min</td><td class="text-red">&lt; 8 ou &gt; 30/min</td></tr>
-              <tr><td>Conscience (GCS)</td><td>Toutes les 15 min</td><td>Toutes les 5 min</td><td class="text-red">Chute ≥ 2 points</td></tr>
-              <tr><td>EtCO2 (intubé)</td><td>Continue</td><td>Continue</td><td class="text-red">&lt; 20 ou &gt; 45 mmHg</td></tr>
+              <tr><td>Glasgow (GCS)</td><td>Toutes les 15 min</td><td>Toutes les 5 min</td><td class="text-red">Chute ≥ 2 points</td></tr>
               <tr><td>Glycémie capillaire</td><td>À l'arrivée</td><td>Toutes les 30 min</td><td class="text-red">&lt; 0,5 ou &gt; 3 g/L</td></tr>
-              <tr><td>Température</td><td>À l'arrivée + arrivée hôpital</td><td>Toutes les 30 min</td><td class="text-red">&lt; 35°C ou &gt; 39°C</td></tr>
             </tbody>
           </table>
 
-          <div class="section-title">Surveillance spécifique post-IOT</div>
-          <ul class="step-list">
-            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Position sonde</strong> — vérifier marquage au niveau des dents toutes les 30 min. Réévaluer si désaturation inexpliquée.</span></li>
-            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Pression ballonnet</strong> — 20–30 cmH2O. Vérifier toutes les heures avec manomètre.</span></li>
-            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Sédation</strong> — évaluer score RASS cible entre -2 et -3. Adapter perfusion selon protocole.</span></li>
-          </ul>
+
         </div>
       </div>
     </div>
@@ -218,13 +211,11 @@
 
           <div class="section-title">Bilan SMUR complet — Exemple terrain</div>
           <div class="info-box" style="font-family:var(--mono,monospace); font-size:12px; line-height:2;">
-            <strong>SAMU 96-1 de SAMU Régulation :</strong><br>
-            [S] Prise en charge M. Dupont Jean, 58 ans, pour ACR récupéré — ROSC obtenu à 14h32.<br>
-            [B] ATCD : cardiopathie ischémique connue. Témoin présent, RCP débutée immédiatement.<br>
-            [A] GCS 6 (Y2V1M3), intubé, sédaté Midazolam + Kétamine. FC 95 régulier, PA 110/70. 
-            SpO2 99% FiO2 100%. EtCO2 38. ECG post-ROSC : sus-ST inférieur.<br>
-            [R] Demande accueil USIC + coronarographie. VVP G18 × 2, Adrénaline 3mg total, 
-            pas d'amiodarone. ETA CHU 8 minutes. Famille prévenue.
+            <strong>GOLF-96 de Régulation :</strong><br>
+            [S] Patient masculin, 45 ans, ACR récupéré — ROSC obtenu à 14h32.<br>
+            [B] ATCD inconnus. Témoin présent, RCP débutée immédiatement.<br>
+            [A] Conscient GCS 8, SpO2 97% sous O2, PA 110/70, FC 95. FR 16 régulière, conscience altérée.<br>
+            [R] Transport CHU, ETA 8 minutes. VVP G18 posée, pas de médicaments administrés en pré-hôpital.
           </div>
         </div>
       </div>

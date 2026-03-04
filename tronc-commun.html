@@ -71,20 +71,19 @@
     <table class="data-table">
       <thead><tr><th>Objectif</th><th>Niveau visé</th><th>Évaluation</th></tr></thead>
       <tbody>
-        <tr><td>Appliquer les algorithmes RCP adulte et pédiatrique.</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td><td>Simulation haute fidélité</td></tr>
-        <tr><td>Identifier les bases anatomiques utiles à la décision préhospitalière.</td><td><span class="badge badge-yellow">DÉBUTANT</span></td><td>QCM + oral raisonnement clinique</td></tr>
+        <tr><td>Appliquer les algorithmes RCP adulte en conforme ERC 2021.</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td><td>Simulation haute fidélité</td></tr>
+        <tr><td>Analyser les constantes vitales et prendre les décisions cliniques en préhospitalier.</td><td><span class="badge badge-yellow">DÉBUTANT</span></td><td>QCM + oral raisonnement clinique</td></tr>
         <tr><td>Conduire une communication soignant/soigné adaptée au stress.</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td><td>Jeux de rôle scénarisés</td></tr>
-        <tr><td>Mettre en œuvre EPI, hygiène et sécurité de scène.</td><td><span class="badge badge-red">EXPERT</span></td><td>Audit terrain + validation tuteur</td></tr>
+        <tr><td>Mettre en œuvre EPI, hygiène et sécurité de scène en intervention.</td><td><span class="badge badge-red">EXPERT</span></td><td>Audit terrain + validation tuteur</td></tr>
       </tbody>
     </table>
 
     <div class="section-title">Modules</div>
     <div class="module-nav">
       <button class="mod-btn active" onclick="showModule('rcp-adulte')">01 · RCP Adulte</button>
-      <button class="mod-btn" onclick="showModule('rcp-pediatrique')">02 · RCP Pédiatrique</button>
-      <button class="mod-btn" onclick="showModule('anatomie')">03 · Anatomie & Physio</button>
-      <button class="mod-btn" onclick="showModule('communication')">04 · Communication</button>
-      <button class="mod-btn" onclick="showModule('securite')">05 · Sécurité & Hygiène</button>
+      <button class="mod-btn" onclick="showModule('constantes')">02 · Constantes vitales</button>
+      <button class="mod-btn" onclick="showModule('communication')">03 · Communication</button>
+      <button class="mod-btn" onclick="showModule('securite')">04 · Sécurité terrain</button>
     </div>
 
     <!-- MODULE 1 : RCP ADULTE -->
@@ -143,128 +142,107 @@
       </div>
     </div>
 
-    <!-- MODULE 2 : RCP PÉDIATRIQUE -->
-    <div id="mod-rcp-pediatrique" class="module-content">
+    <!-- MODULE 2 : CONSTANTES VITALES -->
+    <div id="mod-constantes" class="module-content">
       <div class="panel">
-        <div class="panel-header">👶 Module 02 — RCP Pédiatrique · Durée : 3h00 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
-        <div class="panel-body">
-          <div class="warn-box">
-            <strong>⚠ Spécificité pédiatrique :</strong> L'ACR pédiatrique est le plus souvent d'origine respiratoire (hypoxie), contrairement à l'adulte où il est surtout cardiaque. La ventilation est donc prioritaire.
-          </div>
-
-          <div class="section-title">Séquence RCP Pédiatrique</div>
-          <ul class="step-list">
-            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>5 insufflations initiales</strong> — avant de commencer les compressions (différence majeure vs adulte).</span></li>
-            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Ratio 15:2</strong> — si 2 secouristes. Ratio 30:2 si seul. Fréquence compressions : 100–120/min.</span></li>
-            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Profondeur compressions</strong> — 1/3 du diamètre thoracique : ≈ 4 cm nourrisson, ≈ 5 cm enfant.</span></li>
-            <li class="step-item"><span class="step-num">04</span><span class="step-text"><strong>Technique compressions</strong> — 2 doigts (nourrisson &lt; 1 an) · 1 main (enfant 1–8 ans) · 2 mains (enfant > 8 ans).</span></li>
-          </ul>
-
-          <div class="section-title">Doses médicaments — Pédiatrie</div>
-          <table class="data-table">
-            <thead><tr><th>Médicament</th><th>Dose</th><th>Voie</th><th>Remarque</th></tr></thead>
-            <tbody>
-              <tr><td>Adrénaline</td><td class="mono">10 µg/kg</td><td>IV/IO</td><td>Toutes les 3–5 min</td></tr>
-              <tr><td>Amiodarone</td><td class="mono">5 mg/kg</td><td>IV/IO</td><td>FV/TV réfractaire, max 300mg</td></tr>
-              <tr><td>Atropine</td><td class="mono">20 µg/kg</td><td>IV/IO</td><td>Bradycardie symptomatique, min 100µg</td></tr>
-              <tr><td>Glucose 10%</td><td class="mono">2 ml/kg</td><td>IV/IO</td><td>Si hypoglycémie confirmée</td></tr>
-            </tbody>
-          </table>
-
-          <div class="section-title">Défibrillation pédiatrique</div>
-          <ul class="step-list">
-            <li class="step-item"><span class="step-num">J1</span><span class="step-text"><strong>4 J/kg</strong> — énergie initiale et suivantes. Électrodes pédiatriques si disponibles (&lt; 25 kg). <span class="drug-tag">4 J/kg</span></span></li>
-            <li class="step-item"><span class="step-num">⚠</span><span class="step-text">Si seul DEA adulte disponible : utiliser avec atténuateur pédiatrique ou à défaut en mode adulte. Ne pas retarder la défibrillation.</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- MODULE 3 : ANATOMIE -->
-    <div id="mod-anatomie" class="module-content">
-      <div class="panel">
-        <div class="panel-header">🫀 Module 03 — Anatomie & Physiologie de base · Durée : 2h30 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
-        <div class="panel-body">
-          <div class="section-title">Système cardiovasculaire</div>
-          <table class="data-table">
-            <thead><tr><th>Paramètre</th><th>Valeur normale adulte</th><th>Seuil d'alerte</th></tr></thead>
-            <tbody>
-              <tr><td>Fréquence cardiaque</td><td class="mono">60–100 /min</td><td class="mono text-red">&lt; 40 ou &gt; 150 /min</td></tr>
-              <tr><td>PA systolique</td><td class="mono">100–140 mmHg</td><td class="mono text-red">&lt; 90 mmHg = choc</td></tr>
-              <tr><td>PA diastolique</td><td class="mono">60–90 mmHg</td><td class="mono text-red">&gt; 110 mmHg = urgence</td></tr>
-              <tr><td>Débit cardiaque</td><td class="mono">4–8 L/min</td><td>Effondrement = choc cardiogénique</td></tr>
-              <tr><td>Volémie adulte</td><td class="mono">≈ 5 L</td><td class="mono text-red">Perte &gt; 1,5 L = choc hémorragique</td></tr>
-            </tbody>
-          </table>
-
-          <div class="section-title">Système respiratoire</div>
-          <table class="data-table">
-            <thead><tr><th>Paramètre</th><th>Valeur normale</th><th>Seuil d'alerte</th></tr></thead>
-            <tbody>
-              <tr><td>Fréquence respiratoire</td><td class="mono">12–20 /min</td><td class="mono text-red">&lt; 8 ou &gt; 30 /min</td></tr>
-              <tr><td>SpO2</td><td class="mono">≥ 95%</td><td class="mono text-red">&lt; 90% = urgence</td></tr>
-              <tr><td>EtCO2</td><td class="mono">35–45 mmHg</td><td class="mono text-red">&lt; 10 = RCP inefficace</td></tr>
-              <tr><td>Volume courant</td><td class="mono">7 ml/kg</td><td>Hypoventilation si &lt; 5 ml/kg</td></tr>
-            </tbody>
-          </table>
-
-          <div class="section-title">Système neurologique</div>
-          <table class="data-table">
-            <thead><tr><th>Score</th><th>Description</th><th>Interprétation clinique</th></tr></thead>
-            <tbody>
-              <tr><td>Glasgow 15</td><td>Y4 V5 M6</td><td>Conscience normale</td></tr>
-              <tr><td>Glasgow 13–14</td><td>Altération légère</td><td>Surveillance rapprochée</td></tr>
-              <tr><td>Glasgow 9–12</td><td>Altération modérée</td><td>Risque d'inhalation</td></tr>
-              <tr><td>Glasgow ≤ 8</td><td>Coma</td><td class="text-red">IOT indiquée</td></tr>
-              <tr><td>Glasgow 3</td><td>Coma profond</td><td class="text-red">Pronostic très réservé</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- MODULE 4 : COMMUNICATION -->
-    <div id="mod-communication" class="module-content">
-      <div class="panel">
-        <div class="panel-header">🗣️ Module 04 — Communication soignant/soigné · Durée : 2h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-header">📊 Module 02 — Bilan paramétrique · Constantes vitales · Durée : 2h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
           <div class="info-box">
-            La communication en situation d'urgence est une compétence à part entière. Une mauvaise communication peut aggraver l'état du patient (stress, non-coopération) et mettre l'équipe en difficulté.
+            <strong>Objectif :</strong> Évaluer rapidement les paramètres vitaux en intervention et identifier les signes de détresse. Ces constantes guident la décision clinique et le transport.
           </div>
 
-          <div class="section-title">Principes de base</div>
-          <ul class="step-list">
-            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Se présenter clairement</strong> — "Je suis [rôle] du SAMU, je suis là pour vous aider." Ton calme et assuré, même en urgence vitale.</span></li>
-            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Questions ouvertes d'abord</strong> — "Qu'est-ce qui se passe ?" avant les questions fermées. Laisser parler 30 secondes.</span></li>
-            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Reformulation</strong> — "Si je comprends bien, vous avez mal à la poitrine depuis 20 minutes ?" → valide la compréhension et rassure.</span></li>
-            <li class="step-item"><span class="step-num">04</span><span class="step-text"><strong>Annonce d'un geste</strong> — toujours prévenir avant de toucher : "Je vais prendre votre tension, vous allez sentir une légère pression."</span></li>
-            <li class="step-item"><span class="step-num">05</span><span class="step-text"><strong>Entourage</strong> — identifier un interlocuteur référent parmi les proches. Donner des tâches simples pour canaliser l'anxiété ("Pouvez-vous récupérer ses médicaments ?").</span></li>
-          </ul>
-
-          <div class="section-title">Communication en situation de crise</div>
+          <div class="section-title">Paramètres de survie à surveiller</div>
           <table class="data-table">
-            <thead><tr><th>Situation</th><th>À faire</th><th>À éviter</th></tr></thead>
+            <thead><tr><th>Paramètre</th><th>Valeur normale</th><th>Seuil d'alerte bas</th><th>Seuil d'alerte haut</th><th>Action SAMU associée</th></tr></thead>
             <tbody>
-              <tr><td>Patient agité</td><td>Voix basse, espace, ne pas s'opposer frontalement</td><td>Crier, contraindre sans préparation</td></tr>
-              <tr><td>Patient inconscient</td><td>Parler quand même, rassurer (audition préservée possible)</td><td>Parler du patient à la 3e personne devant lui</td></tr>
-              <tr><td>Annonce de décès</td><td>Lieu calme, s'asseoir, langage simple, laisser le silence</td><td>"Il est parti", termes techniques</td></tr>
-              <tr><td>Douleur intense</td><td>Valider la douleur, agir vite, informer sur le traitement</td><td>Minimiser ("c'est pas si grave")</td></tr>
+              <tr>
+                <td><strong>Fréquence cardiaque (FC)</strong></td>
+                <td class="mono">60–100 /min</td>
+                <td class="mono text-red">< 40 /min</td>
+                <td class="mono text-red">> 150 /min</td>
+                <td>Bradycardie : E.C.G., recherche bloc · Tachycardie : O2, IV, traitement cause</td>
+              </tr>
+              <tr>
+                <td><strong>Pression artérielle (PA)</strong></td>
+                <td class="mono">100–140 / 60–90</td>
+                <td class="mono text-red">PAS < 90 mmHg</td>
+                <td class="mono text-red">PAS > 180 ou PAD > 110</td>
+                <td>Hypotension : choc ⇒ remplissage, E.C.G. · Hypertension : monitoring continu</td>
+              </tr>
+              <tr>
+                <td><strong>Saturation O2 (SpO2)</strong></td>
+                <td class="mono">≥ 95% air ambiant</td>
+                <td class="mono text-red">< 90%</td>
+                <td class="mono">N/A</td>
+                <td>Désaturation : O2 haute concentration, ventilation, suspicion respiratoire</td>
+              </tr>
+              <tr>
+                <td><strong>Fréquence respiratoire (FR)</strong></td>
+                <td class="mono">12–20 /min</td>
+                <td class="mono text-red">< 8 /min ou > 30 /min</td>
+                <td class="mono text-red">-</td>
+                <td>Bradypnée : intubation si GCS ≤ 8 · Tachypnée : détresse respiratoire</td>
+              </tr>
+              <tr>
+                <td><strong>Glycémie capillaire</strong></td>
+                <td class="mono">0,70–1,10 g/L à jeun</td>
+                <td class="mono text-red">< 0,50 g/L</td>
+                <td class="mono text-red">> 3,50 g/L</td>
+                <td>Hypoglycémie : glucose IV/IM · Hyperglycémie : insuline selon protocole, monitoring</td>
+              </tr>
+              <tr>
+                <td><strong>Score Glasgow</strong></td>
+                <td class="mono">15 (Y4 V5 M6)</td>
+                <td class="mono text-red">≤ 8</td>
+                <td class="mono">-</td>
+                <td>GCS ≤ 8 : intubation orotrachéale, position de sécurité, surveillance neuro serrée</td>
+              </tr>
+              <tr>
+                <td><strong>Température core</strong></td>
+                <td class="mono">36,5–37,5 °C</td>
+                <td class="mono text-red">< 35 °C (hypothermie)</td>
+                <td class="mono text-red">> 39 °C (fièvre)</td>
+                <td>Hypothermie : réchauffement actif si signes vitaux · Fièvre : recherche foyer infectieux</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">Intégration clinique : la SAPS</div>
+          <div class="info-box">
+            Lors du bilan, intégrer les paramètres dans une lecture globale : un patient avec SpO2 92 % + FR 28 + malaise = suspicion respiratoire aiguë. Les constantes isolées ne suffisent pas — c'est leur ensemble qui trace le tableau clinique.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 3 : COMMUNICATION -->
+    <div id="mod-communication" class="module-content" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">🗣️ Module 03 — Communication soignant/soigné · Durée : 1h30 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-body">
+          <div class="section-title">Situations clés en intervention</div>
+          <table class="data-table">
+            <thead><tr><th>Situation</th><th>Actions prioritaires</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Présentation à l'arrivée</strong></td><td>Se présenter clairement : "Je suis [rôle] du SAMU, je suis là pour vous aider." Ton calme et assuré. Questions ouvertes d'abord ("Qu'est-ce qui se passe ?").</td></tr>
+              <tr><td><strong>Annonce d'un geste</strong></td><td>Toujours prévenir avant de toucher : "Je vais prendre votre tension, vous allez sentir une légère pression." Rassurer = coopération du patient.</td></tr>
+              <tr><td><strong>Patient agité ou agressif</strong></td><td>Voix basse et calme, maintenir distance respectueuse, ne pas s'opposer frontalement, chercher un interlocuteur de référence parmi les proches.</td></tr>
             </tbody>
           </table>
 
           <div class="section-title">Communication radio — Format SAMU</div>
           <div class="info-box">
-            <strong>Format :</strong> [Appelant] de [Destinataire], [message], terminé.<br><br>
-            Exemple : <em>"SAMU 96-1 de Régulation, départ pour AVP rue des Lilas, 2 victimes, bilan dans 5 minutes, terminé."</em>
+            <strong>Format standard :</strong> [Appelant] de [Destinataire], [message], terminé.<br><br>
+            <em>Exemple :</em> "SAMU 96-1 de Régulation, départ pour AVP rue des Lilas, 2 victimes, bilan dans 5 minutes, terminé."
           </div>
         </div>
       </div>
     </div>
 
-    <!-- MODULE 5 : SÉCURITÉ -->
-    <div id="mod-securite" class="module-content">
+    <!-- MODULE 4 : SÉCURITÉ -->
+    <div id="mod-securite" class="module-content" style="display:none;">
       <div class="panel">
-        <div class="panel-header">🦺 Module 05 — Sécurité & Hygiène en intervention · Durée : 2h15 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
+        <div class="panel-header">🦺 Module 04 — Sécurité & Hygiène en intervention · Durée : 1h45 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
           <div class="section-title">Équipements de Protection Individuelle (EPI)</div>
           <table class="data-table">
@@ -275,21 +253,21 @@
               <tr><td>Masque FFP2</td><td>Suspicion pathologie aéroportée</td><td><span class="badge badge-red">OUI si indiqué</span></td></tr>
               <tr><td>Lunettes de protection</td><td>Risque de projection</td><td><span class="badge badge-yellow">RECOMMANDÉ</span></td></tr>
               <tr><td>Tenue SAMU réglementaire</td><td>Toute intervention</td><td><span class="badge badge-red">OUI</span></td></tr>
-              <tr><td>Gilet haute visibilité</td><td>Intervention voie publique / nuit</td><td><span class="badge badge-red">OUI</span></td></tr>
             </tbody>
           </table>
 
-          <div class="section-title">Sécurisation de scène — Protocole</div>
+          <div class="section-title">Sécurisation de la scène</div>
           <ul class="step-list">
-            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Évaluation des risques</strong> — avant de sortir du véhicule : incendie, gaz, trafic, comportement hostile, lignes électriques.</span></li>
-            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Positionnement véhicule</strong> — en protection (angle 45°), feux de détresse + gyrophares. Zone de sécurité ≥ 50 m en cas de risque routier.</span></li>
-            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Neutralisation des risques</strong> — si possible et sans danger. Sinon attendre les services compétents (pompiers, police).</span></li>
-            <li class="step-item"><span class="step-num">04</span><span class="step-text"><strong>Zone d'accès contrôlée</strong> — ne laisser entrer que le personnel soignant. Éloigner les curieux.</span></li>
+            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Évaluer le contexte</strong> — trafic, dangers environnementaux, agressivité. Si danger = attendre la police ou se retirer.</span></li>
+            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Baliser l'accès</strong> — cônes/triangle de signalisation, gilet haute visibilité de jour/nuit, lampe si obscurité.</span></li>
+            <li class="step-item"><span class="step-num">03</span><span class="step-text"><strong>Patient isolé = risque</strong> — avoir un tiers sur les lieux si possible. Entourage agité = appeler renfort.</span></li>
           </ul>
 
-          <div class="section-title">Précautions standard</div>
+          <div class="section-title">Hygiène et précautions standard</div>
           <ul class="step-list">
-            <li class="step-item"><span class="step-num">✓</span><span class="step-text">Lavage mains SHA avant/après chaque geste · Ne jamais recapuchonner une aiguille · Élimination DASRI dans conteneur adapté · Traçabilité des AES dans les 4h</span></li>
+            <li class="step-item"><span class="step-num">H1</span><span class="step-text"><strong>Lavage des mains</strong> — eau + savon ou solution hydro-alcoolique avant/après patient, même avec gants.</span></li>
+            <li class="step-item"><span class="step-num">H2</span><span class="step-text"><strong>Gestion des aiguilles</strong> — ne jamais recapuchonner à la main. Mettre dans conteneur prévu immédiatement après utilisation.</span></li>
+            <li class="step-item"><span class="step-num">H3</span><span class="step-text"><strong>Sang / fluides</strong> — nettoyage immédiat à l'eau/savon puis essuiement. Pas de contact peau nue.</span></li>
           </ul>
         </div>
       </div>
@@ -300,10 +278,9 @@
       <thead><tr><th>Compétence</th><th>Domaine</th><th>Niveau</th></tr></thead>
       <tbody>
         <tr><td>Conduire une RCP adulte conforme ERC 2021</td><td>Réanimation</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
-        <tr><td>Adapter les gestes RCP au contexte pédiatrique</td><td>Pédiatrie</td><td><span class="badge badge-yellow">DÉBUTANT</span></td></tr>
-        <tr><td>Analyser rapidement les paramètres vitaux clés</td><td>Physiologie clinique</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
-        <tr><td>Communiquer efficacement avec patient et équipe</td><td>Communication</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
-        <tr><td>Sécuriser l'environnement d'intervention</td><td>Hygiène / Sécurité</td><td><span class="badge badge-red">EXPERT</span></td></tr>
+        <tr><td>Analyser les constantes vitales et décider du transport</td><td>Bilan paramétrique</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
+        <tr><td>Communiquer efficacement en situation stressante</td><td>Communication</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
+        <tr><td>Sécuriser l'environnement et appliquer EPI</td><td>Hygiène / Sécurité</td><td><span class="badge badge-red">EXPERT</span></td></tr>
       </tbody>
     </table>
 

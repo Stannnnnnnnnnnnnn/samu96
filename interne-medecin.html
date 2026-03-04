@@ -87,40 +87,40 @@
 
           <div class="section-title">Niveaux de priorité P0 → P4</div>
           <table class="data-table">
-            <thead><tr><th>Niveau</th><th>Définition</th><th>Exemples</th><th>Moyen</th><th>Délai</th></tr></thead>
+            <thead><tr><th>Niveau</th><th>Définition</th><th>Exemples RP Arma 3</th><th>Moyen</th><th>Délai</th></tr></thead>
             <tbody>
               <tr>
                 <td><span class="badge badge-red">P0</span></td>
                 <td>Détresse vitale immédiate</td>
-                <td>ACR, détresse respi sévère, coma</td>
+                <td>ACR, détresse respiratoire sévère, trauma balistique grave</td>
                 <td>SMUR</td>
                 <td class="mono text-red">&lt; 8 min</td>
               </tr>
               <tr>
                 <td><span class="badge badge-red">P1</span></td>
                 <td>Urgence vitale potentielle</td>
-                <td>Douleur thoracique, AVC, trauma grave</td>
+                <td>Choc hémorragique, AVC suspecté, polytraumatisé stable</td>
                 <td>SMUR ± VSAV</td>
                 <td class="mono text-red">&lt; 15 min</td>
               </tr>
               <tr>
                 <td><span class="badge badge-yellow">P2</span></td>
                 <td>Urgence relative</td>
-                <td>Fracture, douleur abdominale, fièvre haute</td>
+                <td>Fracture membre, douleur thoracique sans critère grave</td>
                 <td>VSAV</td>
                 <td class="mono">&lt; 30 min</td>
               </tr>
               <tr>
                 <td><span class="badge badge-yellow">P3</span></td>
                 <td>Urgence différable</td>
-                <td>Plaie mineure, malaise résolu, chute sans trauma</td>
+                <td>Plaie simple, malaise résolu, chute sans trauma apparent</td>
                 <td>VSAV / VSL</td>
                 <td class="mono">&lt; 60 min</td>
               </tr>
               <tr>
                 <td><span class="badge badge-dim">P4</span></td>
                 <td>Conseil médical</td>
-                <td>Conseil médicamenteux, orientation médecin ville</td>
+                <td>Conseil, orientation, patient ne nécessitant pas d'envoi</td>
                 <td>Téléphone</td>
                 <td class="mono">Différé</td>
               </tr>
@@ -134,9 +134,9 @@
                 <div style="font-family:var(--mono,monospace);font-size:11px;color:#e63030;letter-spacing:2px;margin-bottom:10px;">SMUR — CRITÈRES</div>
                 <ul style="font-size:13px;padding-left:16px;line-height:2;">
                   <li>Détresse vitale confirmée ou fortement suspectée</li>
-                  <li>Geste médical invasif prévisible (IOT, IOO, thrombolyse)</li>
+                  <li>Geste médical invasif prévisible (IOT, IOO, défibrillation, adrénaline en ACR)</li>
                   <li>Traitement médicamenteux spécialisé nécessaire</li>
-                  <li>Transfert secondaire médicalisé (TIHM)</li>
+                  <li>Transfert secondaire médicalisé</li>
                   <li>Doute diagnostique à fort risque vital</li>
                 </ul>
               </div>
@@ -163,35 +163,111 @@
       <div class="panel">
         <div class="panel-header">🧠 Module 02 — Prise de décision en urgence · Durée : 3h00 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
         <div class="panel-body">
-          <div class="info-box">La décision médicale en urgence préhospitalière s'appuie sur une évaluation rapide, des arbres décisionnels éprouvés et une gestion du risque d'erreur dans un environnement contraignant.</div>
+          <div class="info-box">La décision médicale en urgence préhospitalière s'appuie sur une évaluation rapide, des arbres décisionnels éprouvés et une gestion du risque dans un environnement opérationnel (RP Arma 3).</div>
 
-          <div class="section-title">Douleur thoracique — Arbre décisionnel</div>
-          <div style="max-width:500px;">
-            <div class="tree-box" style="background:rgba(230,48,48,0.08);border-color:rgba(230,48,48,0.3);">Douleur thoracique → ECG 12 dérivations immédiat</div>
+          <div class="section-title">Trauma balistique — Arbre décisionnel xABCDE</div>
+          <div style="max-width:600px;">
+            <div class="tree-box" style="background:rgba(230,48,48,0.08);border-color:rgba(230,48,48,0.3);">TRAUMA BALISTIQUE → Bilan xABCDE</div>
             <div class="tree-arrow">↓</div>
-            <div style="display:flex;gap:8px;">
+            <div class="tree-box">Hémorragie catastrophique (jet, perte > 500 mL/min) ?</div>
+            <div style="display:flex;gap:8px;margin-top:8px;">
               <div style="flex:1;">
-                <div class="tree-box" style="background:rgba(230,48,48,0.1);border-color:rgba(230,48,48,0.4);"><strong>Sus-ST ≥ 2mm</strong></div>
+                <div class="tree-box" style="background:rgba(230,48,48,0.1);border-color:rgba(230,48,48,0.4);"><strong>OUI</strong></div>
                 <div class="tree-arrow">↓</div>
-                <div class="tree-box">SCA-ST+ → Activation coronarographie → Aspirine 250mg + Héparine → Transport direct USIC</div>
+                <div class="tree-box"><strong>Garrot proximale immédiat</strong> ou <strong>Packing compressif</strong> — Puis O2 + accès IV + transport immédiat</div>
               </div>
               <div style="flex:1;">
-                <div class="tree-box"><strong>Pas de sus-ST</strong></div>
+                <div class="tree-box"><strong>NON</strong></div>
                 <div class="tree-arrow">↓</div>
-                <div class="tree-box">Clinique + PA + auscultation → SCA-NSTEMI ? EP ? Dissection ? → Orientation adaptée</div>
+                <div class="tree-box">Continuer xABCDE</div>
               </div>
             </div>
+            <div class="tree-arrow" style="margin-top:12px;">↓</div>
+            <div class="tree-box">Détresse respiratoire ?</div>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+              <div style="flex:1;">
+                <div class="tree-box" style="background:rgba(230,48,48,0.1);border-color:rgba(230,48,48,0.4);"><strong>OUI</strong></div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box">O2 haut débit + position demi-assise si possible</div>
+              </div>
+              <div style="flex:1;">
+                <div class="tree-box"><strong>NON</strong></div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box">Continuer évaluation</div>
+              </div>
+            </div>
+            <div class="tree-arrow" style="margin-top:12px;">↓</div>
+            <div class="tree-box">État hémodynamique : PA &lt; 90 mmHg ?</div>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+              <div style="flex:1;">
+                <div class="tree-box" style="background:rgba(230,48,48,0.1);border-color:rgba(230,48,48,0.4);"><strong>OUI</strong></div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box">Remplissage prudent (250 mL bolus, réévaluer) — Garrot si saignement visible</div>
+              </div>
+              <div style="flex:1;">
+                <div class="tree-box"><strong>NON</strong></div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box">Continuer évaluation</div>
+              </div>
+            </div>
+            <div class="tree-arrow" style="margin-top:12px;">↓</div>
+            <div class="tree-box">Neurologique : GCS ≤ 8 ?</div>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+              <div style="flex:1;">
+                <div class="tree-box" style="background:rgba(230,48,48,0.1);border-color:rgba(230,48,48,0.4);"><strong>OUI</strong></div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box"><strong>Protection voies aériennes</strong> (IOT ou VAS selon protocole) — Montée en GCS ?</div>
+              </div>
+              <div style="flex:1;">
+                <div class="tree-box"><strong>NON</strong></div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box">Monitoring neurologique continu</div>
+              </div>
+            </div>
+            <div class="tree-arrow" style="margin-top:12px;">↓</div>
+            <div class="tree-box" style="background:rgba(67,230,48,0.1);border-color:rgba(67,230,48,0.3);"><strong>PACKAGING & TRANSPORT IMMÉDIAT</strong> — Vers centre référent trauma</div>
           </div>
 
-          <div class="section-title" style="margin-top:20px;">Diagnostics différentiels — Douleur thoracique</div>
+          <div class="section-title" style="margin-top:20px;">Mécanismes lésionnels fréquents en RP — Tableau diagnostique</div>
           <table class="data-table">
-            <thead><tr><th>Diagnostic</th><th>Signe discriminant</th><th>Action clé</th></tr></thead>
+            <thead><tr><th>Mécanisme</th><th>Signes évocateurs</th><th>Action prioritaire</th><th>Transport</th></tr></thead>
             <tbody>
-              <tr><td>SCA-ST+</td><td>Sus-ST ECG + douleur irradiante + sueurs</td><td>Coronarographie urgente</td></tr>
-              <tr><td>EP massive</td><td>Hypoxie + tachycardie + signes droits ECG + contexte</td><td>Thrombolyse si choc</td></tr>
-              <tr><td>Dissection aortique</td><td>Douleur déchirante + asymétrie PA bras</td><td>Chirurgie vasculaire urgente — pas d'anticoagulants</td></tr>
-              <tr><td>Pneumothorax suffocant</td><td>Silence auscultatoire unilatéral + déviation trachée</td><td>Exsufflation immédiate</td></tr>
-              <tr><td>OAP</td><td>Crépitants bilatéraux + orthopnée + SpO2 basse</td><td>O2 + Furosémide + VNI</td></tr>
+              <tr>
+                <td><strong>Trauma balistique</strong> (plaie pénétrante)</td>
+                <td>Plaie par projectile · saignement externe · douleur locale · entrée/sortie</td>
+                <td>Arrêt hémorragie (garrot/packing) · O2 · accès IV · monitorage PA</td>
+                <td>SMUR immédiat</td>
+              </tr>
+              <tr>
+                <td><strong>Accident de véhicule</strong> (polytraumatisme)</td>
+                <td>Déformation habitacle · perte de conscience · trauma multiple · douleur diffuse</td>
+                <td>xABCDE · immobilisation · O2 · accès IV</td>
+                <td>SMUR immédiat</td>
+              </tr>
+              <tr>
+                <td><strong>Chute de hauteur</strong></td>
+                <td>Histoire de chute &gt; 3 m · douleur membres/rachis · possible coma</td>
+                <td>Immobilisation rachis · O2 si SpO2 &lt; 94% · accès IV · observation neuro</td>
+                <td>SMUR si GCS &lt; 15 ou PA instable</td>
+              </tr>
+              <tr>
+                <td><strong>Intoxication / Overdose</strong></td>
+                <td>Substance identifiée ou antécédents · conscience altérée · FR déprimée · pupilles anormales</td>
+                <td>Protection voies aériennes (VAS/IOT) · O2 · accès IV · Narcan si opioïdes</td>
+                <td>SMUR si coma ou détresse respi</td>
+              </tr>
+              <tr>
+                <td><strong>Coma éthylique</strong></td>
+                <td>Haleine alcoolisée · conscience altérée · FR variable · hypothermie possible</td>
+                <td>Positionnement latéral · O2 · accès IV · prévention aspiration · observation</td>
+                <td>VSAV si stable, SMUR si GCS ≤ 8 ou complications</td>
+              </tr>
+              <tr>
+                <td><strong>Arrêt cardiaque</strong> (toutes causes)</td>
+                <td>Perte de conscience · absence pouls · apnée · peau marbrée/cyanosée</td>
+                <td><strong>RCP immédiate</strong> · défibrillation FV/TV · adrénaline cycles · IOT</td>
+                <td>SMUR immédiat</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -204,35 +280,59 @@
         <div class="panel-header">⚕️ Module 03 — Procédures médicales avancées · Durée : 4h00 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
         <div class="panel-body">
 
-          <div class="section-title">Anesthésie préhospitalière — Séquence rapide</div>
+          <div class="section-title">Procédure 01 — Adrénaline en arrêt cardiaque (RCP)</div>
           <table class="data-table">
-            <thead><tr><th>Étape</th><th>Médicament</th><th>Dose</th><th>Délai d'action</th></tr></thead>
+            <thead><tr><th>Étape</th><th>Action</th><th>Détail</th></tr></thead>
             <tbody>
-              <tr><td>Prémédication vagolytique</td><td>Atropine</td><td class="mono">0,5 mg IV</td><td>1–2 min</td></tr>
-              <tr><td>Induction hypnotique</td><td>Kétamine</td><td class="mono">1,5–2 mg/kg IV</td><td>30–60 sec</td></tr>
-              <tr><td>Curarisation</td><td>Succinylcholine</td><td class="mono">1 mg/kg IV</td><td>60 sec</td></tr>
-              <tr><td>Alternative curarisation</td><td>Rocuronium</td><td class="mono">1,2 mg/kg IV</td><td>60–90 sec</td></tr>
-              <tr><td>Entretien sédation</td><td>Midazolam + Sufentanil</td><td class="mono">0,05–0,1 mg/kg/h + 0,2 µg/kg/h</td><td>Continu</td></tr>
+              <tr><td><strong>IND</strong></td><td>Indication</td><td>ACR confirmé (pas de pouls, perte de conscience, apnée)</td></tr>
+              <tr><td><strong>CI</strong></td><td>Contre-indication</td><td>Aucune si ACR confirmé (RCP l'emporte)</td></tr>
+              <tr><td><strong>01</strong></td><td>Dose Adrénaline</td><td>0,1 mL/kg de 1/1000 IV (soit ~7 mg chez adulte 70 kg)</td></tr>
+              <tr><td><strong>02</strong></td><td>Timing</td><td>1ère dose dès accès IV, puis toutes les 2 min de RCP (30 compressions / 2 ventilations)</td></tr>
+              <tr><td><strong>03</strong></td><td>Surveillance</td><td>Monitorage continu ECG · palpation pouls à 1 min · signes de reprise (gasping, réaction pupille)</td></tr>
+              <tr><td><strong>04</strong></td><td>Transport</td><td>RCP continue jusqu'à reprise d'activité ou déclaration décès en scène</td></tr>
             </tbody>
           </table>
 
-          <div class="section-title">Thrombolyse préhospitalière — STEMI</div>
-          <ul class="step-list">
-            <li class="step-item"><span class="step-num">IND</span><span class="step-text"><strong>Indications</strong> — STEMI confirmé + délai coronarographie > 120 min + pas de contre-indication.</span></li>
-            <li class="step-item"><span class="step-num">CI</span><span class="step-text"><strong>Contre-indications absolues</strong> — AVC récent &lt; 6 mois · chirurgie majeure &lt; 3 sem · hémorragie active · PA &gt; 180/110 incontrôlée · dissection aortique suspectée.</span></li>
-            <li class="step-item"><span class="step-num">01</span><span class="step-text"><strong>Ténectéplase (TNK)</strong> — dose selon poids IV bolus. Aspiriné 250 mg + Énoxaparine selon protocole local.</span></li>
-            <li class="step-item"><span class="step-num">02</span><span class="step-text"><strong>Surveillance post-thrombolyse</strong> — ECG toutes les 30 min · reperfusion si sus-ST réduit ≥ 50% · transfert coronarographie dans les 3–24h.</span></li>
-          </ul>
-
-          <div class="section-title">Sédation procédurale</div>
+          <div class="section-title">Procédure 02 — Défibrillation (FV / TV sans pouls)</div>
           <table class="data-table">
-            <thead><tr><th>Procédure</th><th>Agent</th><th>Dose</th><th>Monitoring requis</th></tr></thead>
+            <thead><tr><th>Étape</th><th>Action</th><th>Détail</th></tr></thead>
             <tbody>
-              <tr><td>Cardioversion électrique</td><td>Midazolam ± Kétamine</td><td class="mono">1–3 mg IV + 0,5 mg/kg</td><td>ECG continu + SpO2 + PA</td></tr>
-              <tr><td>Réduction luxation</td><td>Kétamine</td><td class="mono">1 mg/kg IV ou 4 mg/kg IM</td><td>SpO2 + PA + scope</td></tr>
-              <tr><td>Pansement brûlure étendue</td><td>Kétamine + Midazolam</td><td class="mono">1 mg/kg + 0,05 mg/kg</td><td>SpO2 + PA + EtCO2</td></tr>
+              <tr><td><strong>IND</strong></td><td>Indication</td><td>Fibrillation ventriculaire (FV) ou tachycardie ventriculaire pulseless (TV) à l'ECG</td></tr>
+              <tr><td><strong>CI</strong></td><td>Contre-indication</td><td>Patient dans l'eau · peau mouillée (sécher brièvement) · TDM/pacemaker (sinon utiliser autre placement pads)</td></tr>
+              <tr><td><strong>01</strong></td><td>Position pads</td><td>Pad droit : 2ème EIC ligne médio-axillaire · Pad gauche : 5ème EIC axillaire · Appui palmaire énergique</td></tr>
+              <tr><td><strong>02</strong></td><td>Charge & choc</td><td>DAE automatisé (énergie auto) OU biphasique 200 J 1er choc (si disponible : augmenter à 360 J chocs suivants)</td></tr>
+              <tr><td><strong>03</strong></td><td>Après choc</td><td>RCP 30/2 immédiatement · 2 min puis vérifier rythme à nouveau · répéter cycles si FV/TV persiste</td></tr>
+              <tr><td><strong>04</strong></td><td>Surveillance</td><td>Monitorage ECG continu · observation signes reprise · coordination avec adrénaline</td></tr>
             </tbody>
           </table>
+
+          <div class="section-title">Procédure 03 — ECMO (Extracorporeal Membrane Oxygenation) — Présentation</div>
+          <div class="info-box">
+            <strong>Contexte RP :</strong> L'ECMO est une ressource hospitalière avancée (voir équipements pour détails techniques). En préhospitalier, la décision est de <strong>maintenir l'hémodynamique du patient</strong> jusqu'à son arrivée à l'hôpital pour cannulation.
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Situation</th><th>Indication ECMO hospitalière</th><th>Rôle du SMUR en préhospitalier</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ACR réfractaire</strong></td>
+                <td>RCP &gt; 60 min sans retour circulation spontanée</td>
+                <td>Poursuivre RCP high-quality · accès IV · déplétion rapide · transport immédiat hospitalisation réputée ECMO</td>
+              </tr>
+              <tr>
+                <td><strong>Choc cardiogénique</strong> (infarctus massif)</td>
+                <td>État hémodynamique critique non répondeur inotropes</td>
+                <td>O2 · accès IV · support hémodynamique prudent · notification préalable équipe ECMO</td>
+              </tr>
+              <tr>
+                <td><strong>Hypothermie accidentelle profonde</strong></td>
+                <td>Température core &lt; 30°C</td>
+                <td>Réchauffement prudent · RCP selon protocoles · transport immédiat (ECMO décision hospitalière)</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="warn-box">
+            <strong>Point clé :</strong> Le SMUR n'initie pas l'ECMO en préhospitalier. La notification antéalerte du centre ECMO dès la scène décisionnelle permet une prise en charge optimale à l'arrivée hospitalière.
+          </div>
         </div>
       </div>
     </div>
@@ -242,37 +342,71 @@
       <div class="panel">
         <div class="panel-header">🤝 Module 04 — Coordination inter-services · Durée : 2h45 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
-          <div class="info-box">En situation de crise ou de multi-victimes, la coordination entre SAMU, SDIS, forces de l'ordre et hôpitaux est déterminante. Le médecin régulateur SAMU coordonne le volet médical.</div>
+          <div class="info-box">En situation de crise ou de multi-victimes RP, la coordination entre SAMU, SDIS, Police/Gendarmerie est déterminante. Le médecin régulateur SAMU coordonne le volet médical sur le terrain.</div>
 
-          <div class="section-title">Niveaux ORSAN</div>
+          <div class="section-title">Niveaux ORSAN (contexte RP serveur)</div>
           <table class="data-table">
             <thead><tr><th>Niveau</th><th>Déclenchement</th><th>Effectifs engagés</th><th>Commandement</th></tr></thead>
             <tbody>
-              <tr><td><span class="badge badge-green">ORSAN 1</span></td><td>Afflux ponctuel modéré (5–15 patients)</td><td>Renfort équipes en place</td><td>Médecin régulateur</td></tr>
-              <tr><td><span class="badge badge-yellow">ORSAN 2</span></td><td>Afflux important (15–50 patients)</td><td>Rappel de personnel, ouverture lits</td><td>Directeur médical de crise</td></tr>
-              <tr><td><span class="badge badge-red">ORSAN 3</span></td><td>Catastrophe (> 50 patients)</td><td>Mobilisation totale, plan blanc</td><td>Cellule de crise ARS + préfecture</td></tr>
-              <tr><td><span class="badge badge-red">ORSAN 4</span></td><td>Crise sanitaire majeure</td><td>Dispositif national</td><td>DGS + Gouvernement</td></tr>
+              <tr><td><span class="badge badge-green">ORSAN 1</span></td><td>Afflux ponctuel modéré (5–15 patients)</td><td>Renfort équipes en place + rappel personnels</td><td>Médecin régulateur SAMU</td></tr>
+              <tr><td><span class="badge badge-yellow">ORSAN 2</span></td><td>Afflux important (15–50 patients)</td><td>Mobilisation SAMU + SDIS + Police</td><td>Chef SMUR + Chef SDIS</td></tr>
+              <tr><td><span class="badge badge-red">ORSAN 3</span></td><td>Catastrophe (> 50 patients)</td><td>Mobilisation totale tous services + autres régions</td><td>Préfet / Autorités civiles + Médecin terrain</td></tr>
             </tbody>
           </table>
 
-          <div class="section-title">Triage multi-victimes — Méthode SIEVE</div>
+          <div class="section-title">Triage multi-victimes — Méthode SIEVE (RP)</div>
           <ul class="step-list">
-            <li class="step-item"><span class="step-num">M</span><span class="step-text"><strong>Marche</strong> — les victimes qui marchent seules = urgence relative. Les diriger vers un point de rassemblement.</span></li>
-            <li class="step-item"><span class="step-num">V</span><span class="step-text"><strong>Ventilation</strong> — ouvrir les voies aériennes. Ventilation absente après ouverture = décédé (T4). Présente → étape suivante.</span></li>
-            <li class="step-item"><span class="step-num">FR</span><span class="step-text"><strong>FR &gt; 30 ou &lt; 10</strong> → Urgence absolue T1 (rouge). FR 10–29 → étape suivante.</span></li>
-            <li class="step-item"><span class="step-num">TRC</span><span class="step-text"><strong>TRC &gt; 2 secondes ou pouls radial absent</strong> → T1 (rouge). TRC ≤ 2s → T2 (jaune) urgence relative.</span></li>
+            <li class="step-item"><span class="step-num">M</span><span class="step-text"><strong>Marche</strong> — les victimes qui marchent seules = urgence relative (tag VERT). Les diriger vers un point de rassemblement supervisé.</span></li>
+            <li class="step-item"><span class="step-num">V</span><span class="step-text"><strong>Ventilation</strong> — ouvrir les voies aériennes. Ventilation absente après ouverture = décédé (tag NOIR). Présente → étape suivante.</span></li>
+            <li class="step-item"><span class="step-num">FR</span><span class="step-text"><strong>FR > 30 ou < 10</strong> → Urgence absolue (tag ROUGE P0). FR 10–29 → étape suivante.</span></li>
+            <li class="step-item"><span class="step-num">TRC</span><span class="step-text"><strong>TRC > 2 secondes ou pouls radial absent</strong> → tag ROUGE (P0/P1). TRC ≤ 2s et pouls présent → tag JAUNE (P2 urgence relative).</span></li>
           </ul>
 
-          <div class="section-title">Interfaces inter-services</div>
+          <div class="section-title">Services coordonnés en préhospitalier RP</div>
           <table class="data-table">
-            <thead><tr><th>Service</th><th>Rôle en préhospitalier</th><th>Canal de communication</th></tr></thead>
+            <thead><tr><th>Service</th><th>Rôle en préhospitalier</th><th>Contacte</th></tr></thead>
             <tbody>
-              <tr><td>SDIS</td><td>Premiers secours, sécurisation, désincarcération</td><td>ANTARES + téléphone direct COZ</td></tr>
-              <tr><td>Police / Gendarmerie</td><td>Sécurisation scène, périmètre, identification victimes</td><td>Téléphone direct + radio ACROPOL</td></tr>
-              <tr><td>SAMU voisins</td><td>Renfort en cas de saturation</td><td>Téléphone direct régulation à régulation</td></tr>
-              <tr><td>ARS</td><td>Activation plans nationaux, ressources hospitalières</td><td>Astreinte ARS 24h/24</td></tr>
+              <tr><td><strong>SDIS</strong> (Pompiers)</td><td>Premiers secours, sécurisation scène, désincarcération, renfort équipes</td><td>Régulation SDIS + radio ANTARES</td></tr>
+              <tr><td><strong>Police / Gendarmerie</strong></td><td>Sécurisation scène, périmètre, identification victimes, prélèvements</td><td>Appel direct + coordination sur site</td></tr>
+              <tr><td><strong>SAMU adjacent</strong></td><td>Renfort en cas de saturation, support régulation</td><td>Appel régulation à régulation (hotline)</td></tr>
             </tbody>
           </table>
+
+          <div class="section-title">Format de message inter-services (RP)</div>
+          <div class="grid-2">
+            <div>
+              <div style="background:rgba(230,48,48,0.08);border:1px solid rgba(230,48,48,0.2);border-radius:4px;padding:16px;margin-bottom:12px;">
+                <div style="font-family:var(--mono,monospace);font-size:11px;color:#e63030;letter-spacing:1px;margin-bottom:8px;"><strong>APPEL SDIS</strong></div>
+                <div style="font-size:13px;line-height:1.8;">
+                  📞 <strong>Indicatif SDIS</strong> [ex: "SDIS 96 Chef"]<br>
+                  ➤ <strong>Demande</strong> : Renfort pompiers / Désincarcération / Sécurisation<br>
+                  ➤ <strong>Situation</strong> : Nombre victimes · lieu · type sinistre<br>
+                  ➤ <strong>Moyen SAMU en place</strong> : SMUR + VSAV...
+                </div>
+              </div>
+            </div>
+            <div>
+              <div style="background:rgba(234,179,8,0.08);border:1px solid rgba(234,179,8,0.2);border-radius:4px;padding:16px;margin-bottom:12px;">
+                <div style="font-family:var(--mono,monospace);font-size:11px;color:#eab308;letter-spacing:1px;margin-bottom:8px;"><strong>APPEL POLICE</strong></div>
+                <div style="font-size:13px;line-height:1.8;">
+                  📞 <strong>Indicatif Police</strong> [ex: "Genda 96"]<br>
+                  ➤ <strong>Sécurisation scène</strong> : Demandée / En cours / Complète<br>
+                  ➤ <strong>Adresse / Lieu</strong> : Précis + repères<br>
+                  ➤ <strong>Bilan SAMU</strong> : Nombre patients · type urgence
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:rgba(67,230,48,0.08);border:1px solid rgba(67,230,48,0.2);border-radius:4px;padding:16px;margin-bottom:12px;">
+            <div style="font-family:var(--mono,monospace);font-size:11px;color:#43e630;letter-spacing:1px;margin-bottom:8px;"><strong>APPEL RÉGULATION (Bilan SBAR)</strong></div>
+            <div style="font-size:13px;line-height:1.8;">
+              📞 <strong>Situation</strong> (Lieu + Type sinistre + Contexte)<br>
+              📍 <strong>Background</strong> (Nombre patients + Mécanisme lésionnel)<br>
+              ⚕️ <strong>Assessment</strong> (Bilan triage P0-P4 rapide)<br>
+              📋 <strong>Recommendation</strong> (Moyens demandés + Transport + Destinations)
+            </div>
+          </div>
         </div>
       </div>
     </div>

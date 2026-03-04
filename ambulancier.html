@@ -69,7 +69,7 @@
 
     <div class="section-title">Modules</div>
     <div class="module-nav">
-      <button class="mod-btn active" onclick="showModule('abcde')">01 · Bilan ABCDE</button>
+      <button class="mod-btn active" onclick="showModule('abcde')">01 · Bilan xABCDE</button>
       <button class="mod-btn" onclick="showModule('immobilisation')">02 · Immobilisation</button>
       <button class="mod-btn" onclick="showModule('conduite')">03 · Conduite urgence</button>
       <button class="mod-btn" onclick="showModule('secours')">04 · Gestes de secours</button>
@@ -78,9 +78,16 @@
     <!-- MODULE 1 : ABCDE -->
     <div id="mod-abcde" class="module-content active">
       <div class="panel">
-        <div class="panel-header">🔍 Module 01 — Bilan primaire ABCDE · Durée : 3h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-header">🔍 Module 01 — Bilan primaire xABCDE · Durée : 3h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
-          <div class="info-box">Le bilan ABCDE est une approche systématique et priorisée de l'évaluation du patient en urgence. Chaque lettre doit être évaluée ET traitée avant de passer à la suivante.</div>
+          <div class="info-box">Le bilan xABCDE est une approche systématique et priorisée de l'évaluation du patient en urgence. Le « x » traite d'abord l'hémorragie catastrophique. Chaque étape doit être évaluée ET traitée avant de passer à la suivante.</div>
+
+          <div class="section-title">x — eXsanguination (Hémorragie catastrophique)</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">x</span><span class="step-text"><strong>Évaluation</strong> — hémorragie extériorisée massive ? amputation ? plaie vasculaire ?</span></li>
+            <li class="step-item"><span class="step-num">→</span><span class="step-text"><strong>Actions</strong> — garrot CAT en premier si membre atteint (5 cm au-dessus, noter l'heure) · compression directe manuelle sur plaie non garrotable · packing si plaie cavitaire accessible.</span></li>
+          </ul>
+          <div class="warn-box"><strong>⚠ Alerte rouge :</strong> « Une hémorragie non contrôlée tue avant un problème respiratoire. Le x passe avant tout. »</div>
 
           <div class="section-title">A — Airway (Voies aériennes)</div>
           <ul class="step-list">
@@ -96,8 +103,8 @@
 
           <div class="section-title">C — Circulation</div>
           <ul class="step-list">
-            <li class="step-item"><span class="step-num">C</span><span class="step-text"><strong>Évaluation</strong> — pouls radial/carotidien · fréquence · PA · TRC (temps de recoloration capillaire) · hémorragie extériorisée.</span></li>
-            <li class="step-item"><span class="step-num">→</span><span class="step-text"><strong>Actions</strong> — compressions directes sur hémorragie · CAT si artère de membre · allonger jambes surélevées si choc · DSA si ACR.</span></li>
+            <li class="step-item"><span class="step-num">C</span><span class="step-text"><strong>Évaluation</strong> — pouls radial/carotidien · fréquence · PA · TRC (temps de recoloration cutanée) · hémorragie extériorisée.</span></li>
+            <li class="step-item"><span class="step-num">→</span><span class="step-text"><strong>Actions</strong> — compressions directes sur hémorragie · CAT si artère de membre · allonger jambes surélevées si choc. <strong>Alerte :</strong> TRC > 2s = problème circulatoire.</span></li>
           </ul>
 
           <div class="section-title">D — Disability (Neurologie)</div>
@@ -108,14 +115,15 @@
 
           <div class="section-title">E — Exposition</div>
           <ul class="step-list">
-            <li class="step-item"><span class="step-num">E</span><span class="step-text"><strong>Évaluation</strong> — déshabillage complet · recherche lésions cachées · brûlures · température.</span></li>
-            <li class="step-item"><span class="step-num">→</span><span class="step-text"><strong>Actions</strong> — couverture de survie contre l'hypothermie · recouvririmmédiatement après examen · respecter la dignité.</span></li>
+            <li class="step-item"><span class="step-num">E</span><span class="step-text"><strong>Évaluation</strong> — déshabillage complet · recherche lésions cachées · brûlures · température. Recherche orifice d'entrée/sortie si trauma balistique.</span></li>
+            <li class="step-item"><span class="step-num">→</span><span class="step-text"><strong>Actions</strong> — couverture de survie contre l'hypothermie · recouvrir immédiatement après examen · respecter la dignité.</span></li>
           </ul>
 
           <div class="section-title">Critères de gravité immédiate</div>
           <table class="data-table">
             <thead><tr><th>Signe</th><th>Valeur</th><th>Priorité</th></tr></thead>
             <tbody>
+              <tr><td>Hémorragie non contrôlée / visible</td><td>—</td><td><span class="badge badge-red">P0 immédiat</span></td></tr>
               <tr><td>Absence de pouls</td><td>—</td><td><span class="badge badge-red">P0 — ACR</span></td></tr>
               <tr><td>SpO2</td><td class="mono">&lt; 90%</td><td><span class="badge badge-red">P0/P1</span></td></tr>
               <tr><td>PA systolique</td><td class="mono">&lt; 90 mmHg</td><td><span class="badge badge-red">P1 — Choc</span></td></tr>
@@ -178,14 +186,15 @@
           </ul>
 
           <div class="section-title">Communication radio en déplacement</div>
+          <div class="info-box"><strong>Format serveur :</strong> [Indicatif] de [Destinataire], message, terminé.</div>
           <table class="data-table">
-            <thead><tr><th>Situation</th><th>Message type</th></tr></thead>
+            <thead><tr><th>Situation</th><th>Message type (exemple avec GOLF-96)</th></tr></thead>
             <tbody>
-              <tr><td>Départ intervention</td><td class="mono">"SAMU 96-1 de Régulation, départ pour [adresse], terminé."</td></tr>
-              <tr><td>Arrivée sur scène</td><td class="mono">"SAMU 96-1 de Régulation, arrivée sur les lieux, bilan dans 5 min, terminé."</td></tr>
-              <tr><td>Bilan terrain</td><td class="mono">"SAMU 96-1 de Régulation, bilan : [SBAR], demande [mesure], terminé."</td></tr>
-              <tr><td>Départ vers hôpital</td><td class="mono">"SAMU 96-1 de Régulation, départ CHU avec [patient], ETA [X] min, terminé."</td></tr>
-              <tr><td>Disponibilité</td><td class="mono">"SAMU 96-1 de Régulation, disponible, terminé."</td></tr>
+              <tr><td>Départ intervention</td><td class="mono">"GOLF-96 de Régulation, départ pour [adresse], terminé."</td></tr>
+              <tr><td>Arrivée sur scène</td><td class="mono">"GOLF-96 de Régulation, sur les lieux, bilan à venir, terminé."</td></tr>
+              <tr><td>Bilan terrain</td><td class="mono">"GOLF-96 de Régulation, bilan [SBAR résumé], demande [moyen], terminé."</td></tr>
+              <tr><td>Départ vers hôpital</td><td class="mono">"GOLF-96 de Régulation, départ CHU avec patient, ETA X min, terminé."</td></tr>
+              <tr><td>Disponibilité</td><td class="mono">"GOLF-96 de Régulation, disponible, terminé."</td></tr>
             </tbody>
           </table>
         </div>
