@@ -27,7 +27,7 @@
     <div class="page-header">
       <div class="breadcrumb">/ <span>SPÉCIALITÉS / CARDIOLOGIE</span></div>
       <h1 class="page-title">Spécialité <span>Cardio</span></h1>
-      <p class="page-subtitle">Signe RP clé : douleur thoracique irradiante + sueurs + malaise.</p>
+      <p class="page-subtitle">Syndromes coronariens, troubles du rythme, ACR et choc cardiogénique : référentiel avancé SFMU/HAS/ERC avec traduction opérationnelle SAMU 96.</p>
     </div>
 
     <div class="alert alert-green">
@@ -35,75 +35,181 @@
       <a href="specialites.html">← Retour à l'index des spécialités</a>
     </div>
 
-    <div class="section-title">1. Physiopathologie</div>
+    <div class="alert alert-yellow">
+      <strong>Frontière méthodologique</strong>
+      <ul style="margin:8px 0 0 18px;">
+        <li><strong>Faits médicaux établis :</strong> recommandations SFMU/HAS/ERC, données physiopathologiques humaines, niveaux de preuve variables selon entité clinique.</li>
+        <li><strong>Adaptation gameplay RP :</strong> variables serveur (<span class="badge badge-dim">noflow_score</span>, <span class="badge badge-dim">reviving_score</span>) utilisées comme modèle simplifié de dette ischémique et de récupération circulatoire.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">Index pédagogique</div>
+    <ul class="step-list">
+      <li class="step-item"><span class="step-num">01</span><span class="step-text">🔬 Physiopathologie avancée : cascade ischémique coronarienne, électrophysiologie, bas débit et sidération myocardique.</span></li>
+      <li class="step-item"><span class="step-num">02</span><span class="step-text">🩺 Sémiologie et diagnostic : phénotypes cliniques, ECG, biomarqueurs, scores de gravité préhospitalière.</span></li>
+      <li class="step-item"><span class="step-num">03</span><span class="step-text">📚 Thérapeutique de référence : SCA, arythmies, ACR, choc cardiogénique, limites de preuve.</span></li>
+      <li class="step-item"><span class="step-num">04</span><span class="step-text">🎮 Protocole SAMU 96 : traduction stricte des mécanismes serveur et justification physiologique.</span></li>
+    </ul>
+
+    <div class="section-title">1. 🔬 Physiopathologie avancée</div>
     <div class="panel">
-      <div class="panel-header">Mécanisme simplifié</div>
+      <div class="panel-header">Ischémie myocardique, instabilité électrique et défaillance hémodynamique</div>
       <div class="panel-body">
-        En cardio d'urgence, le problème vient surtout d'une pompe qui n'envoie plus assez de sang (IDM, choc), d'un circuit électrique instable (FA/FV/TV),
-        ou d'un arrêt complet de la circulation. En RP, la priorité est d'identifier rapidement hypoperfusion et hypoxie : marbrures, confusion, hypotension,
-        douleur thoracique et dyspnée. Plus l'ischémie dure, plus le patient bascule vers l'arrêt cardiaque.
+        <ul>
+          <li><strong>Syndrome coronarien aigu (SCA) :</strong> rupture/érosion de plaque athéromateuse → exposition facteur tissulaire → activation plaquettaire (TXA2, ADP) + coagulation (thrombine) → thrombus intracoronaire. L'ischémie bascule en nécrose lorsque la dette énergétique cellulaire dépasse les capacités mitochondriales ; perte du gradient ionique transmembranaire, surcharge calcique, apoptose puis nécrose.</li>
+          <li><strong>Électrophysiologie des troubles du rythme :</strong> la <strong>FV</strong> correspond à des fronts d'onde multiples désorganisés ; la <strong>TV sans pouls</strong> est un circuit rapide non perfusant. La dissociation électromécanique peut persister malgré activité électrique visible (AESP) en l'absence de débit effectif.</li>
+          <li><strong>Arrêt cardio-respiratoire (ACR) :</strong> le no-flow réel entraîne une chute immédiate de la perfusion cérébrale et coronaire. L'acidose lactique, la dysfonction endothéliale et la microthrombose aggravent la défaillance de reperfusion.</li>
+          <li><strong>Choc cardiogénique :</strong> baisse du débit cardiaque avec augmentation des pressions de remplissage, hypoperfusion systémique, vasoconstriction compensatrice puis défaillance multiviscérale (rein, foie, cerveau). L'inflammation systémique post-ischémique entretient la sidération myocardique.</li>
+          <li><strong>Pont physiologique avec le serveur :</strong> la variable <span class="badge badge-dim">noflow_score</span> modélise la dette ischémique cumulative ; au-delà d'un seuil critique, la probabilité de récupération neurologique utile décroît fortement.</li>
+        </ul>
+
+        <table class="data-table" style="margin-top:12px;">
+          <thead><tr><th>Entité</th><th>Niveau cellulaire</th><th>Niveau d'organe</th><th>Conséquence clinique</th></tr></thead>
+          <tbody>
+            <tr><td>SCA ST+</td><td>Nécrose myocardique transmurale progressive</td><td>Dysfonction segmentaire VG, risque rupture/conduction</td><td>Douleur, choc, arythmies malignes</td></tr>
+            <tr><td>FV/TVSP</td><td>Désorganisation des courants Na+/K+/Ca2+</td><td>Débit nul malgré activité électrique</td><td>ACR immédiat</td></tr>
+            <tr><td>AESP</td><td>Énergie électrique conservée, pompe inefficace</td><td>Absence de pouls central</td><td>Pronostic péjoratif sans cause réversible traitée</td></tr>
+            <tr><td>Choc cardiogénique</td><td>Hypoxie mitochondriale tissulaire</td><td>Hypoperfusion globale persistante</td><td>Marbrures, oligurie, encéphalopathie</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <div class="section-title">2. Signes cliniques / Diagnostic</div>
-    <table class="data-table">
-      <thead>
-        <tr><th>Signe</th><th>Description</th><th>Gravité</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Douleur thoracique irradiante</td><td>Barre rétrosternale vers bras gauche/mâchoire, sueurs, anxiété.</td><td><span class="badge badge-red">ROUGE</span></td></tr>
-        <tr><td>Tachyarythmie (FA/TV)</td><td>Palpitations, malaise, hypotension possible, pouls irrégulier.</td><td><span class="badge badge-yellow">JAUNE</span></td></tr>
-        <tr><td>Fibrillation ventriculaire</td><td>Perte de pouls, inconscience, arrêt circulatoire immédiat.</td><td><span class="badge badge-red">ROUGE</span></td></tr>
-        <tr><td>Signes de choc cardiogénique</td><td>Extrémités froides, confusion, PAS basse, dyspnée intense.</td><td><span class="badge badge-red">ROUGE</span></td></tr>
-        <tr><td>SCA non compliqué</td><td>Douleur persistante mais hémodynamique encore stable.</td><td><span class="badge badge-yellow">JAUNE</span></td></tr>
-        <tr><td>Malaise vagal isolé</td><td>Bradycardie transitoire avec récupération rapide.</td><td><span class="badge badge-green">VERT</span></td></tr>
-      </tbody>
-    </table>
-
-    <div class="section-title">3. Protocole de traitement</div>
+    <div class="section-title">2. 🩺 Sémiologie et Diagnostic clinique</div>
     <div class="panel">
-      <div class="panel-header">Check-list opérationnelle</div>
+      <div class="panel-header">Critères cliniques, paracliniques et gravité absolue</div>
       <div class="panel-body">
-        <div class="alert alert-red"><strong>01</strong>Évaluation immédiate : conscience, pouls, SpO2, TA, ECG scope. Si ACR, RCP immédiate + DEA.</div>
-        <div class="alert alert-yellow"><strong>02</strong>Si douleur thoracique suspecte SCA : Aspirine per os (dose RP usuelle), O2 si SpO2 basse, monitorage continu.</div>
-        <div class="alert alert-yellow"><strong>03</strong>Trinitrine sublinguale si tension correcte et douleur persistante. Recontrôle douleur/TA après 5 min.</div>
-        <div class="alert alert-yellow"><strong>04</strong>Trouble du rythme instable : cardioversion/ défibrillation selon rythme ; Amiodarone si rythme choquable réfractaire.</div>
-        <div class="alert alert-green"><strong>05</strong>Brady symptomatique : Atropine en bolus RP ; réévaluation toutes 3-5 min.</div>
-        <div class="alert alert-red"><strong>06</strong>En ACR : Adrénaline toutes 3-5 min ; après reprise circulatoire, évacuation prioritaire vers structure adaptée.</div>
+        <table class="data-table">
+          <thead><tr><th>Tableau clinique</th><th>Signes sémiologiques discriminants</th><th>Examens/score utiles</th><th>Critères de gravité absolue</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>SCA suspect</td>
+              <td>Douleur constrictive &gt; 20 min, irradiation, dyspnée, sueurs, nausées, angoisse de mort imminente.</td>
+              <td>ECG 12 dérivations répété, troponine (hospitalière), classification <strong>Killip-Kimball</strong>.</td>
+              <td>Hypotension, OAP, troubles du rythme ventriculaire, troubles de conduction haut degré.</td>
+            </tr>
+            <tr>
+              <td>Tachyarythmie instable</td>
+              <td>Palpitations + douleur thoracique + altération neurologique/hypotension.</td>
+              <td>ECG monitoré, fréquence et largeur QRS, tolérance hémodynamique.</td>
+              <td>PAS &lt; 90, douleur ischémique persistante, insuffisance cardiaque aiguë, syncope.</td>
+            </tr>
+            <tr>
+              <td>ACR</td>
+              <td>Inconscience, apnée ou gasps, absence de pouls central.</td>
+              <td>Algorithme ERC, rythme initial (FV/TVSP/Asystolie/AESP), chronologie Utstein.</td>
+              <td>No-flow prolongé, absence ROSC malgré prise en charge complète.</td>
+            </tr>
+            <tr>
+              <td>Choc cardiogénique</td>
+              <td>Marbrures, extrémités froides, oligurie, agitation/confusion, dyspnée sévère.</td>
+              <td>Lactate (hospitalier), échographie cardiaque ciblée, profil hémodynamique.</td>
+              <td>Hypoperfusion persistante malgré correction initiale, défaillance multiviscérale.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul style="margin-top:12px;">
+          <li><strong>GCS (Glasgow)</strong> : indispensable en cardio compliqué (hypoperfusion cérébrale, post-ROSC, choc).</li>
+          <li><strong>Éléments ECG critiques préhospitaliers</strong> : sus-décalage ST territorial, TV monomorphe rapide, FV, bradycardie extrême avec mauvais débit.</li>
+          <li><strong>Point de vigilance diagnostique</strong> : douleur thoracique non coronarienne possible (EP, dissection aortique, pneumothorax sous tension) ; reclassification dynamique obligatoire.</li>
+        </ul>
       </div>
     </div>
 
-    <div class="section-title">4. Algorithme décisionnel</div>
+    <div class="section-title">3. 📚 Thérapeutique de Référence (SFMU/HAS/ERC)</div>
     <div class="panel">
-      <div class="panel-header">Condition → Action → Résultat</div>
+      <div class="panel-header">Conduites recommandées et niveau de certitude</div>
       <div class="panel-body">
-        <div class="grid-2" style="margin-bottom:0;">
-          <div class="alert alert-red"><strong>Condition</strong>Absence de pouls / inconscience</div>
-          <div class="alert alert-red"><strong>Action</strong>RCP + DEA + Adrénaline</div>
-          <div class="alert alert-yellow"><strong>Condition</strong>Douleur thoracique + sueurs + TA stable</div>
-          <div class="alert alert-yellow"><strong>Action</strong>Aspirine + Trinitrine + surveillance ECG</div>
-          <div class="alert alert-yellow"><strong>Condition</strong>Tachycardie mal tolérée</div>
-          <div class="alert alert-yellow"><strong>Action</strong>Cardioversion/Amiodarone</div>
-          <div class="alert alert-green"><strong>Résultat attendu</strong>Perfusion améliorée, douleur en baisse, transfert médicalisé sécurisé.</div>
-          <div class="alert alert-green"><strong>Si échec</strong>Escalade vers protocole ACR/choc et renfort SMUR immédiat.</div>
-        </div>
+        <table class="data-table">
+          <thead><tr><th>Situation</th><th>Recommandation médicale</th><th>Détails techniques</th><th>Zone d'incertitude / limite</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>SCA ST+ présumé</td>
+              <td>Antiagrégation précoce, monitorage continu, stratégie de reperfusion urgente.</td>
+              <td>Aspirine si non contre-indiquée ; O2 seulement si hypoxémie ; transmission ECG précoce si possible.</td>
+              <td>Choix exact antithrombotique préhospitalier dépend des protocoles locaux et du plateau receveur.</td>
+            </tr>
+            <tr>
+              <td>FV/TV sans pouls</td>
+              <td>Défibrillation précoce + RCP de haute qualité + adrénaline selon algorithme.</td>
+              <td>Cycles de 2 min, minimiser interruptions, accès IV/IO rapide.</td>
+              <td>Efficacité décroît avec retard de choc et allongement no-flow.</td>
+            </tr>
+            <tr>
+              <td>TV avec pouls instable</td>
+              <td>Cardioversion synchronisée prioritaire.</td>
+              <td>Sédation selon état hémodynamique, monitorage strict.</td>
+              <td>Fenêtre thérapeutique étroite en choc profond.</td>
+            </tr>
+            <tr>
+              <td>Bradycardie mal tolérée</td>
+              <td>Atropine en première intention puis stratégie d'escalade.</td>
+              <td>Recherche cause réversible (ischémie, toxique, hypoxie).</td>
+              <td>Réponse atropinique inconstante si bloc distal.</td>
+            </tr>
+            <tr>
+              <td>Choc cardiogénique</td>
+              <td>Optimisation oxygénation, perfusion prudente, vasopresseur/inotrope selon profil.</td>
+              <td>Objectif perfusion d'organes, éviter surcharge volémique aveugle.</td>
+              <td>Stratégie personnalisée guidée par échographie et biologie (souvent hospitalières).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-red" style="margin-top:10px;"><strong>Point de doctrine :</strong> en ACR, la qualité de RCP, la précocité du choc électrique et la correction des causes réversibles conditionnent davantage le pronostic que l'accumulation de gestes non ciblés.</div>
       </div>
     </div>
 
-    <div class="section-title">5. Médicaments spécifiques</div>
-    <table class="data-table">
-      <thead>
-        <tr><th>Médicament</th><th>Indication</th><th>Dose RP</th><th>Effet attendu</th><th>Contre-indication principale</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Adrénaline</td><td>ACR, choc profond</td><td>1 mg IV/IO répété 3-5 min</td><td>Relance perfusion coronarienne/cérébrale</td><td>Tachyarythmie sévère hors ACR</td></tr>
-        <tr><td>Amiodarone</td><td>FV/TV réfractaire, TV stable</td><td>Bolus IV RP progressif</td><td>Stabilisation du rythme</td><td>Bradycardie majeure, bloc AV</td></tr>
-        <tr><td>Atropine</td><td>Bradycardie symptomatique</td><td>Bolus IV RP, répétable</td><td>Hausse de la fréquence cardiaque</td><td>Glaucome aigu, tachycardie extrême</td></tr>
-        <tr><td>Aspirine</td><td>SCA/IDM suspect</td><td>160-300 mg per os</td><td>Freine l'agrégation plaquettaire</td><td>Allergie, saignement actif</td></tr>
-        <tr><td>Trinitrine</td><td>Douleur angineuse avec TA correcte</td><td>1 dose sublinguale, réévaluation 5 min</td><td>Vasodilatation, baisse douleur</td><td>Hypotension, prise d'inhibiteur PDE5</td></tr>
-        <tr><td>Héparine</td><td>SCA/EP selon avis médical</td><td>Bolus puis relais RP</td><td>Limite extension du thrombus</td><td>Hémorragie active</td></tr>
-      </tbody>
-    </table>
+    <div class="section-title">4. 🎮 Protocole Opérationnel SAMU 96 (Application Serveur)</div>
+    <div class="panel">
+      <div class="panel-header">Traduction strictement justifiée des mécaniques hardcodées</div>
+      <div class="panel-body">
+        <table class="data-table">
+          <thead><tr><th>Mécanique serveur</th><th>Valeur</th><th>Équivalent physiologique</th><th>Usage opérationnel cardio</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-dim">noflow_score</span></td>
+              <td>280-320 au départ, +1/s ; seuil 800</td>
+              <td>Dette ischémique cérébro-myocardique cumulative.</td>
+              <td>Objectif : réduire rapidement la pente (RCP, O2, adrénaline, choc).</td>
+            </tr>
+            <tr>
+              <td>RCP (8 s) pro</td>
+              <td>reviving +5 à +9 / noflow -10 à -20</td>
+              <td>Débit cardiaque substitutif ~20-30% normal.</td>
+              <td>Action continue prioritaire entre analyses de rythme.</td>
+            </tr>
+            <tr>
+              <td>Adrénaline</td>
+              <td>noflow -80 à -120</td>
+              <td>Vasoconstriction alpha-1, hausse pression de perfusion coronaire/cérébrale.</td>
+              <td>Administration rythmée toutes 3-5 min en ACR.</td>
+            </tr>
+            <tr>
+              <td>Défibrillation</td>
+              <td>reviving +20 à +30 ; noflow -40 à -60 ; ROSC 1/6</td>
+              <td>Dépolarisation globale interrompant FV/TVSP.</td>
+              <td>Prioritaire si rythme choquable, sans délai non justifié.</td>
+            </tr>
+            <tr>
+              <td>O2 (usage unique)</td>
+              <td>noflow -100 à -200 ; pente +0.5/s</td>
+              <td>Réduction hypoxémie et ralentissement acidose lactique.</td>
+              <td>À engager précocement en ACR/hypoxémie sévère.</td>
+            </tr>
+            <tr>
+              <td>ECMO VA</td>
+              <td>noflow = 0 ; reviving +30</td>
+              <td>Suppléance cardio-respiratoire complète.</td>
+              <td>Réservée aux profils sélectionnés (réfractaire avec no-flow court).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-yellow" style="margin-top:10px;"><strong>Matériel et pharmacologie gameplay :</strong> trousse (+80% HP) et bandage hémostatique (+20% HP) sont assimilés à des stratégies de restauration de perfusion. Morphine = antalgie complète mais nausées codées (prévoir protection voies aériennes). Paracétamol = antalgie palier 1. Naloxone = antagonisme μ obligatoire en surdose opioïde.</div>
+      </div>
+    </div>
   </main>
 </div>
 

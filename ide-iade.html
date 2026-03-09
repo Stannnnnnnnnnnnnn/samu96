@@ -86,39 +86,91 @@
       <div class="panel">
         <div class="panel-header">💊 Module 01 — Pharmacologie urgences · Durée : 4h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
-          <div class="warn-box"><strong>⚠ Rappel réglementaire :</strong> Tout acte de prescription appartient au médecin. L'IDE applique les prescriptions médicales. En SMUR, les protocoles IDE permettent certains actes sur prescription anticipée.</div>
+          <div class="alert alert-yellow"><strong>⚠ Cadre d'exercice IDE/IADE :</strong> prescription médicale obligatoire hors protocoles anticipés validés. Références pédagogiques : ERC (ACLS), recommandations SFMU, HAS sécurité médicamenteuse.</div>
 
-          <div class="section-title">Médicaments de réanimation</div>
-          <table class="data-table">
-            <thead><tr><th>Médicament</th><th>Indication</th><th>Dose</th><th>Voie</th><th>Surveillance</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Adrénaline</strong></td><td>ACR, anaphylaxie</td><td class="mono">1 mg (ACR) · 0,5 mg IM</td><td>IV/IO/IM</td><td>FC, PA, rythme</td></tr>
-              <tr><td><strong>Morphine</strong></td><td>Douleur intense</td><td class="mono">2–4 mg IV</td><td>IV</td><td>FR, SpO2</td></tr>
-              <tr><td><strong>Paracétamol</strong></td><td>Douleur, fièvre</td><td class="mono">1 g IV</td><td>IV</td><td>Tolérance</td></tr>
-              <tr><td><strong>Naloxone</strong></td><td>Overdose stupéfiants</td><td class="mono">0,4 mg IV titration</td><td>IV/IM/IN</td><td>FR, conscience, vigilance</td></tr>
-              <tr><td><strong>Coma éthylique</strong></td><td>Ivresse profonde, coma alcoolique</td><td class="mono">—</td><td>—</td><td>FR, conscience, ne pas laisser seul</td></tr>
-            </tbody>
-          </table>
-
-          <div class="section-title">Thérapeutiques non-médicamenteuses</div>
-          <table class="data-table">
-            <thead><tr><th>Thérapeutique</th><th>Indication</th><th>Remarques</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Défibrillateur</strong></td><td>FV, TV sans pouls</td><td>Disponible en SMUR et ambulances</td></tr>
-              <tr><td><strong>Oxygénothérapie</strong></td><td>Hypoxémie SpO2 &lt; 94%</td><td>Cible SpO2 94-98% post-ROSC</td></tr>
-              <tr><td><strong>ECMO</strong></td><td>ACR réfractaire, support circulatoire</td><td>Coordination CHU dédiée</td></tr>
-              <tr><td><strong>Biafine</strong></td><td>Brûlures superficielles</td><td>Pansement local</td></tr>
-              <tr><td><strong>Bandage hémostatique</strong></td><td>Hémorragie externe incontrôlable</td><td>Technique de compression</td></tr>
-              <tr><td><strong>Trousse premiers soins</strong></td><td>Plaies, blessures mineures</td><td>Kit de base SMUR</td></tr>
-            </tbody>
-          </table>
-
-          <div class="section-title">Règles de sécurité médicamenteuse</div>
+          <div class="section-title">Index du module</div>
           <ul class="step-list">
-            <li class="step-item"><span class="step-num">5B</span><span class="step-text"><strong>Bon patient · Bon médicament · Bonne dose · Bonne voie · Bon moment</strong> — vérification systématique avant tout acte.</span></li>
-            <li class="step-item"><span class="step-num">⚠</span><span class="step-text"><strong>Morphine</strong> : respecter titration lente. Valider absence allergie avant administration.</span></li>
-            <li class="step-item"><span class="step-num">⚠</span><span class="step-text"><strong>Naloxone</strong> : obligatoire en cas d'overdose stupéfiants. Réversible, effet court (30–90 min).</span></li>
+            <li class="step-item"><span class="step-num">01</span><span class="step-text">🧬 Pharmacodynamie ciblée en ACR (Adrénaline, O2, Naloxone, Morphine).</span></li>
+            <li class="step-item"><span class="step-num">02</span><span class="step-text">🎮 Correspondance stricte entre physiopathologie et variables système (<span class="badge badge-dim">noflow_score</span>, <span class="badge badge-dim">reviving_score</span>).</span></li>
+            <li class="step-item"><span class="step-num">03</span><span class="step-text">⏱️ Check-list opérationnelle IDE en ACR (monitoring, Lucas 3, Lifepak 15, oxygénation).</span></li>
           </ul>
+
+          <div class="section-title">Théorie médicale (Physiopathologie / SFMU)</div>
+          <table class="data-table">
+            <thead><tr><th>Thème</th><th>Mécanisme physiopathologique</th><th>Conséquence clinique attendue</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Adrénaline 1 mg IV/IO</strong> <span class="badge badge-red">ERC/SFMU</span></td>
+                <td>Agonisme <strong>alpha-1</strong> prédominant : vasoconstriction périphérique, augmentation pression diastolique aortique, amélioration de la pression de perfusion coronaire et cérébrale pendant la RCP.</td>
+                <td>Augmentation probabilité de ROSC si RCP de qualité et rythme traité.</td>
+              </tr>
+              <tr>
+                <td><strong>Oxygénothérapie</strong> (masque haute concentration / IOT)</td>
+                <td>Augmentation du contenu artériel en O2 et limitation relative de l'hypoxie cellulaire. Retarde la transition vers métabolisme anaérobie massif et acidose lactique.</td>
+                <td>Ralentissement de l'aggravation métabolique pendant le low-flow.</td>
+              </tr>
+              <tr>
+                <td><strong>Naloxone</strong></td>
+                <td>Antagoniste compétitif des récepteurs opioïdes <strong>μ</strong>. Inverse la dépression respiratoire induite par opioïdes.</td>
+                <td>Reprise ventilatoire potentielle, réduction risque hypoxique secondaire.</td>
+              </tr>
+              <tr>
+                <td><strong>Morphine</strong></td>
+                <td>Agoniste opioïde μ : antalgie puissante, baisse réponse neurovégétative à la douleur. Effets indésirables : nausées, vomissements, dépression respiratoire dose-dépendante.</td>
+                <td>Confort analgésique, mais surveillance respiratoire stricte nécessaire.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">Application système (Gameplay) — table de correspondance</div>
+          <table class="data-table">
+            <thead><tr><th>Action thérapeutique</th><th>Référence médicale</th><th>Effet hardcodé</th><th>Justification physiopathologique</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Massage cardiaque 8s</strong> (pro)</td>
+                <td>RCP haute qualité, interruptions minimales (ERC/SFMU)</td>
+                <td><span class="badge badge-green">reviving_score +5 à +9</span><br><span class="badge badge-yellow">noflow_score -10 à -20</span></td>
+                <td>Flux sanguin mécanique substitutif, perfusion coronaire/cérébrale partielle.</td>
+              </tr>
+              <tr>
+                <td><strong>Adrénaline 1 mg IV/IO</strong> toutes 3–5 min</td>
+                <td>Algorithme ERC ACR adulte</td>
+                <td><span class="badge badge-yellow">noflow_score -80 à -120</span></td>
+                <td>Gain de perfusion d'organes nobles via vasoconstriction alpha-1.</td>
+              </tr>
+              <tr>
+                <td><strong>Défibrillation</strong> FV/TV sans pouls</td>
+                <td>Choc externe biphasique précoce</td>
+                <td><span class="badge badge-green">reviving_score +20 à +30</span><br><span class="badge badge-yellow">noflow_score -40 à -60</span><br><span class="badge badge-red">ROSC instantané 1/6</span></td>
+                <td>Dépolarisation myocardique simultanée favorisant reprise d'un rythme organisé perfusant.</td>
+              </tr>
+              <tr>
+                <td><strong>Oxygénothérapie</strong> (usage unique)</td>
+                <td>Correction hypoxémie, optimisation transport O2</td>
+                <td><span class="badge badge-yellow">noflow_score -100 à -200</span><br><span class="badge badge-dim">progression +1/s → +0.5/s</span></td>
+                <td>Frein relatif de la cascade hypoxique/acidotique tissulaire.</td>
+              </tr>
+              <tr>
+                <td><strong>ECMO VA</strong> (si engagée)</td>
+                <td>ACR réfractaire sélectionné</td>
+                <td><span class="badge badge-yellow">noflow_score = 0</span><br><span class="badge badge-green">reviving_score +30</span></td>
+                <td>Suppléance circulatoire et respiratoire complète, restauration perfusion systémique.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">Check-list opérationnelle IDE — ACR</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">T0</span><span class="step-text">🚨 Confirmer ACR, lancer chronométrage, débuter RCP immédiate, installer <strong>Lifepak 15</strong> (ECG + analyse rythme).</span></li>
+            <li class="step-item"><span class="step-num">T+1</span><span class="step-text">🫁 Démarrer <strong>O2 précocement</strong> (masque haute concentration puis IOT selon décision médicale). Cet usage unique doit être engagé tôt pour ralentir la pente du <span class="badge badge-dim">noflow_score</span>.</span></li>
+            <li class="step-item"><span class="step-num">T+2</span><span class="step-text">💉 Préparer <strong>Adrénaline 1 mg IV/IO</strong>, tracer heure d'injection, anticiper redose à 3–5 min.</span></li>
+            <li class="step-item"><span class="step-num">T+3</span><span class="step-text">⚙️ Préparer et positionner <strong>Lucas 3</strong> dès que disponible pour maintenir compressions constantes et limiter les pauses.</span></li>
+            <li class="step-item"><span class="step-num">Cycle</span><span class="step-text">⚡ Analyser rythme toutes les 2 min, choc immédiat si FV/TV sans pouls, reprise RCP sans délai post-choc.</span></li>
+            <li class="step-item"><span class="step-num">Trace</span><span class="step-text">🧾 Documenter : heure ACR, no-flow présumé, cycles RCP, doses, chocs, évolution clinique, décision médicale (poursuite/arrêt).</span></li>
+          </ul>
+
+          <div class="section-title">Zone d'incertitude / données manquantes</div>
+          <div class="alert alert-red"><strong>Donnée non codée explicitement :</strong> absence de protocole serveur détaillé pour coma éthylique (indications, score de gravité, critères d'intubation, interaction avec Naloxone). Application à standardiser avant simulation avancée.</div>
         </div>
       </div>
     </div>

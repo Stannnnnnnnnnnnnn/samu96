@@ -280,108 +280,161 @@
 
     <section id="tab-dispatch" class="main-tab-panel" role="tabpanel">
       <div class="regulation-layout">
-        <div class="panel">
-          <div class="panel-header">Arbre décisionnel — appel entrant</div>
+        <div class="panel" style="border:1px solid rgba(0,48,135,0.3);">
+          <div class="panel-header" style="background:rgba(0,48,135,0.12);">📌 Références physiologiques adultes (HAS / SFMU)</div>
           <div class="panel-body">
-            <div class="decision-tree">
-              <div class="tree-node tree-action">APPEL ENTRANT</div>
-              <div class="tree-arrow"></div>
-              <div class="tree-node tree-action">Identification + localisation</div>
-              <div class="tree-arrow"></div>
-              <div class="tree-node tree-action">Motif principal</div>
-              <div class="tree-arrow"></div>
-              <div class="tree-node tree-action">Bilan téléphonique xABCDE</div>
-              <div class="tree-arrow"></div>
-              <div class="tree-node tree-decision">Décision médecin régulateur</div>
-              <div class="tree-arrow"></div>
-              <div class="tree-branches">
-                <div class="tree-node tree-immediate">P0/P1 : SMUR immédiat</div>
-                <div class="tree-node tree-action">P2/P3 : VSAV</div>
-                <div class="tree-node tree-advice">P4 : Conseil médical</div>
-              </div>
-            </div>
+            <table class="data-table">
+              <thead><tr><th>Paramètre</th><th>Normal</th><th>Surveillance rapprochée</th><th>Seuil critique</th></tr></thead>
+              <tbody>
+                <tr><td>SpO2</td><td>≥ 95%</td><td>90–94%</td><td>⚠️ <strong>&lt; 90%</strong> 🔴 détresse respiratoire</td></tr>
+                <tr><td>FC</td><td>60–100 bpm</td><td>50–59 / 101–130 bpm</td><td>⚠️ <strong>&lt; 50</strong> ou <strong>&gt; 130</strong></td></tr>
+                <tr><td>TA systolique</td><td>90–140 mmHg</td><td>141–180 mmHg</td><td>⚠️ <strong>&lt; 90</strong> (choc) / 🔴 <strong>&gt; 180</strong></td></tr>
+                <tr><td>FR</td><td>12–20 /min</td><td>21–25 /min</td><td>⚠️ <strong>&gt; 25</strong> ou <strong>&lt; 10</strong></td></tr>
+                <tr><td>Glycémie capillaire</td><td>0,7–1,10 g/L</td><td>0,6–0,69 g/L</td><td>🔴 <strong>&lt; 0,6 g/L</strong> action immédiate</td></tr>
+                <tr><td>Température</td><td>36–37,5°C</td><td>37,6–38,4°C</td><td>⚠️ <strong>&lt; 35°C</strong> / <strong>&gt; 38,5°C</strong></td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        <div>
-          <div class="panel">
-            <div class="panel-header">Niveaux de priorité P0 → P4</div>
-            <div class="panel-body">
-              <table class="data-table">
-                <thead><tr><th>Niveau</th><th>Définition</th><th>Délai</th></tr></thead>
-                <tbody>
-                  <tr class="priority-p0"><td><span class="badge badge-red">P0</span></td><td>ACR / détresse vitale immédiate</td><td class="mono text-red">&lt; 8 min</td></tr>
-                  <tr class="priority-p1"><td><span class="badge badge-red">P1</span></td><td>Urgence vitale potentielle</td><td class="mono text-red">&lt; 15 min</td></tr>
-                  <tr class="priority-p2"><td><span class="badge badge-yellow">P2</span></td><td>Urgence relative</td><td class="mono">&lt; 30 min</td></tr>
-                  <tr class="priority-p3"><td><span class="badge badge-yellow">P3</span></td><td>Urgence différable</td><td class="mono">&lt; 60 min</td></tr>
-                  <tr class="priority-p4"><td><span class="badge badge-green">P4</span></td><td>Conseil médical / orientation différée</td><td class="mono">Différé</td></tr>
-                </tbody>
-              </table>
+        <div class="panel" style="border:1px solid rgba(0,48,135,0.35);">
+          <div class="panel-header" style="background:rgba(0,48,135,0.12);">🎧 Espace ARM — Filtre et action immédiate</div>
+          <div class="panel-body">
+            <div class="alert alert-green"><strong>Script obligatoire :</strong> « SAMU, bonjour. Quelle est la ville et l'adresse exacte de l'urgence ? »</div>
+            <div class="decision-tree">
+              <div class="tree-node tree-action">1) 📍 Localisation : ville, adresse, GPS, repères</div>
+              <div class="tree-arrow"></div>
+              <div class="tree-node tree-action">2) ❓ Motif : « Que se passe-t-il ? »</div>
+              <div class="tree-arrow"></div>
+              <div class="tree-node tree-action">3) 🧠 Conscience : « La victime vous parle-t-elle ? »</div>
+              <div class="tree-arrow"></div>
+              <div class="tree-node tree-action">4) 🫁 Respiration : « Respire-t-elle normalement ? »</div>
+              <div class="tree-arrow"></div>
+              <div class="tree-node tree-immediate">⚠️ NO-FLOW EN COURS — Dicter RCP maintenant — Bascule Médecin</div>
             </div>
-          </div>
 
-          <div class="panel">
-            <div class="panel-header">Critères SMUR vs VSAV</div>
-            <div class="panel-body smur-vsav">
-              <div>
-                <span class="badge badge-red">SMUR</span>
-                <ul>
-                  <li>P0 / P1</li>
-                  <li>Médicalisation nécessaire</li>
-                  <li>Gestes avancés préhospitaliers</li>
-                </ul>
-              </div>
-              <div>
-                <span class="badge badge-yellow">VSAV</span>
-                <ul>
-                  <li>P2 / P3</li>
-                  <li>Surveillance simple</li>
-                  <li>Transport programmé ou orienté</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+            <table class="data-table" style="margin-top:12px;">
+              <thead><tr><th>Départs réflexes ARM</th><th>Engagement immédiat</th><th>Consigne associée</th></tr></thead>
+              <tbody>
+                <tr><td>« Ne respire plus » / « Inconscient »</td><td><span class="badge badge-red">VSAV + SMUR</span></td><td>RCP guidée mot pour mot + transfert médecin</td></tr>
+                <tr><td>« Plaie par arme » / « Fusillade » / « Bagarre »</td><td><span class="badge badge-red">GN + VSAV + SMUR PR</span></td><td>Sécurité scène + compression si possible</td></tr>
+                <tr><td>« Accident route grave »</td><td><span class="badge badge-red">VSAV + SMUR</span></td><td>Immobilisation relative + surveillance respiratoire</td></tr>
+              </tbody>
+            </table>
 
-          <div class="panel">
-            <div class="panel-header">Plan ORSAN / Multi-victimes</div>
-            <div class="panel-body">
-              <div class="alert alert-yellow"><strong>Alerte jaune :</strong> déclenchement renforcé si &gt; 5 victimes</div>
-              <div class="alert alert-red"><strong>Alerte rouge :</strong> crise majeure si &gt; 15 victimes</div>
-              <table class="data-table">
-                <thead><tr><th>Niveau</th><th>Déclenchement</th><th>Responsable</th><th>Moyens engagés</th></tr></thead>
-                <tbody>
-                  <tr><td class="mono">ORSAN 1</td><td>Incident localisé</td><td>Médecin régulateur</td><td>Ressources SAMU renforcées</td></tr>
-                  <tr><td class="mono">ORSAN 2</td><td>Multi-victimes limité</td><td>Cadre de garde</td><td>SMUR + VSAV additionnels</td></tr>
-                  <tr><td class="mono">ORSAN 3</td><td>Afflux massif régional</td><td>Direction SAMU</td><td>Poste médical avancé, rappel équipes</td></tr>
-                  <tr><td class="mono">ORSAN 4</td><td>Crise majeure</td><td>Cellule de crise</td><td>Coordination zonale, moyens exceptionnels</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+            <div class="alert alert-yellow" style="margin-top:12px;"><strong>À dicter mot pour mot — ACR suspecté :</strong><br>« Allongez la personne sur le dos sur une surface dure — Posez vos deux mains au centre de la poitrine — Appuyez fort et vite, 100 fois par minute — Ne vous arrêtez pas »</div>
+            <div class="alert alert-yellow"><strong>À dicter mot pour mot — Hémorragie externe :</strong><br>« Comprimez la plaie avec votre main ou un tissu propre — Appuyez FORT sans relâcher — Ne retirez pas le tissu »</div>
+            <div class="alert alert-yellow"><strong>À dicter mot pour mot — PLS :</strong><br>« Mettez la personne sur le côté, genou plié en avant pour stabiliser — Vérifiez que la bouche est libre »</div>
 
-          <div class="panel">
-            <div class="panel-header">TIHM — Transfert Inter-Hospitalier Médicalisé</div>
-            <div class="panel-body check-columns">
-              <div>
-                <div class="section-title" style="margin-top:0;">Check-list départ</div>
-                <ul>
-                  <li>Dossier médical complet</li>
-                  <li>Consentement validé</li>
-                  <li>Monitoring opérationnel</li>
-                  <li>Médicaments prêts</li>
-                  <li>Contact service receveur confirmé</li>
-                </ul>
-              </div>
-              <div>
-                <div class="section-title" style="margin-top:0;">Check-list arrivée</div>
-                <ul>
-                  <li>Transmissions SBAR</li>
-                  <li>Passage de relais équipe receveuse</li>
-                  <li>Traçabilité horodatée</li>
-                </ul>
-              </div>
-            </div>
+            <div class="alert alert-green"><strong>Autonomie ARM :</strong> P3 évident (petite plaie, malaise résolu) → engagement <strong>VSAV seul</strong> autorisé.</div>
           </div>
+        </div>
+
+        <div class="panel" style="border:1px solid rgba(185,28,28,0.5); box-shadow:0 0 0 2px rgba(185,28,28,0.08);">
+          <div class="panel-header" style="background:rgba(185,28,28,0.12);">🩺 Espace Médecin Régulateur — OAD scores et allocation</div>
+          <div class="panel-body">
+            <div class="alert alert-red"><strong>Rappel no-flow (ERC 2021 + mécanique serveur) :</strong> 0–1 min survie &gt; 90% si RCP immédiate ; 1–4 min décroissance rapide ; &gt; 4 min sans RCP = lésions anoxiques probables ; 🔴 <strong>noflow_score &gt; 800 = irréversible</strong>.</div>
+
+            <div class="section-title">Score de Glasgow (GCS) — calcul interactif</div>
+            <table class="data-table">
+              <thead><tr><th>Composante</th><th>Choix</th><th>Points</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Yeux (Y)</td>
+                  <td>
+                    <select id="gcs-eyes" data-score-group="gcs">
+                      <option value="4">Ouverture spontanée (4)</option>
+                      <option value="3">À la voix (3)</option>
+                      <option value="2">À la douleur (2)</option>
+                      <option value="1">Aucune (1)</option>
+                    </select>
+                  </td>
+                  <td>1–4</td>
+                </tr>
+                <tr>
+                  <td>Verbal (V)</td>
+                  <td>
+                    <select id="gcs-verbal" data-score-group="gcs">
+                      <option value="5">Orienté (5)</option>
+                      <option value="4">Confus (4)</option>
+                      <option value="3">Mots inappropriés (3)</option>
+                      <option value="2">Sons incompréhensibles (2)</option>
+                      <option value="1">Aucune (1)</option>
+                    </select>
+                  </td>
+                  <td>1–5</td>
+                </tr>
+                <tr>
+                  <td>Moteur (M)</td>
+                  <td>
+                    <select id="gcs-motor" data-score-group="gcs">
+                      <option value="6">Obéit aux ordres (6)</option>
+                      <option value="5">Localise la douleur (5)</option>
+                      <option value="4">Retrait à la douleur (4)</option>
+                      <option value="3">Flexion anormale (3)</option>
+                      <option value="2">Extension (2)</option>
+                      <option value="1">Aucune (1)</option>
+                    </select>
+                  </td>
+                  <td>1–6</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="alert alert-green"><strong>Calcul rapide :</strong> Yeux + Verbal + Moteur = <span id="gcs-total" class="mono">15</span>/15</div>
+            <div class="alert alert-red"><strong>Seuils critiques :</strong> ⚠️ <strong>GCS ≤ 8</strong> = détresse neurologique majeure (IOT systématique) · ⚠️ <strong>GCS &lt; 13</strong> = P1 obligatoire.</div>
+
+            <div class="section-title">MGAP trauma (SFMU 2020) — calcul interactif</div>
+            <table class="data-table">
+              <thead><tr><th>Variable</th><th>Choix</th><th>Points</th></tr></thead>
+              <tbody>
+                <tr><td>Mécanisme</td><td><select id="mgap-mech" data-score-group="mgap"><option value="4">Trauma fermé</option><option value="0">Trauma pénétrant</option></select></td><td>0 ou 4</td></tr>
+                <tr><td>Glasgow</td><td><input id="mgap-gcs" type="number" min="3" max="15" value="15" data-score-group="mgap" /></td><td>3 à 15</td></tr>
+                <tr><td>Âge</td><td><select id="mgap-age" data-score-group="mgap"><option value="5">&lt; 60 ans</option><option value="0">≥ 60 ans</option></select></td><td>0 ou 5</td></tr>
+                <tr><td>PAS</td><td><select id="mgap-sbp" data-score-group="mgap"><option value="5">&gt; 120 mmHg</option><option value="3">60–120 mmHg</option><option value="0">&lt; 60 mmHg</option></select></td><td>0 / 3 / 5</td></tr>
+              </tbody>
+            </table>
+            <div class="alert alert-green"><strong>MGAP total :</strong> <span id="mgap-total" class="mono">29</span>/29</div>
+            <div class="alert alert-yellow"><strong>Interprétation :</strong> ≥ 23 faible risque · 18–22 modéré · 🔴 ≤ 17 risque élevé → UMH/HELISMUR.</div>
+
+            <div class="section-title">NEWS2 simplifié (HAS 2022) — calcul interactif</div>
+            <table class="data-table">
+              <thead><tr><th>Critère</th><th>Condition</th><th>Points</th></tr></thead>
+              <tbody>
+                <tr><td>SpO2</td><td><label><input type="checkbox" class="news2-crit" value="3"> &lt; 92%</label></td><td>+3</td></tr>
+                <tr><td>FC</td><td><label><input type="checkbox" class="news2-crit" value="3"> &gt; 130 bpm</label></td><td>+3</td></tr>
+                <tr><td>FR</td><td><label><input type="checkbox" class="news2-crit" value="3"> &gt; 24 /min</label></td><td>+3</td></tr>
+                <tr><td>Conscience</td><td><label><input type="checkbox" class="news2-crit" value="3"> altérée</label></td><td>+3</td></tr>
+              </tbody>
+            </table>
+            <div class="alert alert-green"><strong>NEWS2 simplifié :</strong> <span id="news2-total" class="mono">0</span> points</div>
+            <div class="alert alert-red"><strong>Seuil :</strong> 🔴 <strong>NEWS2 ≥ 7</strong> = activation SMUR immédiate.</div>
+
+            <div class="section-title">Triage P0 → P4 et vecteurs</div>
+            <table class="data-table">
+              <thead><tr><th>Priorité</th><th>Critères</th><th>Vecteur</th></tr></thead>
+              <tbody>
+                <tr><td><span class="badge badge-red">P0</span></td><td>ACR, choc hémorragique, asphyxie</td><td>UMH ou HELISMUR + VSAV</td></tr>
+                <tr><td><span class="badge badge-red">P1</span></td><td>Trauma haute cinétique, douleur thoracique, GCS &lt; 13</td><td>VLM ou UMH</td></tr>
+                <tr><td><span class="badge badge-yellow">P2</span></td><td>Risque évolutif avec constantes stables</td><td>VSAV + rappel médecin</td></tr>
+                <tr><td><span class="badge badge-yellow">P3</span></td><td>Urgence différable</td><td>VSAV</td></tr>
+                <tr><td><span class="badge badge-green">P4</span></td><td>Conseil médical</td><td>Téléphone</td></tr>
+              </tbody>
+            </table>
+
+            <div class="section-title">Critères SUdF 2019 — HELISMUR / SMUR</div>
+            <div class="hud-steps">
+              <label class="hud-step"><input type="checkbox" class="sudf-criterion"><span class="step-number">01</span><span class="step-text">P0/P1 confirmé</span><span class="badge badge-green step-done">OK</span></label>
+              <label class="hud-step"><input type="checkbox" class="sudf-criterion"><span class="step-number">02</span><span class="step-text">Distance terrestre &gt; 20–25 min</span><span class="badge badge-green step-done">OK</span></label>
+              <label class="hud-step"><input type="checkbox" class="sudf-criterion"><span class="step-number">03</span><span class="step-text">Terrain inaccessible/contraint</span><span class="badge badge-green step-done">OK</span></label>
+              <label class="hud-step"><input type="checkbox" class="sudf-criterion"><span class="step-number">04</span><span class="step-text">Besoin SMUR + transport rapide simultané</span><span class="badge badge-green step-done">OK</span></label>
+            </div>
+            <div class="alert alert-yellow"><strong>Critères SMUR remplis ?</strong> <span id="sudf-count" class="mono">0</span>/4 cochés</div>
+            <div class="alert alert-green"><strong>Non-engagement SMUR / VSAV seul :</strong> Glasgow 15, SpO2 ≥ 95%, FC 60–100, TA normale, absence de cinétique élevée → P3/P4 possible.</div>
+          </div>
+        </div>
+
+        <div class="alert" style="background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.18);color:#0f172a;">
+          <strong>Références :</strong> HAS 2022 · SFMU 2020/2023 · ERC 2021 · SUdF 2019
         </div>
       </div>
     </section>
@@ -471,9 +524,75 @@
       });
     });
 
+    function toInt(value) {
+      const n = parseInt(value, 10);
+      return Number.isNaN(n) ? 0 : n;
+    }
+
+    function updateGCS() {
+      const eyes = toInt(document.getElementById('gcs-eyes')?.value);
+      const verbal = toInt(document.getElementById('gcs-verbal')?.value);
+      const motor = toInt(document.getElementById('gcs-motor')?.value);
+      const total = eyes + verbal + motor;
+      const out = document.getElementById('gcs-total');
+      if (out) out.textContent = String(total);
+
+      const mgapGcsInput = document.getElementById('mgap-gcs');
+      if (mgapGcsInput) {
+        mgapGcsInput.value = String(total);
+        updateMGAP();
+      }
+    }
+
+    function updateMGAP() {
+      const mech = toInt(document.getElementById('mgap-mech')?.value);
+      const gcs = Math.min(15, Math.max(3, toInt(document.getElementById('mgap-gcs')?.value)));
+      const age = toInt(document.getElementById('mgap-age')?.value);
+      const sbp = toInt(document.getElementById('mgap-sbp')?.value);
+      const total = mech + gcs + age + sbp;
+      const out = document.getElementById('mgap-total');
+      if (out) out.textContent = String(total);
+    }
+
+    function updateNEWS2() {
+      const total = Array.from(document.querySelectorAll('.news2-crit:checked'))
+        .reduce((sum, el) => sum + toInt(el.value), 0);
+      const out = document.getElementById('news2-total');
+      if (out) out.textContent = String(total);
+    }
+
+    function updateSUDF() {
+      const total = document.querySelectorAll('.sudf-criterion:checked').length;
+      const out = document.getElementById('sudf-count');
+      if (out) out.textContent = String(total);
+    }
+
+    ['gcs-eyes', 'gcs-verbal', 'gcs-motor'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('change', updateGCS);
+    });
+
+    ['mgap-mech', 'mgap-gcs', 'mgap-age', 'mgap-sbp'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('change', updateMGAP);
+      if (el && el.tagName === 'INPUT') el.addEventListener('input', updateMGAP);
+    });
+
+    document.querySelectorAll('.news2-crit').forEach((el) => {
+      el.addEventListener('change', updateNEWS2);
+    });
+
+    document.querySelectorAll('.sudf-criterion').forEach((el) => {
+      el.addEventListener('change', updateSUDF);
+    });
+
     activateMainTab('medical');
     activateProcedure('acr');
     activateShockTab('hem');
+    updateGCS();
+    updateMGAP();
+    updateNEWS2();
+    updateSUDF();
   })();
 </script>
 <script>renderNav('procedures.html');</script>

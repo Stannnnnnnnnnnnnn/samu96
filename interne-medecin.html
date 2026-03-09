@@ -280,62 +280,138 @@
         <div class="panel-header">⚕️ Module 03 — Procédures médicales avancées · Durée : 4h00 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
         <div class="panel-body">
 
-          <div class="section-title">Procédure 01 — Adrénaline en arrêt cardiaque (RCP)</div>
+          <div class="alert alert-yellow"><strong>Référentiel :</strong> alignement pédagogique sur ERC, SFMU et HAS. La logique de jeu est utilisée comme traduction opérationnelle, sans remplacer le jugement médical.</div>
+
+          <div class="section-title">Index du module</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">01</span><span class="step-text">🧠 Ischémie tissulaire irréversible et seuil de futilité.</span></li>
+            <li class="step-item"><span class="step-num">02</span><span class="step-text">⚡ Électrophysiologie FV/TV sans pouls et défibrillation précoce.</span></li>
+            <li class="step-item"><span class="step-num">03</span><span class="step-text">🫀 ECMO VA : indication stricte, arbre décisionnel ECMO vs DCD.</span></li>
+            <li class="step-item"><span class="step-num">04</span><span class="step-text">🏷️ Triage IE/UR/UV/DCD basé sur physiologie du choc.</span></li>
+          </ul>
+
+          <div class="section-title">Théorie médicale (Physiopathologie / SFMU)</div>
           <table class="data-table">
-            <thead><tr><th>Étape</th><th>Action</th><th>Détail</th></tr></thead>
+            <thead><tr><th>Axe</th><th>Concept scientifique</th><th>Traduction clinique</th></tr></thead>
             <tbody>
-              <tr><td><strong>IND</strong></td><td>Indication</td><td>ACR confirmé (pas de pouls, perte de conscience, apnée)</td></tr>
-              <tr><td><strong>CI</strong></td><td>Contre-indication</td><td>Aucune si ACR confirmé (RCP l'emporte)</td></tr>
-              <tr><td><strong>01</strong></td><td>Dose Adrénaline</td><td>1 mg IV/IO</td></tr>
-              <tr><td><strong>02</strong></td><td>Timing</td><td>1ère dose dès accès IV, puis toutes les 3 à 5 min de RCP (30 compressions / 2 ventilations)</td></tr>
-              <tr><td><strong>03</strong></td><td>Surveillance</td><td>Monitorage continu ECG · vérification du pouls lors des pauses d'analyse (toutes les 2 min) · signes de reprise (gasping, réaction pupille)</td></tr>
-              <tr><td><strong>04</strong></td><td>Transport</td><td>RCP continue jusqu'à ROSC ou décision médicale d'arrêt par le médecin régulateur ou SMUR</td></tr>
+              <tr>
+                <td><strong>No-flow prolongé</strong></td>
+                <td>Ischémie cérébrale et myocardique → déplétion ATP, dysfonction membranaire, acidose et nécrose cellulaire irréversible.</td>
+                <td>Après un seuil critique, probabilité de ROSC utile très faible ; décision d'arrêt des soins discutée selon contexte, qualité RCP et causes réversibles.</td>
+              </tr>
+              <tr>
+                <td><strong>FV / TV sans pouls</strong></td>
+                <td>Activité électrique anarchique ventriculaire (FV) ou circuit rapide non perfusant (TVSP), sans débit effectif.</td>
+                <td>Défibrillation précoce = meilleure chance de restaurer un rythme organisé perfusant.</td>
+              </tr>
+              <tr>
+                <td><strong>ECMO VA</strong></td>
+                <td>Assistance extracorporelle cardio-respiratoire (drainage veineux + réinjection artérielle), maintien perfusion d'organes nobles.</td>
+                <td>Indication en ACR réfractaire sélectionné : no-flow court et low-flow optimisé, stratégie de centre expert.</td>
+              </tr>
             </tbody>
           </table>
 
-          <div class="section-title">Procédure 02 — Défibrillation (FV / TV sans pouls)</div>
+          <div class="section-title">Application système (Gameplay) — justification médicale des variables</div>
           <table class="data-table">
-            <thead><tr><th>Étape</th><th>Action</th><th>Détail</th></tr></thead>
+            <thead><tr><th>Variable script</th><th>Règle hardcodée</th><th>Lecture physiopathologique</th><th>Conduite médicale</th></tr></thead>
             <tbody>
-              <tr><td><strong>IND</strong></td><td>Indication</td><td>Fibrillation ventriculaire (FV) ou tachycardie ventriculaire pulseless (TV) à l'ECG</td></tr>
-              <tr><td><strong>CI</strong></td><td>Contre-indication</td><td>Patient dans l'eau · peau mouillée (sécher brièvement) · TDM/pacemaker (sinon utiliser autre placement pads)</td></tr>
-              <tr><td><strong>01</strong></td><td>Position pads</td><td>Pad droit : sous-claviculaire droit (parasternale) · Pad gauche : 5ème EIC axillaire antérieure · Appui palmaire énergique</td></tr>
-              <tr><td><strong>02</strong></td><td>Charge & choc</td><td>DAE automatisé (énergie auto) OU biphasique 150–200 J (énergie fixe selon constructeur, ne pas augmenter entre les chocs en biphasique)</td></tr>
-              <tr><td><strong>03</strong></td><td>Après choc</td><td>RCP 30/2 immédiatement · 2 min puis vérifier rythme à nouveau · répéter cycles si FV/TV persiste</td></tr>
-              <tr><td><strong>04</strong></td><td>Surveillance</td><td>Monitorage ECG continu · observation signes reprise · coordination avec adrénaline</td></tr>
+              <tr>
+                <td><strong>noflow_score</strong></td>
+                <td>+1/s (ralenti à +0.5/s sous O2), seuil critique &gt; 800</td>
+                <td>Accumulation de dette ischémique globale (cerveau + myocarde).</td>
+                <td>Réduire rapidement le no-flow: RCP, défibrillation précoce, adrénaline, oxygénation.</td>
+              </tr>
+              <tr>
+                <td><strong>reviving_score_needed</strong></td>
+                <td>Cible 50–70 ; +40 si no-flow &gt; 800</td>
+                <td>Besoin de récupération plus élevé si lésions d'ischémie avancée.</td>
+                <td>Interpréter comme bascule vers pronostic défavorable et possible futilité.</td>
+              </tr>
+              <tr>
+                <td><strong>reviving_score</strong></td>
+                <td>Score de réponse aux actions thérapeutiques</td>
+                <td>Approximation de la restauration d'une perfusion efficace.</td>
+                <td>Poursuivre uniquement si stratégie cohérente avec pronostic et causes réversibles.</td>
+              </tr>
             </tbody>
           </table>
-          <div class="info-box">
-            <strong>Note :</strong> 360 J = énergie monophasique uniquement. Les défibrillateurs modernes biphasiques utilisent 150–200 J fixes.
+
+          <div class="section-title">Défibrillation précoce — rationnel et impact</div>
+          <table class="data-table">
+            <thead><tr><th>Élément</th><th>Théorie</th><th>Impact gameplay</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Choc externe FV/TVSP</strong></td>
+                <td>Dépolarisation simultanée du myocarde, interruption des circuits électriques pathologiques, possibilité de reprise sinusale.</td>
+                <td><span class="badge badge-green">reviving_score +20 à +30</span> + <span class="badge badge-yellow">noflow_score -40 à -60</span></td>
+              </tr>
+              <tr>
+                <td><strong>ROSC immédiat</strong></td>
+                <td>Peut survenir si myocarde encore récupérable et temps de choc court.</td>
+                <td><span class="badge badge-red">1 chance sur 6</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">Arbre décisionnel strict — ECMO VA vs Déclaration de décès (DCD)</div>
+          <div style="max-width:760px;">
+            <div class="tree-box" style="background:rgba(0,48,135,0.08);border-color:rgba(0,48,135,0.25);">ACR réfractaire après ACLS optimisé (RCP + défibrillation + adrénaline + oxygénation)</div>
+            <div class="tree-arrow">↓</div>
+            <div class="tree-box">No-flow estimé &lt; 5 min ?</div>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+              <div style="flex:1;">
+                <div class="tree-box" style="background:rgba(67,230,48,0.1);border-color:rgba(67,230,48,0.35);"><strong>OUI</strong></div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box">Low-flow optimisé (compressions efficaces, pauses minimales, ETCO2 compatible) ?</div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box">Cause potentiellement réversible identifiée (H/T) ?</div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box" style="background:rgba(67,230,48,0.12);border-color:rgba(67,230,48,0.35);"><strong>ECMO VA</strong> : antéalerte centre expert, transport médicalisé continu.</div>
+              </div>
+              <div style="flex:1;">
+                <div class="tree-box" style="background:rgba(230,48,48,0.1);border-color:rgba(230,48,48,0.35);"><strong>NON</strong></div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box">Si <span class="badge badge-red">noflow_score &gt; 800</span> + absence cause réversible + absence ROSC malgré stratégie complète :</div>
+                <div class="tree-arrow">↓</div>
+                <div class="tree-box" style="background:rgba(230,48,48,0.12);border-color:rgba(230,48,48,0.35);"><strong>DCD</strong> : décision médicale argumentée, traçabilité horaire et contexte.</div>
+              </div>
+            </div>
           </div>
 
-          <div class="section-title">Procédure 03 — ECMO (Extracorporeal Membrane Oxygenation) — Présentation</div>
-          <div class="info-box">
-            <strong>Contexte RP :</strong> L'ECMO est une ressource hospitalière avancée (voir équipements pour détails techniques). En préhospitalier, la décision est de <strong>maintenir l'hémodynamique du patient</strong> jusqu'à son arrivée à l'hôpital pour cannulation.
-          </div>
+          <div class="section-title" style="margin-top:20px;">Triage avancé — Badges IE / UR / UV / DCD (base physiologique)</div>
           <table class="data-table">
-            <thead><tr><th>Situation</th><th>Indication ECMO hospitalière</th><th>Rôle du SMUR en préhospitalier</th></tr></thead>
+            <thead><tr><th>Badge</th><th>Définition opérationnelle</th><th>Profil de choc dominant</th><th>Critères décisionnels</th></tr></thead>
             <tbody>
               <tr>
-                <td><strong>ACR réfractaire</strong></td>
-                <td>RCP &gt; 60 min sans retour circulation spontanée</td>
-                <td>Poursuivre RCP high-quality · accès IV · déplétion rapide · transport immédiat hospitalisation réputée ECMO</td>
+                <td><span class="badge badge-red">IE</span></td>
+                <td>Extrême urgence immédiate, menace vitale minute.</td>
+                <td>Cardiogénique sévère, hypovolémique massif, obstructif.</td>
+                <td>Altération conscience, PAS &lt; 90, signes d'hypoperfusion, détresse respiratoire majeure.</td>
               </tr>
               <tr>
-                <td><strong>Choc cardiogénique</strong> (infarctus massif)</td>
-                <td>État hémodynamique critique non répondeur inotropes</td>
-                <td>O2 · accès IV · support hémodynamique prudent · notification préalable équipe ECMO</td>
+                <td><span class="badge badge-yellow">UR</span></td>
+                <td>Urgence relative avec potentiel de décompensation.</td>
+                <td>Distributif débutant, hypovolémique modéré, cardiogénique compensé.</td>
+                <td>Stabilité transitoire, monitorage rapproché requis, réévaluation fréquente.</td>
               </tr>
               <tr>
-                <td><strong>Hypothermie accidentelle profonde</strong></td>
-                <td>Température core &lt; 30°C</td>
-                <td>Réchauffement prudent · RCP selon protocoles · transport immédiat (ECMO décision hospitalière)</td>
+                <td><span class="badge badge-green">UV</span></td>
+                <td>Urgence différable, fonction vitale préservée.</td>
+                <td>Absence de choc constitué.</td>
+                <td>Paramètres stables, pas de critère d'hypoperfusion d'organe.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-dim">DCD</span></td>
+                <td>Décès constaté ou réanimation jugée futile.</td>
+                <td>ACR irréversible / lésions incompatibles avec survie.</td>
+                <td>No-flow prolongé, absence ROSC, absence cause réversible, décision collégiale tracée.</td>
               </tr>
             </tbody>
           </table>
-          <div class="warn-box">
-            <strong>Point clé :</strong> Le SMUR n'initie pas l'ECMO en préhospitalier. La notification antéalerte du centre ECMO dès la scène décisionnelle permet une prise en charge optimale à l'arrivée hospitalière.
-          </div>
+
+          <div class="section-title">Zone d'incertitude / données manquantes</div>
+          <div class="alert alert-red"><strong>Points à préciser côté serveur :</strong> seuil ETCO2 non codé, critères d'exclusion ECMO non explicités (âge, comorbidités, délai exact low-flow), absence de protocole d'hypothermie thérapeutique post-ROSC.</div>
         </div>
       </div>
     </div>

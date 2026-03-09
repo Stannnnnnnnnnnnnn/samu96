@@ -27,7 +27,7 @@
     <div class="page-header">
       <div class="breadcrumb">/ <span>SPÉCIALITÉS / TRAUMATOLOGIE</span></div>
       <h1 class="page-title">Spécialité <span>Trauma</span></h1>
-      <p class="page-subtitle">Signe RP clé : mécanisme lésionnel + zones vitales touchées.</p>
+      <p class="page-subtitle">Cinétique lésionnelle, choc hémorragique, triade létale et traumatismes crâniens graves : référentiel avancé SFMU/HAS avec traduction SAMU 96.</p>
     </div>
 
     <div class="alert alert-green">
@@ -35,72 +35,196 @@
       <a href="specialites.html">← Retour à l'index des spécialités</a>
     </div>
 
-    <div class="section-title">1. Physiopathologie</div>
+    <div class="alert alert-yellow">
+      <strong>Frontière méthodologique</strong>
+      <ul style="margin:8px 0 0 18px;">
+        <li><strong>Faits médicaux établis :</strong> xABCDE, Damage Control Resuscitation, prise en charge du TC grave, triage de gravité validé.</li>
+        <li><strong>Adaptation gameplay RP :</strong> points de vie, kits, et variables ACR servent d'approximation opératoire de la perfusion, de l'hémostase et de la dette ischémique.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">Index pédagogique</div>
+    <ul class="step-list">
+      <li class="step-item"><span class="step-num">01</span><span class="step-text">🔬 Physiopathologie avancée : cinétique, hémorragie, triade létale, lésion cérébrale primaire/secondaire.</span></li>
+      <li class="step-item"><span class="step-num">02</span><span class="step-text">🩺 Sémiologie et diagnostic : examen xABCDE, scores Glasgow/FAST/RTS, critères d'instabilité immédiate.</span></li>
+      <li class="step-item"><span class="step-num">03</span><span class="step-text">📚 Thérapeutique de référence : contrôle hémorragique, réanimation volémique raisonnée, neuroprotection préhospitalière.</span></li>
+      <li class="step-item"><span class="step-num">04</span><span class="step-text">🎮 Protocole SAMU 96 : conversion stricte des mécaniques serveur en logique clinique trauma.</span></li>
+    </ul>
+
+    <div class="section-title">1. 🔬 Physiopathologie avancée</div>
     <div class="panel">
-      <div class="panel-header">Mécanisme simplifié</div>
+      <div class="panel-header">Cinétique lésionnelle, choc hémorragique et défaillance d'organe</div>
       <div class="panel-body">
-        En trauma, la gravité dépend de l'énergie du choc et des zones atteintes (tête, thorax, abdomen, rachis). Les décès précoces viennent surtout d'hémorragie,
-        détresse respiratoire ou atteinte cérébrale. En RP, la lecture du mécanisme (chute, explosion, collision) guide immédiatement les priorités de triage et d'évacuation.
+        <ul>
+          <li><strong>Cinétique :</strong> l'énergie transmise ($E=\frac{1}{2}mv^2$) et la décélération déterminent l'ampleur des lésions internes. Un mécanisme à haute énergie peut produire des lésions occultes malgré un examen initial trompeusement rassurant.</li>
+          <li><strong>Choc hémorragique :</strong> perte volémique → baisse retour veineux → chute du volume d'éjection → hypoperfusion microcirculatoire. La vasoconstriction compensatrice retarde les signes, puis survient défaillance cellulaire avec bascule en métabolisme anaérobie et hyperlactatémie.</li>
+          <li><strong>Triade létale trauma :</strong> <strong>coagulopathie</strong> (consommation + dilution + activation fibrinolyse), <strong>hypothermie</strong> (diminution activité enzymatique de coagulation), <strong>acidose</strong> (dysfonction myocardique et enzymatique). Chaque composante potentialise les deux autres.</li>
+          <li><strong>TC grave :</strong> lésion primaire (impact, contusion, cisaillement axonal) puis lésions secondaires évitables : hypoxémie, hypotension, hypercapnie/hypocapnie extrêmes, hyperthermie, hypoglycémie ou hyperglycémie marquée.</li>
+          <li><strong>Pont avec le serveur :</strong> en trauma compliqué d'ACR, la progression de <span class="badge badge-dim">noflow_score</span> représente l'accumulation des lésions anoxiques cérébro-myocardiques ; la réduction de ce score traduit une restauration partielle de perfusion.</li>
+        </ul>
+
+        <table class="data-table" style="margin-top:12px;">
+          <thead><tr><th>Phénotype trauma</th><th>Processus cellulaire dominant</th><th>Retentissement systémique</th><th>Menace vitale prioritaire</th></tr></thead>
+          <tbody>
+            <tr><td>Hémorragie externe massive</td><td>Hypoxie tissulaire aiguë</td><td>Choc hypovolémique</td><td>Arrêt hémorragique immédiat</td></tr>
+            <tr><td>Trauma thoracique sévère</td><td>Altération échanges alvéolo-capillaires</td><td>Hypoxémie + surcharge droite</td><td>Oxygénation/ventilation</td></tr>
+            <tr><td>Trauma abdominal/pelvien</td><td>Saignement profond occulte</td><td>Instabilité hémodynamique retardée</td><td>Contrôle source + évacuation rapide</td></tr>
+            <tr><td>TC grave</td><td>Œdème cytotoxique + excitotoxicité glutamatergique</td><td>HTIC, baisse PPC</td><td>Prévention agressions cérébrales secondaires</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <div class="section-title">2. Signes cliniques / Diagnostic</div>
-    <table class="data-table">
-      <thead>
-        <tr><th>Signe</th><th>Description</th><th>Gravité</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Polytraumatisme</td><td>Impact à haute cinétique, lésions multiples suspectées.</td><td><span class="badge badge-red">ROUGE</span></td></tr>
-        <tr><td>TC grave</td><td>Glasgow bas, vomissements, anisocorie, confusion.</td><td><span class="badge badge-red">ROUGE</span></td></tr>
-        <tr><td>Trauma thoracique</td><td>Dyspnée, douleur ventilatoire, asymétrie thoracique.</td><td><span class="badge badge-red">ROUGE</span></td></tr>
-        <tr><td>Trauma abdominal</td><td>Douleur diffuse, défense, tachycardie/hypotension.</td><td><span class="badge badge-yellow">JAUNE</span></td></tr>
-        <tr><td>Fracture membre</td><td>Déformation, douleur intense, impotence fonctionnelle.</td><td><span class="badge badge-yellow">JAUNE</span></td></tr>
-        <tr><td>Contusion isolée</td><td>Douleur locale sans signe de choc.</td><td><span class="badge badge-green">VERT</span></td></tr>
-      </tbody>
-    </table>
-
-    <div class="section-title">3. Protocole de traitement</div>
+    <div class="section-title">2. 🩺 Sémiologie et Diagnostic clinique</div>
     <div class="panel">
-      <div class="panel-header">Check-list xABCDE terrain (Arma)</div>
+      <div class="panel-header">Examen structuré et scores validés</div>
       <div class="panel-body">
-        <div class="alert alert-red"><strong>01 - A (Airway)</strong>Libérer voie aérienne, immobilisation cervicale si suspicion rachis/cou.</div>
-        <div class="alert alert-red"><strong>02 - B (Breathing)</strong>Contrôler fréquence respi, SpO2, symétrie thorax (zone thorax Arma), O2 si besoin.</div>
-        <div class="alert alert-red"><strong>03 - C (Circulation)</strong>Rechercher hémorragie externe (bras/jambes), garrot/pansement compressif, perfusion, Exacyl précoce.</div>
-        <div class="alert alert-yellow"><strong>04 - D (Disability)</strong>Évaluer Glasgow, pupilles, déficit moteur ; suspecter TC/atteinte médullaire.</div>
-        <div class="alert alert-yellow"><strong>05 - E (Exposure)</strong>Inspection complète : tête, thorax, abdomen, bassin, membres ; prévenir hypothermie.</div>
-        <div class="alert alert-green"><strong>06 - Antalgie</strong>Morphine ou Kétamine selon douleur et stabilité hémodynamique, réévaluer toutes 5-10 min.</div>
+        <table class="data-table">
+          <thead><tr><th>Outil/score</th><th>Utilité préhospitalière</th><th>Seuils d'alerte</th><th>Interprétation opérationnelle</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>xABCDE</strong></td>
+              <td>Priorise les menaces vitales immédiates.</td>
+              <td>Hémorragie incontrôlée, obstruction VA, détresse ventilatoire, PAS basse, déficit neuro aigu.</td>
+              <td>Toute anomalie non corrigée impose transport prioritaire médicalisé.</td>
+            </tr>
+            <tr>
+              <td><strong>GCS (Glasgow)</strong></td>
+              <td>Évalue sévérité neurologique et évolution dynamique.</td>
+              <td>≤ 8 = TC grave avec risque d'insuffisance ventilatoire/protection VA.</td>
+              <td>Indication forte de stratégie voie aérienne et neuroprotection.</td>
+            </tr>
+            <tr>
+              <td><strong>FAST / eFAST</strong></td>
+              <td>Dépistage rapide d'épanchement intra-abdominal, péricardique, pleural.</td>
+              <td>FAST positif + instabilité hémodynamique.</td>
+              <td>Suspicion hémorragie interne active, filière chirurgicale urgente.</td>
+            </tr>
+            <tr>
+              <td><strong>RTS simplifié</strong></td>
+              <td>Association GCS, PAS, FR pour triage gravité.</td>
+              <td>Baisse progressive du score.</td>
+              <td>Risque élevé de décompensation précoce.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="data-table" style="margin-top:12px;">
+          <thead><tr><th>Présentation clinique</th><th>Signes discriminants</th><th>Critères de gravité absolue</th></tr></thead>
+          <tbody>
+            <tr><td>Choc hémorragique</td><td>Tachycardie, marbrures, soif, agitation puis obnubilation, allongement TRC</td><td>PAS &lt; 90 ou chute rapide, altération conscience, saignement massif visible ou suspect</td></tr>
+            <tr><td>Trauma thoracique sévère</td><td>Dyspnée, asymétrie thoracique, douleur ventilatoire, hypoxémie</td><td>Détresse respiratoire aiguë, cyanose, épuisement ventilatoire</td></tr>
+            <tr><td>TC grave</td><td>GCS bas, anisocorie, vomissements, convulsions, déficit focal</td><td>GCS ≤ 8, dégradation neurologique, anomalies pupillaires progressives</td></tr>
+            <tr><td>Polytrauma à haute cinétique</td><td>Mécanisme majeur (éjection, chute haute, explosion), lésions multiples</td><td>Instabilité d'emblée ou suspicion lésion interne non contrôlable préhospitalièrement</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <div class="section-title">4. Algorithme décisionnel</div>
+    <div class="section-title">3. 📚 Thérapeutique de Référence (SFMU/HAS/ERC)</div>
     <div class="panel">
-      <div class="panel-header">Condition → Action → Résultat</div>
+      <div class="panel-header">Damage Control Resuscitation et neuroprotection</div>
       <div class="panel-body">
-        <div class="grid-2" style="margin-bottom:0;">
-          <div class="alert alert-red"><strong>Condition</strong>Mécanisme violent + instabilité hémodynamique</div>
-          <div class="alert alert-red"><strong>Action</strong>xABCDE complet + contrôle hémorragie + évacuation urgente</div>
-          <div class="alert alert-yellow"><strong>Condition</strong>Trauma thorax/abdomen sans choc immédiat</div>
-          <div class="alert alert-yellow"><strong>Action</strong>Surveillance rapprochée + antalgie + transport monitoré</div>
-          <div class="alert alert-yellow"><strong>Condition</strong>Lésion membre isolée</div>
-          <div class="alert alert-yellow"><strong>Action</strong>Immobilisation, antalgie, bilan neurovasculaire distal</div>
-          <div class="alert alert-green"><strong>Résultat attendu</strong>Hémorragie contrôlée, ventilation stabilisée, patient packagé prêt transfert.</div>
-          <div class="alert alert-green"><strong>Zones Arma</strong>Tête/torse/abdomen/bras/jambes alignées avec bilan lésionnel RP.</div>
-        </div>
+        <table class="data-table">
+          <thead><tr><th>Axe thérapeutique</th><th>Référence pratique</th><th>Objectif physiologique</th><th>Incertitudes / limites</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Contrôle hémorragique</td>
+              <td>Garrot proximal, pansement compressif/hémostatique, packing selon site.</td>
+              <td>Réduction immédiate pertes sanguines et préservation perfusion d'organes nobles.</td>
+              <td>Efficacité dépend localisation ; certaines hémorragies profondes restent non accessibles préhospitalièrement.</td>
+            </tr>
+            <tr>
+              <td>Réanimation volémique raisonnée</td>
+              <td>Bolus prudents, stratégie permissive selon contexte hors TC grave.</td>
+              <td>Maintenir perfusion minimale sans majorer saignement par hyperpression.</td>
+              <td>Seuil tensionnel cible variable selon profil et lésions associées.</td>
+            </tr>
+            <tr>
+              <td>Acide tranexamique précoce</td>
+              <td>Administration dans les premières heures si hémorragie significative suspectée.</td>
+              <td>Frein de l'hyperfibrinolyse traumatique.</td>
+              <td>Bénéfice temporel ; utilité décroissante en administration tardive.</td>
+            </tr>
+            <tr>
+              <td>Prévention hypothermie</td>
+              <td>Couverture active, limitation exposition, fluides adaptés.</td>
+              <td>Limiter aggravation coagulopathie et dysfonction enzymatique.</td>
+              <td>Souvent sous-estimée en phase terrain.</td>
+            </tr>
+            <tr>
+              <td>TC grave</td>
+              <td>Éviter hypoxémie et hypotension, maintien ventilation/perfusion cérébrales.</td>
+              <td>Prévenir agressions cérébrales secondaires.</td>
+              <td>Objectifs ventilatoires précis parfois difficiles en contexte tactique.</td>
+            </tr>
+            <tr>
+              <td>Antalgie</td>
+              <td>Titration morphine/kétamine selon état hémodynamique et neurologique.</td>
+              <td>Réduire stress sympathique délétère et consommation d'oxygène.</td>
+              <td>Risque de dépression respiratoire, vomissements, confusion des signes neurologiques.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-red" style="margin-top:10px;"><strong>Point critique trauma :</strong> la mortalité évitable précoce reste dominée par l'hémorragie non contrôlée, l'hypoxémie et l'hypotension prolongée chez le TC grave.</div>
       </div>
     </div>
 
-    <div class="section-title">5. Médicaments spécifiques</div>
-    <table class="data-table">
-      <thead>
-        <tr><th>Médicament</th><th>Indication</th><th>Dose RP</th><th>Effet attendu</th><th>Contre-indication principale</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Morphine</td><td>Douleur traumatique intense</td><td>Titration IV progressive</td><td>Antalgie rapide</td><td>Dépression respiratoire/hypotension sévère</td></tr>
-        <tr><td>Kétamine</td><td>Douleur sévère, patient instable</td><td>Bolus faible dose puis adaptation</td><td>Antalgie avec maintien tensionnel</td><td>Psychose aiguë non contrôlée</td></tr>
-        <tr><td>Acide tranexamique (Exacyl)</td><td>Hémorragie majeure précoce</td><td>1 g IV préhospitalier RP</td><td>Freine fibrinolyse, limite saignement</td><td>Thrombose active connue</td></tr>
-        <tr><td>NaCl hypertonique</td><td>HTIC/TC avec signes d'engagement</td><td>Bolus IV sur protocole</td><td>Diminue œdème cérébral</td><td>Hypernatrémie sévère</td></tr>
-      </tbody>
-    </table>
+    <div class="section-title">4. 🎮 Protocole Opérationnel SAMU 96 (Application Serveur)</div>
+    <div class="panel">
+      <div class="panel-header">Traduction des mécaniques hardcodées en logique trauma</div>
+      <div class="panel-body">
+        <table class="data-table">
+          <thead><tr><th>Mécanique serveur</th><th>Valeur</th><th>Traduction trauma</th><th>Conduite recommandée SAMU 96</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Bandage hémostatique</td>
+              <td>+20% HP</td>
+              <td>Compression/hémostase locale de première intention.</td>
+              <td>Prioritaire sur saignement externe actif ; réévaluer récidive.</td>
+            </tr>
+            <tr>
+              <td>Trousse premiers soins</td>
+              <td>+80% HP</td>
+              <td>Approximation d'une restauration volémique et d'un conditionnement global.</td>
+              <td>Utiliser après contrôle hémorragique initial, pas en substitution d'un xABCDE.</td>
+            </tr>
+            <tr>
+              <td>Morphine</td>
+              <td>Analgésie complète + nausées</td>
+              <td>Antalgie opioïde avec risque émétisant et respiratoire.</td>
+              <td>Surveiller ventilation ; anticiper PLS/protection voies aériennes.</td>
+            </tr>
+            <tr>
+              <td>Paracétamol</td>
+              <td>+20% à +30% HP</td>
+              <td>Antalgie palier 1, baisse réponse sympathique.</td>
+              <td>Indiqué si douleur modérée sans détresse vitale immédiate.</td>
+            </tr>
+            <tr>
+              <td>Naloxone</td>
+              <td>Antidote opioïdes</td>
+              <td>Antagoniste compétitif récepteurs μ.</td>
+              <td>Obligatoire en dépression respiratoire post-opioïdes/surdose suspectée.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="data-table" style="margin-top:12px;">
+          <thead><tr><th>Trauma avec ACR secondaire</th><th>Mécanique ACR serveur</th><th>Justification physiologique</th></tr></thead>
+          <tbody>
+            <tr><td>RCP pro 8s</td><td>reviving +5 à +9 / noflow -10 à -20</td><td>Débit substitutif transitoire retardant nécrose d'organes nobles.</td></tr>
+            <tr><td>Adrénaline</td><td>noflow -80 à -120</td><td>Vasoconstriction alpha-1 améliorant pression de perfusion centrale.</td></tr>
+            <tr><td>O2 usage unique</td><td>noflow -100 à -200 ; pente +0.5/s</td><td>Ralentissement de l'hypoxie tissulaire et de l'acidose lactique.</td></tr>
+            <tr><td>Défibrillation</td><td>reviving +20 à +30 ; ROSC 1/6</td><td>Utile uniquement en rythme choquable (FV/TVSP), pas dans l'hémorragie pure non choquable.</td></tr>
+            <tr><td>Seuil noflow &gt; 800</td><td>Échec réanimation</td><td>Équivalent d'ischémie anoxique irréversible cérébro-myocardique.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-yellow" style="margin-top:10px;"><strong>Limite de modèle RP :</strong> la mécanique HP ne distingue pas finement les compartiments (hémorragie interne, coagulopathie, HTIC). Le raisonnement clinique réel doit rester prioritaire pour l'ordre des actions.</div>
+      </div>
+    </div>
   </main>
 </div>
 
