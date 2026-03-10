@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formations — IDE / IADE</title>
   <link rel="stylesheet" href="css/style.css">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDa27t7jEnvsGNOHUvr9SRw10gS90qX7Ow",
+      authDomain: "sau96-urgences.firebaseapp.com",
+      projectId: "sau96-urgences",
+      storageBucket: "sau96-urgences.firebasestorage.app",
+      messagingSenderId: "807568498412",
+      appId: "1:807568498412:web:1a83fef33301ef1f604fc9"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window._samu96_db = db;
+    window._samu96_firestore = { collection, addDoc, getDocs, query, orderBy };
+  </script>
   <style>
     .module-nav { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
     .mod-btn { font-family:var(--mono,monospace); font-size:11px; padding:6px 14px;
@@ -631,121 +651,420 @@
     </div>
 
     <div id="mod-arma" class="module-content">
+      <style>
+        .scenario-player { margin-top: 12px; }
+        .scenario-context { background:#f0f4ff; border-left:3px solid #1e3a8a;
+          padding:12px 16px; border-radius:0 4px 4px 0; margin-bottom:10px; font-size:0.85rem; line-height:1.6; }
+        .scenario-vars { font-family:monospace; font-size:0.78rem; background:#1e293b; color:#7dd3fc;
+          padding:8px 12px; border-radius:4px; margin-bottom:12px; }
+        .scenario-choices { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+        .scenario-choice-btn { padding:10px 14px; border:1.5px solid #cbd5e1; border-radius:5px;
+          background:#fff; cursor:pointer; font-size:0.84rem; text-align:left; transition:background 0.15s; }
+        .scenario-choice-btn:hover { background:#f1f5f9; }
+        .scenario-feedback { padding:10px 14px; border-radius:5px; font-size:0.83rem;
+          font-weight:600; margin-bottom:10px; }
+        .scenario-feedback.good { background:rgba(21,128,61,0.1); color:#14532d;
+          border-left:3px solid #15803d; }
+        .scenario-feedback.bad { background:rgba(185,28,28,0.1); color:#7f1d1d;
+          border-left:3px solid #b91c1c; }
+        .scenario-errors { font-size:0.78rem; font-weight:700; color:#b91c1c;
+          margin-bottom:8px; font-family:monospace; }
+        .scenario-death { background:rgba(185,28,28,0.08); border:2px solid #b91c1c;
+          border-radius:8px; padding:16px; text-align:center; }
+        .scenario-death h3 { color:#b91c1c; margin-bottom:8px; }
+        .scenario-success { background:rgba(21,128,61,0.08); border:2px solid #15803d;
+          border-radius:8px; padding:16px; text-align:center; }
+        .scenario-success h3 { color:#15803d; margin-bottom:8px; }
+        .scenario-restart-btn { margin-top:12px; padding:8px 20px; border:1.5px solid #64748b;
+          border-radius:4px; background:#fff; cursor:pointer; font-size:0.82rem; }
+      </style>
+
+      <div class="info-box"><strong>Système interactif :</strong> 6 scénarios RP terrain Arma 3, progression en arbre de décision. Chaque mauvaise décision ajoute une erreur. À <strong>4 erreurs</strong> : décès patient. Si vous suivez la branche favorable : <strong>transport effectué</strong>.</div>
+
       <div class="panel">
-        <div class="panel-header">🎮 Module 06 — Scénarios Arma 3 · Durée : 3h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
-        <div class="panel-body">
-          <div class="info-box">Ce module simule des situations terrain réelles du serveur SAMU 96. Chaque scénario est basé sur les mécaniques exactes du système médical IG. L'objectif est de savoir prendre les bonnes décisions dans l'ordre correct, en respectant les rôles IDE/IADE.</div>
-
-          <details>
-            <summary><strong>SCÉNARIO 1 — ACR</strong></summary>
-            <div class="warn-box">Contexte RP : « GOLF-96 sur intervention, homme 58 ans, ACR depuis environ 3 min à votre arrivée. noflow_score : 482. reviving_score_needed : 62. »</div>
-            <div class="info-box">Variables initiales : noflow_score = 482 ; reviving_score = 0 ; reviving_score_needed = 62 ; life% = 0.</div>
-            <ul class="step-list">
-              <li class="step-item"><input type="checkbox"> <span class="step-text">O2 immédiatement (noflow -100 à -200, puis progression ralentie à +0.5/s).</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Adrénaline (noflow -80 à -120).</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Massages manuels en attendant Lucas 3.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Poser Lucas 3 (aide mécanique, optimisation cycles).</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Défibrillateur si rythme indiqué (reviving +20 à +30 ; noflow -40 à -60 ; 1/6 ROSC instantané).</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">ECMO si noflow proche 800 sans ROSC.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Appel médecin pour décision d'arrêt si noflow &gt; 800.</span></li>
-            </ul>
-            <div class="alert alert-green">Résultat attendu : ROSC possible si reviving_score ≥ reviving_score_needed et noflow_score &lt; 800.</div>
-            <div class="alert alert-red">Erreur critique : retarder O2 ou interrompre RCP trop longtemps, conduisant à noflow &gt; 800 (réanimation quasi impossible, reviving_needed +40).</div>
-            <div class="info-box"><strong>Justification médicale :</strong> O2 en premier pour freiner anoxie ; adrénaline et compressions maintiennent perfusion ; ECMO = dernier recours quand l'algorithme classique échoue.</div>
-          </details>
-
-          <details>
-            <summary><strong>SCÉNARIO 2 — TRAUMA BALISTIQUE</strong></summary>
-            <div class="warn-box">Contexte RP : « Fusillade centre-ville. Victime GSW cuisse droite, saignement artériel, life% 38%, PA 78/48, FC 135. »</div>
-            <div class="info-box">Variables initiales : life% = 38 ; pain_level élevé ; hémorragie active.</div>
-            <ul class="step-list">
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Sécuriser la scène (FDO présentes ?).</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Garrot proximal cuisse droite.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Bandage hémostatique plaie (+20% vie IG).</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Monitoring Lifepak 15.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">O2.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Appel médecin (Morphine si prescrite).</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Badge IE.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Brancard Ferno F2 + transport.</span></li>
-            </ul>
-            <div class="alert alert-green">Résultat attendu : hémorragie contrôlée, stabilisation minimale avant évacuation.</div>
-            <div class="alert alert-red">Erreur critique : débuter remplissage/antalgie avant contrôle hémorragique.</div>
-            <div class="info-box"><strong>Justification médicale :</strong> damage control hémorragique : le garrot prime sur tout autre geste.</div>
-          </details>
-
-          <details>
-            <summary><strong>SCÉNARIO 3 — OVERDOSE STUPÉFIANT</strong></summary>
-            <div class="warn-box">Contexte RP : « Personne inconsciente dans un véhicule, seringues visibles. FR 5, GCS 5, SpO2 85%. »</div>
-            <div class="info-box">Variables initiales : FR 5 ; SpO2 85 ; GCS 5 ; suspicion opioïdes forte.</div>
-            <ul class="step-list">
-              <li class="step-item"><input type="checkbox"> <span class="step-text">O2.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Monitoring Lifepak 15.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Appel médecin.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Naloxone 0.4mg sur prescription.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Surveillance FR + conscience toutes les 5 min.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Si re-narcotisation à ~45 min : médecin + re-dose.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Badge selon évolution clinique.</span></li>
-            </ul>
-            <div class="alert alert-green">Résultat attendu : récupération respiratoire transitoire puis surveillance active prolongée.</div>
-            <div class="alert alert-red">Erreur critique : considérer le patient « guéri » après une seule dose de Naloxone.</div>
-            <div class="info-box"><strong>Justification médicale :</strong> la Naloxone a une durée brève ; le risque principal est la re-narcotisation différée.</div>
-          </details>
-
-          <details>
-            <summary><strong>SCÉNARIO 4 — AVP POLYTRAUMATISME</strong></summary>
-            <div class="warn-box">Contexte RP : « AVP frontal, conducteur inconscient éjecté. GCS 7, FR 24, PA 95/60, FC 118, suspicion fracture rachis. »</div>
-            <div class="info-box">Variables initiales : GCS 7 ; risque rachidien majeur ; instabilité hémodynamique relative.</div>
-            <ul class="step-list">
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Sécuriser scène.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Immobilisation rachis (pas de mobilisation intempestive).</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">O2.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Monitoring.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Bandage si hémorragie visible.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Lucas 3 si ACR.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Ferno F2 avec MID.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Badge IE + transport ; médecin décide IOT.</span></li>
-            </ul>
-            <div class="alert alert-green">Résultat attendu : transport sécurisé sans aggravation neurologique secondaire.</div>
-            <div class="alert alert-red">Erreur critique : mobilisation sans protection rachidienne.</div>
-            <div class="info-box"><strong>Justification médicale :</strong> la protection rachidienne précoce réduit le risque de lésion médullaire secondaire.</div>
-          </details>
-
-          <details>
-            <summary><strong>SCÉNARIO 5 — COMA ÉTHYLIQUE</strong></summary>
-            <div class="warn-box">Contexte RP : « Homme inconscient, odeur alcool forte, GCS 9, FR 12, SpO2 94%, glycémie 0.48 g/L. »</div>
-            <div class="info-box">Variables initiales : GCS 9 ; glycémie basse ; risque aspiration vomissements.</div>
-            <ul class="step-list">
-              <li class="step-item"><input type="checkbox"> <span class="step-text">PLS.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">O2.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Monitoring.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Appel médecin.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Traitement coma éthylique sur prescription (implémentation en cours).</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Surveillance horaire FC/SpO2/conscience.</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Aspiration mucosités en cas vomissements (Schiller).</span></li>
-              <li class="step-item"><input type="checkbox"> <span class="step-text">Badge UR.</span></li>
-            </ul>
-            <div class="alert alert-green">Résultat attendu : prévention inhalation + surveillance rapprochée en attente protocole complet.</div>
-            <div class="alert alert-red">Erreur critique : absence de PLS et défaut de protection des voies aériennes.</div>
-            <div class="info-box"><strong>Justification médicale :</strong> en attendant l'implémentation IG spécifique, prise en charge symptomatique et monitorage serré sont prioritaires.</div>
-          </details>
-
-          <details>
-            <summary><strong>SCÉNARIO 6 — BRÛLURES</strong></summary>
-            <div class="warn-box">Contexte RP : « Incendie industriel, 2 victimes. A : brûlures face + torse 2e degré, SpO2 93%, voix rauque. B : brûlure main droite 1er degré, stable. »</div>
-            <div class="info-box">Variables initiales : Victime A = suspicion inhalation ; Victime B = lésion superficielle localisée.</div>
-            <ul class="step-list">
-              <li class="step-item"><span class="step-num">A</span><span class="step-text"><input type="checkbox"> Victime A (IE) : O2 prioritaire (risque œdème VAS).</span></li>
-              <li class="step-item"><span class="step-num">A</span><span class="step-text"><input type="checkbox"> Biafine sur zones accessibles.</span></li>
-              <li class="step-item"><span class="step-num">A</span><span class="step-text"><input type="checkbox"> Badge IE + appel médecin urgent (risque IOT rapide).</span></li>
-              <li class="step-item"><span class="step-num">A</span><span class="step-text"><input type="checkbox"> Ne pas poser de pansements occlusifs sur brûlures étendues.</span></li>
-              <li class="step-item"><span class="step-num">B</span><span class="step-text"><input type="checkbox"> Victime B (UV) : Biafine + badge UV + surveillance + transport différé.</span></li>
-            </ul>
-            <div class="alert alert-green">Résultat attendu : priorisation correcte des voies aériennes de la victime A.</div>
-            <div class="alert alert-red">Erreur critique : traiter d'abord la victime B et retarder la prise en charge inhalation fumées.</div>
-            <div class="info-box"><strong>Justification médicale :</strong> inhalation de fumées → œdème VAS progressif, d'où possible IOT préventive sur décision médecin. Biafine limitée aux brûlures superficielles et non anti-infectieuse.</div>
-          </details>
-        </div>
+        <div class="panel-header">01 · SCÉNARIO ACR (IDE) <button class="mod-btn" data-launch="1">▶ Lancer</button></div>
+        <div class="panel-body"><div class="scenario-player" data-scenario="1" style="display:none;"><div class="scenario-stage"></div></div></div>
       </div>
+
+      <div class="panel">
+        <div class="panel-header">02 · SCÉNARIO TRAUMA BALISTIQUE (IDE) <button class="mod-btn" data-launch="2">▶ Lancer</button></div>
+        <div class="panel-body"><div class="scenario-player" data-scenario="2" style="display:none;"><div class="scenario-stage"></div></div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">03 · SCÉNARIO OVERDOSE STUPÉFIANT (IDE) <button class="mod-btn" data-launch="3">▶ Lancer</button></div>
+        <div class="panel-body"><div class="scenario-player" data-scenario="3" style="display:none;"><div class="scenario-stage"></div></div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">04 · SCÉNARIO AVP POLYTRAUMATISME (IDE) <button class="mod-btn" data-launch="4">▶ Lancer</button></div>
+        <div class="panel-body"><div class="scenario-player" data-scenario="4" style="display:none;"><div class="scenario-stage"></div></div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">05 · SCÉNARIO COMA ÉTHYLIQUE (IDE) <button class="mod-btn" data-launch="5">▶ Lancer</button></div>
+        <div class="panel-body"><div class="scenario-player" data-scenario="5" style="display:none;"><div class="scenario-stage"></div></div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">06 · SCÉNARIO BRÛLURES (IDE) <button class="mod-btn" data-launch="6">▶ Lancer</button></div>
+        <div class="panel-body"><div class="scenario-player" data-scenario="6" style="display:none;"><div class="scenario-stage"></div></div></div>
+      </div>
+
+      <script>
+        (function () {
+          const scenarioState = {
+            1: { errors: 0, errorLogs: [] },
+            2: { errors: 0, errorLogs: [] },
+            3: { errors: 0, errorLogs: [] },
+            4: { errors: 0, errorLogs: [] },
+            5: { errors: 0, errorLogs: [] },
+            6: { errors: 0, errorLogs: [] }
+          };
+
+          const scenarios = {
+            1: {
+              stages: [
+                {
+                  id: 's1_e1', type: 'choice',
+                  context: "GOLF-96 de Régulation — VSAV en route, vous arrivez sur place. Homme 58 ans, retrouvé au sol par sa femme. Pas de pouls, apnée confirmée. L'appelante dit qu'il est 'comme mort depuis 3 minutes'. Vous sortez du VSAV.",
+                  vars: 'noflow_score = 498 | reviving_score = 0 / needed = 62 | life% = 0',
+                  choices: [
+                    { label: "Poser l'O2 en premier", correct: true, feedback: "✅ Bonne décision. L'O2 est prioritaire : elle réduit massivement le noflow et ralentit son évolution. Vous gagnez du temps pour les étapes suivantes.", next: 's1_e2_ok' },
+                    { label: 'Commencer les massages à la main directement', correct: false, feedback: "❌ Les massages seuls sans O2 sont moins efficaces. Le noflow continue à progresser rapidement à +1/s. L'O2 aurait dû être posée en premier.", next: 's1_e2_bad' },
+                    { label: 'Sortir le défibrillateur immédiatement', correct: false, feedback: "❌ Le défibrillateur n'est indiqué que sur rythme choquable (FV/TV). L'O2 est la priorité absolue en premier contact sur ACR.", next: 's1_e2_bad' }
+                  ]
+                },
+                {
+                  id: 's1_e2_ok', type: 'choice',
+                  context: 'O2 posée. Le Lifepak 15 affiche les données. noflow ralentit à +0.5/s. Votre équipier commence les massages. Vous avez l\'Adrénaline et le Lucas 3 dans le sac.',
+                  vars: 'noflow_score ≈ 380 | reviving_score = 7 | progression +0.5/s',
+                  choices: [
+                    { label: 'Adrénaline maintenant + poser Lucas 3 pour prendre le relais des massages', correct: true, feedback: '✅ Adrénaline administrée : noflow -80 à -120. Lucas 3 en place : massages optimisés, libère l\'équipier. Vous optimisez toutes les variables simultanément.', next: 's1_e3_ok' },
+                    { label: 'Attendre le médecin avant de faire quoi que ce soit de plus', correct: false, feedback: "❌ En ACR, chaque seconde compte. L'Adrénaline est dans vos attributions IDE en ACR. L'attente passive fait progresser le noflow.", next: 's1_e3_bad' }
+                  ]
+                },
+                {
+                  id: 's1_e2_bad', type: 'choice',
+                  context: "Massages débutés mais sans O2. Le noflow continue à +1/s. L'appelante panique, votre équipier fatigue. noflow_score grimpe vite.",
+                  vars: 'noflow_score ≈ 560 | reviving_score = 4 | progression +1/s',
+                  choices: [
+                    { label: 'Poser l\'O2 maintenant + Adrénaline', correct: true, feedback: '✅ Correction tardive mais efficace. L\'O2 ralentit la progression. Il faut maintenant enchaîner vite.', next: 's1_e3_ok' },
+                    { label: 'Continuer massages sans O2 en attendant le médecin', correct: false, feedback: '❌ Sans O2, le noflow continue à +1/s. La fenêtre de réanimation se ferme.', next: 's1_e3_bad2' }
+                  ]
+                },
+                {
+                  id: 's1_e3_ok', type: 'choice',
+                  context: 'Lucas 3 tourne. Adrénaline administrée. Le Lifepak 15 affiche un rythme. Le médecin régulateur vous contacte en radio : « GOLF-96, quel est l\'état du patient ? »',
+                  vars: 'noflow_score ≈ 290 | reviving_score = 38 | needed = 62',
+                  choices: [
+                    { label: 'Transmettre bilan SBAR complet au médecin + demander si défibrillateur indiqué', correct: true, feedback: '✅ Bilan transmis. Le médecin confirme un rythme choquable. Il vous autorise le défibrillateur.', next: 's1_e4_ok' },
+                    { label: 'Utiliser le défibrillateur sans contacter le médecin', correct: false, feedback: "❌ Le défibrillateur est dans vos attributions mais l'indication doit être confirmée par le Lifepak. Toujours transmettre le bilan avant.", next: 's1_e4_bad' }
+                  ]
+                },
+                {
+                  id: 's1_e3_bad', type: 'choice',
+                  context: 'Temps perdu. Le noflow remonte. Le patient reste en ACR prolongé, équipe fatiguée, coordination faible.',
+                  vars: 'noflow_score ≈ 640 | reviving_score = 14 | needed = 62',
+                  choices: [
+                    { label: 'Reprendre protocole : SBAR médecin + Adrénaline + Lucas 3', correct: true, feedback: '✅ Vous reprenez une séquence utile et récupérez partiellement la situation.', next: 's1_e3_ok' },
+                    { label: 'Continuer sans coordination', correct: false, feedback: '❌ Vous perdez du temps critique, le noflow explose.', next: 's1_e3_bad2' }
+                  ]
+                },
+                {
+                  id: 's1_e3_bad2', type: 'choice',
+                  context: 'Le noflow s\'accumule dangereusement. Le médecin demande un point immédiat.',
+                  vars: 'noflow_score ≈ 760 | reviving_score = 18 | needed = 62',
+                  choices: [
+                    { label: 'SBAR immédiat + O2 + Adrénaline + Lucas 3', correct: true, feedback: '✅ Dernière tentative de récupération avant dépassement du seuil critique.', next: 's1_e4_bad' },
+                    { label: 'Poursuivre sans correction', correct: false, feedback: '❌ Le noflow_score dépasse la limite de viabilité.', next: 'death' }
+                  ]
+                },
+                {
+                  id: 's1_e4_ok', type: 'choice',
+                  context: 'Défibrillateur armé. Tout le monde s\'écarte. CHOC DÉLIVRÉ.',
+                  vars: 'reviving_score +25 = 63 | noflow_score -50 = 240 | needed = 62',
+                  choices: [
+                    { label: 'Vérifier ROSC (reviving >= needed ET noflow < 800) + monitoring continu', correct: true, feedback: '✅ ROSC OBTENU. reviving_score 63 >= needed 62. noflow 240 < 800. Le patient reprend une activité cardiaque. Préparer le transport immédiat.', next: 'success' },
+                    { label: 'Continuer les massages après le choc sans vérifier', correct: false, feedback: '❌ Après un choc, la priorité est la vérification du ROSC. Des massages prolongés post-ROSC peuvent induire un re-ACR.', next: 's1_e5_bad' }
+                  ]
+                },
+                {
+                  id: 's1_e4_bad', type: 'choice',
+                  context: 'Choc tardif, coordination imparfaite. Le patient oscille entre rythme non perfusant et asystolie.',
+                  vars: 'noflow_score ≈ 790 | reviving_score = 48 | needed = 62',
+                  choices: [
+                    { label: 'Vérifier ROSC strictement et monitorer', correct: true, feedback: '✅ Vous appliquez enfin la séquence correcte, mais la marge est très faible.', next: 's1_e5_bad' },
+                    { label: 'Reporter encore la vérification', correct: false, feedback: '❌ Nouveau retard critique : dépassement du seuil noflow.', next: 'death' }
+                  ]
+                },
+                {
+                  id: 's1_e5_bad', type: 'choice',
+                  context: 'Le patient reste très instable post-choc, noflow critique.',
+                  vars: 'noflow_score ≈ 805 | reviving_score = 55 | needed = 62',
+                  choices: [
+                    { label: 'Poursuivre protocole avec bilan médecin', correct: true, feedback: '✅ Coordination améliorée mais seuil noflow déjà dépassé.', next: 'death' },
+                    { label: 'Perdre du temps en actions non prioritaires', correct: false, feedback: '❌ La fenêtre de réanimation est fermée.', next: 'death' }
+                  ]
+                },
+                {
+                  id: 'success', type: 'success',
+                  context: 'ROSC confirmé. FC 88, SpO2 94% sous O2. Patient inconscient GCS 8. Brancard Ferno sorti, couverture survie posée. Transport CHU enclenché.',
+                  message: '🟢 MISSION RÉUSSIE — PATIENT TRANSPORTÉ<br>Résumé : O2 en premier → Adrénaline → Lucas 3 → Bilan médecin → Défibrillateur → ROSC → Transport.<br>Durée réanimation : environ 8 minutes. noflow final : 240.'
+                },
+                {
+                  id: 'death', type: 'death',
+                  context: 'Le noflow_score a dépassé 800. Le médecin régulateur constate le décès sur avis des variables. Badge DCD posé. Heure de constat transmise à la régulation.',
+                  message: '🔴 PATIENT DÉCÉDÉ — noflow_score > 800'
+                }
+              ]
+            },
+            2: {
+              stages: [
+                { id: 's2_e1', type: 'choice', context: 'GOLF-96, fusillade centre-ville. Victime GSW cuisse droite, saignement artériel abondant. PA 78/48, FC 135, SpO2 96%. La scène vient d\'être sécurisée par la GN.', vars: 'life% = 38 | PA 78/48 | FC 135', choices: [
+                  { label: 'Garrot proximal cuisse droite immédiatement', correct: true, feedback: '✅ Damage control hémorragique. Le garrot est la priorité absolue avant tout remplissage ou antalgique. Notez l\'heure de pose.', next: 's2_e2_ok' },
+                  { label: 'Poser VVP et lancer remplissage NaCl en premier', correct: false, feedback: '❌ Remplir sans contrôler l\'hémorragie, c\'est remplir un seau percé. Le garrot est toujours prioritaire sur le remplissage.', next: 's2_e2_bad' },
+                  { label: 'Monitoring Lifepak 15 en premier', correct: false, feedback: '❌ Le monitoring est utile mais pas prioritaire sur une hémorragie artérielle active. Le patient peut décéder pendant que vous branchez les électrodes.', next: 's2_e2_bad' }
+                ] },
+                { id: 's2_e2_ok', type: 'choice', context: 'Garrot posé, saignement stoppé. Lifepak 15 branché. FC 118, SpO2 94%. Le patient gémit, EVA 8. Votre médecin de terrain vous contacte.', vars: 'life% = 38 | FC 118 | SpO2 94% | PA 82/54', choices: [
+                  { label: 'Bilan SBAR au médecin + O2 + attendre prescription Morphine', correct: true, feedback: '✅ Correct. La Morphine nécessite un ordre médecin. Vous transmettez le bilan et posez l\'O2 en attendant la prescription.', next: 's2_e3_ok' },
+                  { label: 'Administrer Morphine sans attendre l\'ordre médecin', correct: false, feedback: '❌ La Morphine est à prescription médicale obligatoire. De plus, avec PA 82/54, la Morphine risque d\'aggraver l\'hypotension.', next: 's2_e3_bad' }
+                ] },
+                { id: 's2_e2_bad', type: 'choice', context: 'La perte sanguine se poursuit. Le patient pâlit, sueurs froides, état pré-choc.', vars: 'life% = 28 | PA 72/44 | FC 142', choices: [
+                  { label: 'Garrot immédiat + heure de pose + O2', correct: true, feedback: '✅ Correction utile. Vous récupérez partiellement la situation.', next: 's2_e3_ok' },
+                  { label: 'Poursuivre sans contrôle hémorragique', correct: false, feedback: '❌ Hémorragie non contrôlée : décompensation rapide.', next: 'death' }
+                ] },
+                { id: 's2_e3_ok', type: 'choice', context: 'Médecin prescrit Morphine 3mg IV. Vous administrez. EVA redescend à 3. SpO2 après Morphine : 92%. Le patient est conscient, GCS 14.', vars: 'life% = 42 | SpO2 92% | FC 105', choices: [
+                  { label: 'Surveillance SpO2 rapprochée + préparer Naloxone + badge IE + brancard Ferno', correct: true, feedback: '✅ Surveillance post-Morphine correcte. Naloxone prête en cas de dépression respiratoire. Badge IE posé, brancard Ferno sorti.', next: 's2_e4_ok' },
+                  { label: 'Administrer une 2e Morphine car EVA encore à 3', correct: false, feedback: '❌ EVA 3 ne nécessite pas de 2e dose. La Morphine est déjà active et la SpO2 est à 92%. Risque de dépression respiratoire si sur-dosage.', next: 's2_e4_bad' }
+                ] },
+                { id: 's2_e3_bad', type: 'choice', context: 'Hypotension aggravée après décision inadaptée. Le médecin reprend la main.', vars: 'life% = 31 | PA 70/42 | SpO2 90%', choices: [
+                  { label: 'Stopper antalgie non prescrite + O2 + SBAR urgent', correct: true, feedback: '✅ Reprise correcte mais patient reste fragile.', next: 's2_e4_bad' },
+                  { label: 'Insister sur antalgie sans correction hémodynamique', correct: false, feedback: '❌ Choc hémorragique aggravé.', next: 'death' }
+                ] },
+                { id: 's2_e4_ok', type: 'success', context: 'Patient installé sur brancard Ferno. Couverture survie. SpO2 remontée à 95% sous O2. FC 98. Médecin valide le transport CHU trauma.', message: '🟢 TRANSPORT EFFECTUÉ — Garrot → O2 → Morphine sur ordre → Surveillance → Transport.<br>Garrot posé depuis [X min] — à communiquer obligatoirement à l\'équipe receveuse.' },
+                { id: 's2_e4_bad', type: 'choice', context: 'Stabilisation incomplète, paramètres limites avant départ.', vars: 'life% = 30 | PA 76/48 | FC 130', choices: [
+                  { label: 'Prioriser transport immédiat avec monitoring strict', correct: true, feedback: '✅ Décision acceptable de sauvetage.', next: 'success' },
+                  { label: 'Retarder départ pour gestes non prioritaires', correct: false, feedback: '❌ Retard délétère sur choc hémorragique.', next: 'death' }
+                ] },
+                { id: 'success', type: 'success', context: 'Victime remise à l\'équipe trauma, paramètres monitorés.', message: '🟢 TRANSPORT EFFECTUÉ — Contrôle hémorragique priorisé et filière trauma respectée.' },
+                { id: 'death', type: 'death', context: 'Décompensation hémodynamique majeure malgré reprises tardives.', message: '🔴 DÉCÈS PAR CHOC HÉMORRAGIQUE — hémorragie non contrôlée à temps.' }
+              ]
+            },
+            3: {
+              stages: [
+                { id: 's3_e1', type: 'choice', context: 'Appelant signale une personne inconsciente dans un véhicule, seringues visibles sur le siège passager. Vous arrivez. FR 5, GCS 5, SpO2 82%, FC 48.', vars: 'FR 5 | GCS 5 | SpO2 82%', choices: [
+                  { label: 'O2 + libération VAS (subluxation mandibule) + Lifepak 15 + appel médecin', correct: true, feedback: '✅ Priorité VAS + O2 en overdose opioïde. SpO2 à 82% nécessite une correction immédiate avant toute administration médicamenteuse.', next: 's3_e2_ok' },
+                  { label: 'Naloxone directement sans O2 préalable', correct: false, feedback: '❌ La Naloxone est efficace mais l\'hypoxie à 82% est immédiatement mortelle. L\'O2 et la liberté des VAS sont prioritaires.', next: 's3_e2_bad' },
+                  { label: 'Attendre le médecin sans rien faire', correct: false, feedback: '❌ FR 5 et SpO2 82% : sans action immédiate, ACR hypoxique imminent. L\'O2 est dans vos attributions IDE sans prescription.', next: 's3_e2_bad' }
+                ] },
+                { id: 's3_e2_ok', type: 'choice', context: 'O2 posée, SpO2 remonte à 89%. VAS libérées. Le médecin régulateur vous contacte. Il prescrit Naloxone 0.4mg IV.', vars: 'SpO2 89% | FR 7 | GCS 6', choices: [
+                  { label: 'Administrer Naloxone sur ordre médecin + chronomètre 45min re-narcotisation', correct: true, feedback: '✅ Naloxone administrée. Démarrez mentalement le chrono : la Naloxone agit 45min max. Si le patient se rendort, re-narcotisation probable.', next: 's3_e3_ok' },
+                  { label: 'Administrer 3 ampoules de Naloxone d\'un coup pour être sûr', correct: false, feedback: '❌ Surdosage de Naloxone peut précipiter un syndrome de sevrage aigu. La dose prescrite est 0.4mg, pas plus.', next: 's3_e3_bad' }
+                ] },
+                { id: 's3_e2_bad', type: 'choice', context: 'Hypoxie persistante, patient cyanotique.', vars: 'SpO2 79% | FR 4 | GCS 4', choices: [
+                  { label: 'Corriger immédiatement VAS + O2 + appel médecin', correct: true, feedback: '✅ Correction tardive mais vitale.', next: 's3_e3_ok' },
+                  { label: 'Poursuivre stratégie initiale sans oxygénation', correct: false, feedback: '❌ Hypoxie réfractaire, arrêt imminent.', next: 'death' }
+                ] },
+                { id: 's3_e3_ok', type: 'choice', context: 'FR remonte à 14, GCS passe à 10, SpO2 95%. Patient partiellement conscient, agité. 42 minutes passées depuis la Naloxone.', vars: 'SpO2 95% | FR 14 | GCS 10 | ⏱️ T+42min', choices: [
+                  { label: 'Surveillance active + appel médecin pour risque re-narcotisation imminent', correct: true, feedback: '✅ T+42min : la Naloxone arrive en fin d\'effet. Vous alertez le médecin avant que les signes réapparaissent. Anticipation correcte.', next: 's3_e4_ok' },
+                  { label: 'Le patient va bien, on prépare le transport sans signaler', correct: false, feedback: '❌ T+42min c\'est la fenêtre critique. Ne jamais relâcher la surveillance post-Naloxone avant confirmation médicale de stabilisation.', next: 's3_e4_bad' }
+                ] },
+                { id: 's3_e3_bad', type: 'choice', context: 'Agitation sévère, ventilation instable après dose inadaptée.', vars: 'SpO2 88% | FR 10 | GCS 8', choices: [
+                  { label: 'Revenir au protocole prescrit et surveiller 45 min', correct: true, feedback: '✅ Retour au protocole, situation partiellement récupérée.', next: 's3_e4_bad' },
+                  { label: 'Ignorer les constantes et forcer transport immédiat', correct: false, feedback: '❌ Re-narcotisation non anticipée.', next: 'death' }
+                ] },
+                { id: 's3_e4_ok', type: 'success', context: 'Médecin décide hospitalisation. Badge UR posé. Brancard Ferno. SpO2 96% sous O2. FC 72. Patient somnolent mais réactif.', message: '🟢 TRANSPORT EFFECTUÉ — O2 → VAS → Naloxone sur ordre → Surveillance 45min → Transport.<br>Risque re-narcotisation à surveiller à l\'hôpital.' },
+                { id: 's3_e4_bad', type: 'choice', context: 'Signes respiratoires régressifs réapparaissent.', vars: 'SpO2 86% | FR 8 | GCS 7', choices: [
+                  { label: 'Alerter médecin et reprendre protocole de surveillance', correct: true, feedback: '✅ Vous limitez le risque immédiat.', next: 'success' },
+                  { label: 'Ne rien signaler et continuer transport', correct: false, feedback: '❌ Re-narcotisation non détectée.', next: 'death' }
+                ] },
+                { id: 'success', type: 'success', context: 'Patient remis vivant à l\'hôpital avec relais surveillance.', message: '🟢 TRANSPORT EFFECTUÉ — overdose stabilisée par séquence IDE conforme.' },
+                { id: 'death', type: 'death', context: 'Détresse respiratoire non corrigée ou re-narcotisation ignorée.', message: '🔴 DÉCÈS PAR HYPOXIE / RE-NARCOTISATION NON DÉTECTÉE.' }
+              ]
+            },
+            4: {
+              stages: [
+                { id: 's4_e1', type: 'choice', context: 'AVP frontal N174, conducteur éjecté, tonneau estimé à 90 km/h. Homme 35 ans, inconscient au sol. GCS 7, FR 24, PA 95/60, FC 118.', vars: 'GCS 7 | life% = 55 | FC 118 | suspicion trauma rachis', choices: [
+                  { label: 'Ne pas mobiliser + axe tête-cou-tronc maintenu + appel médecin + O2', correct: true, feedback: '✅ Suspicion de lésion rachidienne sur mécanisme haute cinétique. Toute mobilisation intempestive peut provoquer une lésion médullaire irréversible.', next: 's4_e2_ok' },
+                  { label: 'Retourner le patient en PLS directement', correct: false, feedback: '❌ PLS sans protection rachidienne sur trauma haute cinétique = risque de tétraplégie iatrogène. L\'axe tête-cou-tronc est non négociable.', next: 's4_e2_bad' },
+                  { label: 'Poser le bandage hémostatique sur les plaies visibles en premier', correct: false, feedback: '❌ Pas d\'hémorragie externe majeure visible ici. La priorité est la protection du rachis et les voies aériennes, pas les plaies superficielles.', next: 's4_e2_bad' }
+                ] },
+                { id: 's4_e2_ok', type: 'choice', context: 'Rachis protégé, O2 en place. SpO2 94%. Le médecin arrive sur place. Il évalue et demande : « IDE, préparez le Lucas 3 et le brancard Ferno avec le MID. »', vars: 'GCS 7 | SpO2 94% | noflow non enclenché | FC 112', choices: [
+                  { label: 'Préparer Lucas 3 + Ferno MID + couverture survie + Lifepak 15', correct: true, feedback: '✅ Matériel préparé correctement. Le MID sur le Ferno garantit l\'immobilisation en bloc lors du brancardage.', next: 's4_e3_ok' },
+                  { label: 'Poser le Lucas 3 directement sur le patient sans attendre l\'ordre', correct: false, feedback: '❌ Le Lucas 3 est pour la RCP. Pas d\'ACR ici. Le mobiliser sans MID ni protocole de brancardage est dangereux.', next: 's4_e3_bad' }
+                ] },
+                { id: 's4_e2_bad', type: 'choice', context: 'Mobilisation inadaptée, douleur cervicale et déficit moteur suspecté.', vars: 'GCS 6 | FC 124 | PA 90/58', choices: [
+                  { label: 'Revenir à immobilisation stricte + O2 + appel médecin', correct: true, feedback: '✅ Vous réduisez le risque secondaire.', next: 's4_e3_ok' },
+                  { label: 'Continuer manipulations non sécurisées', correct: false, feedback: '❌ Risque médullaire iatrogène majeur.', next: 'death' }
+                ] },
+                { id: 's4_e3_ok', type: 'choice', context: 'Brancardage en bloc réussi, patient sur Ferno. FC 125, PA 88/55 en aggravation. Le médecin suspecte un saignement interne. Il demande votre avis.', vars: 'PA 88/55 | FC 125 | GCS 7 | SpO2 93%', choices: [
+                  { label: 'Bilan SBAR complet + badge IE + O2 maintenu + préparer transport urgent', correct: true, feedback: '✅ PA en aggravation + FC montante = choc hémorragique interne en cours. Badge IE, transport immédiat, le chirurgien doit l\'attendre.', next: 's4_e4_ok' },
+                  { label: 'Administrer Morphine pour calmer le patient agité', correct: false, feedback: '❌ PA 88/55 est une contre-indication relative à la Morphine. Et seul le médecin prescrit. En choc hémorragique, la Morphine peut tuer.', next: 's4_e4_bad' }
+                ] },
+                { id: 's4_e3_bad', type: 'choice', context: 'Patient instable, préparation de transport retardée.', vars: 'PA 84/50 | FC 132 | SpO2 91%', choices: [
+                  { label: 'Basculer immédiatement en transport IE avec SBAR', correct: true, feedback: '✅ Recentrage sur la priorité vitale.', next: 's4_e4_bad' },
+                  { label: 'Rester sur place pour gestes secondaires', correct: false, feedback: '❌ Le retard aggrave le choc interne.', next: 'death' }
+                ] },
+                { id: 's4_e4_ok', type: 'success', context: 'HELISMUR déclenché par le médecin. Transport hélitreuillage zone dégagée. Patient stable sous O2. SpO2 95%.', message: '🟢 TRANSPORT HELISMUR — Rachis protégé → Ferno MID → Bilan → Badge IE → HELI.' },
+                { id: 's4_e4_bad', type: 'choice', context: 'Pré-choc maintenu, marge thérapeutique réduite.', vars: 'PA 80/48 | FC 138', choices: [
+                  { label: 'Transport immédiat vers filière adaptée', correct: true, feedback: '✅ Décision de sauvetage.', next: 'success' },
+                  { label: 'Retarder encore l\'évacuation', correct: false, feedback: '❌ Choc hémorragique non contrôlé.', next: 'death' }
+                ] },
+                { id: 'success', type: 'success', context: 'Patient transféré vers prise en charge chirurgicale urgente.', message: '🟢 TRANSPORT EFFECTUÉ — filière polytrauma respectée.' },
+                { id: 'death', type: 'death', context: 'Décompensation fatale liée au choc interne ou à une lésion iatrogène.', message: '🔴 DÉCÈS PAR CHOC HÉMORRAGIQUE INTERNE / LÉSION MÉDULLAIRE IATROGÈNE.' }
+              ]
+            },
+            5: {
+              stages: [
+                { id: 's5_e1', type: 'choice', context: 'Homme retrouvé effondré devant un bar, odeur alcool forte. GCS 9, FR 12, SpO2 93%, FC 88. Glycémie capillaire à faire.', vars: 'GCS 9 | SpO2 93% | glycémie non mesurée', choices: [
+                  { label: 'PLS + O2 + glycémie capillaire immédiate + Lifepak 15 + appel médecin', correct: true, feedback: '✅ PLS sécurise les VAS. Glycémie indispensable : hypoglycémie et coma éthylique se ressemblent. Vous ne pouvez pas les différencier cliniquement sans glycémie.', next: 's5_e2_ok' },
+                  { label: 'Le laisser en décubitus dorsal, il va cuver', correct: false, feedback: '❌ Décubitus dorsal en coma éthylique = risque majeur d\'inhalation de vomissements. La PLS est obligatoire, même si vous suspectez un coma éthylique simple.', next: 's5_e2_bad' }
+                ] },
+                { id: 's5_e2_ok', type: 'choice', context: 'Glycémie : 0.48 g/L. O2 posée, SpO2 remonte à 96%. Patient en PLS. Vous transmettez les données au médecin régulateur.', vars: 'glycémie 0.48 g/L | SpO2 96% | GCS 9', choices: [
+                  { label: 'Signaler hypoglycémie au médecin + appliquer traitement prescrit + aspirateur mucosités à portée', correct: true, feedback: '✅ 0.48 g/L = hypoglycémie sévère associée. Le médecin doit prescrire le traitement. L\'aspirateur prévient l\'inhalation si vomissements.', next: 's5_e3_ok' },
+                  { label: 'Administrer du Paracétamol pour stabiliser', correct: false, feedback: '❌ Le Paracétamol est analgésique, pas hypoglycémiant. Il est inutile ici et contre-indiqué si éthylisme chronique (hépatotoxicité).', next: 's5_e3_bad' }
+                ] },
+                { id: 's5_e2_bad', type: 'choice', context: 'Vomissements et encombrement des voies aériennes apparaissent.', vars: 'SpO2 88% | GCS 8', choices: [
+                  { label: 'Passer en PLS + O2 + aspiration + glycémie immédiate', correct: true, feedback: '✅ Correction prioritaire des VAS et diagnostic métabolique.', next: 's5_e3_ok' },
+                  { label: 'Maintenir décubitus dorsal', correct: false, feedback: '❌ Inhalation massive en cours.', next: 'death' }
+                ] },
+                { id: 's5_e3_ok', type: 'choice', context: 'Traitement administré sur prescription. GCS remonte à 12. Le patient commence à parler. Vomissements soudains. Vous devez réagir.', vars: 'GCS 12 | SpO2 95% | vomissements actifs', choices: [
+                  { label: 'Aspiration mucosités (Schiller) + maintenir PLS + surveiller SpO2', correct: true, feedback: '✅ L\'aspirateur Schiller est fait pour ça. Aspiration propre, VAS dégagées. SpO2 maintenue. Patient en sécurité.', next: 's5_e4_ok' },
+                  { label: 'Retourner le patient sur le dos pour voir s\'il va mieux', correct: false, feedback: '❌ Décubitus dorsal pendant les vomissements = inhalation certaine. Le maintenir en PLS ou latéral jusqu\'à reprise de conscience complète.', next: 's5_e4_bad' }
+                ] },
+                { id: 's5_e3_bad', type: 'choice', context: 'Hypoglycémie persistante et conscience fluctuante.', vars: 'glycémie 0.44 g/L | GCS 8', choices: [
+                  { label: 'Corriger via prescription médicale et protéger VAS', correct: true, feedback: '✅ Reprise de stratégie adaptée.', next: 's5_e4_bad' },
+                  { label: 'Reporter la correction glycémique', correct: false, feedback: '❌ Aggravation neurologique.', next: 'death' }
+                ] },
+                { id: 's5_e4_ok', type: 'success', context: 'GCS 14, SpO2 97%, glycémie 0.78 g/L après traitement. Badge UR posé. Transport SAU décidé par le médecin.', message: '🟢 TRANSPORT SAU — PLS → Glycémie → Traitement sur prescription → Aspiration → Badge UR.' },
+                { id: 's5_e4_bad', type: 'choice', context: 'Patient partiellement récupéré mais à haut risque d\'inhalation.', vars: 'GCS 11 | SpO2 92%', choices: [
+                  { label: 'Maintenir PLS stricte et transporter rapidement', correct: true, feedback: '✅ Vous sécurisez la fin de prise en charge.', next: 'success' },
+                  { label: 'Relâcher la protection des VAS', correct: false, feedback: '❌ Inhalation secondaire non prévenue.', next: 'death' }
+                ] },
+                { id: 'success', type: 'success', context: 'Admission SAU avec relais métabolique et respiratoire.', message: '🟢 TRANSPORT EFFECTUÉ — coma éthylique compliqué pris en charge correctement.' },
+                { id: 'death', type: 'death', context: 'Complication fatale respiratoire ou métabolique.', message: '🔴 DÉCÈS PAR INHALATION / HYPOGLYCÉMIE NON DÉTECTÉE.' }
+              ]
+            },
+            6: {
+              stages: [
+                { id: 's6_e1', type: 'choice', context: 'Incendie entrepôt industriel. 2 victimes. Victime A : brûlures face + torse, voix rauque, SpO2 91%, stridor audible. Victime B : brûlure main droite, stable, SpO2 98%.', vars: 'Victime A SpO2 91% | stridor | Victime B stable', choices: [
+                  { label: 'Triage immédiat IE/UV + O2 haute concentration Victime A + appel médecin urgent', correct: true, feedback: '✅ Stridor = œdème laryngé en cours. Victime A est IE : risque d\'obstruction totale des VAS en quelques minutes. L\'O2 et le médecin sont urgents.', next: 's6_e2_ok' },
+                  { label: 'S\'occuper des deux en même temps avec égale priorité', correct: false, feedback: '❌ Le triage existe pour éviter ça. Victime A va mourir d\'asphyxie pendant que vous posez de la Biafine sur une main brûlée au 1er degré.', next: 's6_e2_bad' }
+                ] },
+                { id: 's6_e2_ok', type: 'choice', context: 'Victime A : O2 en place, SpO2 remonte à 94%. Médecin arrive et évalue. Il dit : « Cette voix rauque m\'inquiète, on va peut-être devoir intuber vite. » Que préparez-vous ?', vars: 'SpO2 94% | stridor présent | GCS 14', choices: [
+                  { label: 'Préparer matériel IOT + aspirateur Schiller + ne pas poser Biafine sur visage', correct: true, feedback: '✅ La Biafine est contre-indiquée sur brûlures profondes du visage avant évaluation. Le matériel IOT prêt permet une intubation rapide si le médecin le décide.', next: 's6_e3_ok' },
+                  { label: 'Appliquer Biafine sur tout le visage et le torse en attendant', correct: false, feedback: '❌ Biafine sur brûlures profondes et étendues : contre-indiqué. Masque les lésions et empêche le médecin d\'évaluer correctement.', next: 's6_e3_bad' }
+                ] },
+                { id: 's6_e2_bad', type: 'choice', context: 'Victime A se dégrade respiratoirement, stridor majoré.', vars: 'SpO2 86% | tirage inspiratoire', choices: [
+                  { label: 'Reclasser IE immédiat + O2 + médecin prioritaire', correct: true, feedback: '✅ Correction de triage, récupération partielle.', next: 's6_e3_ok' },
+                  { label: 'Rester focalisé sur Victime B', correct: false, feedback: '❌ Obstruction VAS non anticipée.', next: 'death' }
+                ] },
+                { id: 's6_e3_ok', type: 'choice', context: 'Médecin décide IOT préventive Victime A. Il ordonne. Vous assistez. Pendant ce temps, Victime B vous interpelle : « Ça brûle fort, donnez-moi quelque chose ! »', vars: 'IOT en cours Victime A | Victime B EVA 7', choices: [
+                  { label: 'Paracétamol Victime B + Biafine main droite après + monitoring des deux', correct: true, feedback: '✅ Paracétamol dans vos attributions pour douleur modérée. Biafine sur brûlure superficielle main = indication correcte. Vous gérez les deux.', next: 's6_e4_ok' },
+                  { label: 'Laisser Victime B sans prise en charge pour rester sur Victime A', correct: false, feedback: '❌ Victime B est UV mais mérite une prise en charge. Le Paracétamol est dans vos attributions sans prescription.', next: 's6_e4_bad' }
+                ] },
+                { id: 's6_e3_bad', type: 'choice', context: 'Évaluation des brûlures compromise, délai thérapeutique accru.', vars: 'Victime A instable | Victime B douloureuse', choices: [
+                  { label: 'Corriger conduite : stop Biafine visage + assistance IOT + triage actif', correct: true, feedback: '✅ Vous revenez au cadre médical approprié.', next: 's6_e4_bad' },
+                  { label: 'Maintenir stratégie inadaptée', correct: false, feedback: '❌ Retard critique sur VAS.', next: 'death' }
+                ] },
+                { id: 's6_e4_ok', type: 'success', context: 'IOT Victime A réussie, SpO2 99% sous ventilation. Victime B antalgée, badge UV. HELISMUR déclenché pour Victime A. VSAV transport pour Victime B.', message: '🟢 DOUBLE TRANSPORT — Triage → IE/UV → O2 → IOT assistée → Paracétamol → HELISMUR + VSAV.' },
+                { id: 's6_e4_bad', type: 'choice', context: 'Situation rattrapée partiellement, mais toujours tendue.', vars: 'Victime A SpO2 93% | Victime B EVA 6', choices: [
+                  { label: 'Prioriser encore VAS A + antalgie B + double évacuation coordonnée', correct: true, feedback: '✅ Fin de prise en charge sécurisée.', next: 'success' },
+                  { label: 'Désorganiser la priorisation finale', correct: false, feedback: '❌ Asphyxie non anticipée.', next: 'death' }
+                ] },
+                { id: 'success', type: 'success', context: 'Les deux victimes sont évacuées avec filière adaptée.', message: '🟢 TRANSPORT EFFECTUÉ — gestion multi-victimes conforme au triage.' },
+                { id: 'death', type: 'death', context: 'La victime A se dégrade vers obstruction complète des VAS.', message: '🔴 DÉCÈS VICTIME A PAR ASPHYXIE / OBSTRUCTION VAS NON ANTICIPÉE.' }
+              ]
+            }
+          };
+
+          function getStage(scenarioId, stageId) {
+            return scenarios[scenarioId].stages.find(function (s) { return s.id === stageId; });
+          }
+
+          function restartScenario(scenarioId) {
+            scenarioState[scenarioId].errors = 0;
+            scenarioState[scenarioId].errorLogs = [];
+            renderStage(scenarioId, 's' + scenarioId + '_e1', null);
+          }
+
+          function renderStage(scenarioId, stageId, feedbackData) {
+            const player = document.querySelector('.scenario-player[data-scenario="' + scenarioId + '"]');
+            const container = player.querySelector('.scenario-stage');
+            const state = scenarioState[scenarioId];
+            const stage = getStage(scenarioId, stageId) || getStage(scenarioId, 'death');
+
+            let html = '<div class="scenario-errors">⚠️ Erreurs : ' + state.errors + ' / 4</div>';
+
+            if (feedbackData) {
+              html += '<div class="scenario-feedback ' + (feedbackData.correct ? 'good' : 'bad') + '">' + feedbackData.text + '</div>';
+            }
+
+            if (stage.type === 'death') {
+              const logs = state.errorLogs.length
+                ? '<ul style="text-align:left; margin-top:10px;">' + state.errorLogs.map(function (e) { return '<li>' + e + '</li>'; }).join('') + '</ul>'
+                : '<p>Aucune erreur tracée.</p>';
+              html += '<div class="scenario-death"><h3>PATIENT DÉCÉDÉ</h3><div class="scenario-context">' + stage.context + '</div><p>' + stage.message + '</p><p><strong>Erreurs ayant conduit à ce résultat :</strong></p>' + logs + '<button class="scenario-restart-btn" data-restart="' + scenarioId + '">↺ Recommencer</button></div>';
+              container.innerHTML = html;
+              return;
+            }
+
+            if (stage.type === 'success') {
+              html += '<div class="scenario-success"><h3>TRANSPORT EFFECTUÉ — MISSION RÉUSSIE</h3><div class="scenario-context">' + stage.context + '</div><p>' + stage.message + '</p><button class="scenario-restart-btn" data-restart="' + scenarioId + '">↺ Recommencer</button></div>';
+              container.innerHTML = html;
+              return;
+            }
+
+            html += '<div class="scenario-context">' + stage.context + '</div>';
+            html += '<div class="scenario-vars">' + stage.vars + '</div>';
+            html += '<div class="scenario-choices">';
+            stage.choices.forEach(function (choice) {
+              html += '<button class="scenario-choice-btn" data-scenario="' + scenarioId + '" data-next="' + choice.next + '" data-correct="' + (choice.correct ? '1' : '0') + '" data-feedback="' + encodeURIComponent(choice.feedback) + '">' + choice.label + '</button>';
+            });
+            html += '</div>';
+            container.innerHTML = html;
+          }
+
+          document.addEventListener('click', function (e) {
+            const launchBtn = e.target.closest('[data-launch]');
+            if (launchBtn) {
+              const scenarioId = Number(launchBtn.getAttribute('data-launch'));
+              const player = document.querySelector('.scenario-player[data-scenario="' + scenarioId + '"]');
+              player.style.display = 'block';
+              restartScenario(scenarioId);
+              return;
+            }
+
+            const restartBtn = e.target.closest('[data-restart]');
+            if (restartBtn) {
+              const scenarioId = Number(restartBtn.getAttribute('data-restart'));
+              restartScenario(scenarioId);
+              return;
+            }
+
+            const choiceBtn = e.target.closest('.scenario-choice-btn');
+            if (!choiceBtn) return;
+
+            const scenarioId = Number(choiceBtn.getAttribute('data-scenario'));
+            const next = choiceBtn.getAttribute('data-next');
+            const isCorrect = choiceBtn.getAttribute('data-correct') === '1';
+            const feedback = decodeURIComponent(choiceBtn.getAttribute('data-feedback'));
+            const state = scenarioState[scenarioId];
+
+            if (!isCorrect) {
+              state.errors += 1;
+              state.errorLogs.push(feedback);
+              if (state.errors >= 4) {
+                renderStage(scenarioId, 'death', { correct: false, text: feedback });
+                return;
+              }
+            }
+
+            renderStage(scenarioId, next, { correct: isCorrect, text: feedback });
+          });
+        })();
+      </script>
     </div>
 
     <div class="section-title" style="margin-top:32px;">Tableau des compétences</div>
@@ -767,6 +1086,15 @@
 <footer class="footer">
   <span>SAMU 96 · Portail Support · Usage interne uniquement</span>
   <span class="topbar-clock"></span>
+  <span style="margin-left:auto;">
+    <button id="btn-admin-open"
+      style="background:none;border:none;color:rgba(255,255,255,0.25);
+      font-size:0.68rem;cursor:pointer;letter-spacing:0.05em;padding:4px 8px;"
+      onmouseover="this.style.color='rgba(255,255,255,0.6)'"
+      onmouseout="this.style.color='rgba(255,255,255,0.25)'">
+      ⚙ FORMATION
+    </button>
+  </span>
 </footer>
 
 <script>
@@ -795,5 +1123,366 @@ function check(group, good, targetId) {
 <script src="nav.js"></script>
 <script src="main.js"></script>
 <script>renderNav('formations.html');</script>
+
+<div id="modal-admin-overlay" style="display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.6); z-index:9999; align-items:center;
+  justify-content:center;">
+  <div style="background:#fff; border-radius:8px; padding:28px 32px;
+    max-width:420px; width:90%; box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+
+    <div id="admin-login-view">
+      <div style="font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:4px;">
+        Espace Responsable Formation
+      </div>
+      <div style="font-size:0.78rem;color:#64748b;margin-bottom:18px;">
+        Accès réservé — SAMU 96
+      </div>
+      <input type="password" id="input-admin-pwd"
+        placeholder="Mot de passe"
+        style="width:100%;padding:9px 12px;border:1.5px solid #cbd5e1;
+        border-radius:5px;font-size:0.85rem;margin-bottom:10px;box-sizing:border-box;">
+      <div id="admin-login-error"
+        style="color:#b91c1c;font-size:0.78rem;margin-bottom:8px;display:none;">
+        Mot de passe incorrect.
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button onclick="fermerModalAdmin()"
+          style="padding:7px 16px;border:1.5px solid #cbd5e1;border-radius:4px;
+          background:#fff;cursor:pointer;font-size:0.82rem;">Annuler</button>
+        <button onclick="validerLoginAdmin()"
+          style="padding:7px 16px;background:#1e3a8a;color:#fff;border:none;
+          border-radius:4px;cursor:pointer;font-size:0.82rem;font-weight:600;">
+          Connexion</button>
+      </div>
+    </div>
+
+    <div id="admin-dashboard-view" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;
+        margin-bottom:16px;">
+        <div style="font-size:1rem;font-weight:700;color:#1e293b;">
+          Suivi des essais — SAMU 96
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="exporterCSV()"
+            style="padding:5px 12px;border:1.5px solid #1e3a8a;color:#1e3a8a;
+            border-radius:4px;background:#fff;cursor:pointer;font-size:0.75rem;
+            font-weight:600;">⬇ CSV</button>
+          <button onclick="viderDashboard()"
+            style="padding:5px 12px;border:1.5px solid #b91c1c;color:#b91c1c;
+            border-radius:4px;background:#fff;cursor:pointer;font-size:0.75rem;">
+            Fermer</button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+        <select id="filtre-fichier"
+          style="font-size:0.75rem;padding:4px 8px;border:1px solid #cbd5e1;
+          border-radius:4px;">
+          <option value="">Tous les modules</option>
+          <option value="IDE/IADE">IDE / IADE</option>
+          <option value="Médecin">Médecin</option>
+        </select>
+        <select id="filtre-resultat"
+          style="font-size:0.75rem;padding:4px 8px;border:1px solid #cbd5e1;
+          border-radius:4px;">
+          <option value="">Tous les résultats</option>
+          <option value="Validé">Validé ✅</option>
+          <option value="Échoué">Échoué ❌</option>
+        </select>
+        <button onclick="chargerEssais()"
+          style="padding:4px 10px;background:#f1f5f9;border:1px solid #cbd5e1;
+          border-radius:4px;cursor:pointer;font-size:0.75rem;">🔄 Actualiser</button>
+      </div>
+
+      <div id="admin-stats"
+        style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;"></div>
+
+      <div style="overflow-x:auto;max-height:420px;overflow-y:auto;">
+        <table id="admin-table"
+          style="width:100%;border-collapse:collapse;font-size:0.75rem;">
+          <thead>
+            <tr style="background:#f8fafc;position:sticky;top:0;">
+              <th style="padding:7px 10px;text-align:left;border-bottom:
+                1.5px solid #e2e8f0;color:#475569;">Nom</th>
+              <th style="padding:7px 10px;text-align:left;border-bottom:
+                1.5px solid #e2e8f0;color:#475569;">Module</th>
+              <th style="padding:7px 10px;text-align:left;border-bottom:
+                1.5px solid #e2e8f0;color:#475569;">Scénario</th>
+              <th style="padding:7px 10px;text-align:center;border-bottom:
+                1.5px solid #e2e8f0;color:#475569;">Résultat</th>
+              <th style="padding:7px 10px;text-align:center;border-bottom:
+                1.5px solid #e2e8f0;color:#475569;">Erreurs</th>
+              <th style="padding:7px 10px;text-align:left;border-bottom:
+                1.5px solid #e2e8f0;color:#475569;">Date</th>
+              <th style="padding:7px 10px;text-align:left;border-bottom:
+                1.5px solid #e2e8f0;color:#475569;">Détail erreurs</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body">
+            <tr><td colspan="7"
+              style="text-align:center;padding:20px;color:#94a3b8;">
+              Chargement...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="modal-nom-overlay" style="display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.5); z-index:9998; align-items:center;
+  justify-content:center;">
+  <div style="background:#fff; border-radius:8px; padding:28px 32px;
+    max-width:400px; width:90%; box-shadow:0 8px 32px rgba(0,0,0,0.25);">
+    <div style="font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:4px;">
+      Identification requise
+    </div>
+    <div style="font-size:0.78rem;color:#64748b;margin-bottom:18px;">
+      Votre nom sera enregistré avec vos résultats de formation.
+    </div>
+    <input type="text" id="input-nom-joueur"
+      placeholder="Votre nom et prénom"
+      style="width:100%;padding:9px 12px;border:1.5px solid #cbd5e1;
+      border-radius:5px;font-size:0.85rem;margin-bottom:8px;box-sizing:border-box;">
+    <div id="nom-error"
+      style="color:#b91c1c;font-size:0.78rem;margin-bottom:8px;display:none;">
+      Veuillez saisir votre nom avant de continuer.
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button onclick="annulerSaisieNom()"
+        style="padding:7px 16px;border:1.5px solid #cbd5e1;border-radius:4px;
+        background:#fff;cursor:pointer;font-size:0.82rem;">Annuler</button>
+      <button onclick="confirmerNom()"
+        style="padding:7px 16px;background:#1e3a8a;color:#fff;border:none;
+        border-radius:4px;cursor:pointer;font-size:0.82rem;font-weight:600;">
+        Confirmer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ADMIN_PASSWORD = "samu96formation";
+
+window._samu96_nom = "";
+window._samu96_pendingCallback = null;
+
+function demanderNomSiNecessaire(callback) {
+  if (window._samu96_nom && window._samu96_nom.trim() !== "") {
+    callback();
+    return;
+  }
+  window._samu96_pendingCallback = callback;
+  const overlay = document.getElementById('modal-nom-overlay');
+  overlay.style.display = 'flex';
+  document.getElementById('input-nom-joueur').focus();
+}
+
+function confirmerNom() {
+  const val = document.getElementById('input-nom-joueur').value.trim();
+  if (!val) {
+    document.getElementById('nom-error').style.display = 'block';
+    return;
+  }
+  document.getElementById('nom-error').style.display = 'none';
+  window._samu96_nom = val;
+  document.getElementById('modal-nom-overlay').style.display = 'none';
+  if (window._samu96_pendingCallback) {
+    window._samu96_pendingCallback();
+    window._samu96_pendingCallback = null;
+  }
+}
+
+function annulerSaisieNom() {
+  document.getElementById('modal-nom-overlay').style.display = 'none';
+  window._samu96_pendingCallback = null;
+}
+
+async function sauvegarderEssai(nomScenario, resultat, nbErreurs, erreursDetail) {
+  try {
+    const { collection, addDoc } = window._samu96_firestore;
+    const db = window._samu96_db;
+    const fichier = document.title.includes("IDE") ? "IDE/IADE" : "Médecin";
+    await addDoc(collection(db, "samu96_essais"), {
+      nom: window._samu96_nom || "Inconnu",
+      fichier: fichier,
+      scenario: nomScenario,
+      resultat: resultat,
+      nb_erreurs: nbErreurs,
+      erreurs_detail: Array.isArray(erreursDetail) ? erreursDetail : [],
+      timestamp: new Date().toLocaleString('fr-FR')
+    });
+  } catch(e) {
+    console.warn("Erreur Firebase samu96:", e);
+  }
+}
+
+function ouvrirModalAdmin() {
+  document.getElementById('modal-admin-overlay').style.display = 'flex';
+  document.getElementById('admin-login-view').style.display = 'block';
+  document.getElementById('admin-dashboard-view').style.display = 'none';
+  document.getElementById('admin-login-error').style.display = 'none';
+  document.getElementById('input-admin-pwd').value = '';
+  setTimeout(() => document.getElementById('input-admin-pwd').focus(), 100);
+}
+
+function fermerModalAdmin() {
+  document.getElementById('modal-admin-overlay').style.display = 'none';
+}
+
+function validerLoginAdmin() {
+  const pwd = document.getElementById('input-admin-pwd').value;
+  if (pwd === ADMIN_PASSWORD) {
+    document.getElementById('admin-login-view').style.display = 'none';
+    document.getElementById('admin-dashboard-view').style.display = 'block';
+    chargerEssais();
+  } else {
+    document.getElementById('admin-login-error').style.display = 'block';
+    document.getElementById('input-admin-pwd').value = '';
+    document.getElementById('input-admin-pwd').focus();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const pwdInput = document.getElementById('input-admin-pwd');
+  if (pwdInput) {
+    pwdInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') validerLoginAdmin();
+    });
+  }
+  const nomInput = document.getElementById('input-nom-joueur');
+  if (nomInput) {
+    nomInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') confirmerNom();
+    });
+  }
+  document.getElementById('btn-admin-open')
+    ?.addEventListener('click', ouvrirModalAdmin);
+  document.getElementById('modal-admin-overlay')
+    ?.addEventListener('click', function(e) {
+      if (e.target === this) fermerModalAdmin();
+    });
+  document.getElementById('modal-nom-overlay')
+    ?.addEventListener('click', function(e) {
+      if (e.target === this) annulerSaisieNom();
+    });
+});
+
+async function chargerEssais() {
+  const tbody = document.getElementById('admin-table-body');
+  const stats = document.getElementById('admin-stats');
+  if (!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:#94a3b8;">Chargement...</td></tr>';
+
+  try {
+    const { collection, getDocs, query, orderBy } = window._samu96_firestore;
+    const db = window._samu96_db;
+    const q = query(collection(db, "samu96_essais"), orderBy("timestamp", "desc"));
+    const snap = await getDocs(q);
+
+    let essais = [];
+    snap.forEach(doc => essais.push({ id: doc.id, ...doc.data() }));
+
+    const filtFichier = document.getElementById('filtre-fichier')?.value || '';
+    const filtResultat = document.getElementById('filtre-resultat')?.value || '';
+    if (filtFichier) essais = essais.filter(e => e.fichier === filtFichier);
+    if (filtResultat) essais = essais.filter(e => e.resultat === filtResultat);
+
+    const total = essais.length;
+    const valides = essais.filter(e => e.resultat === 'Validé').length;
+    const echoues = essais.filter(e => e.resultat === 'Échoué').length;
+    const joueurs = [...new Set(essais.map(e => e.nom))].length;
+
+    stats.innerHTML = `
+      <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:5px;
+        padding:6px 12px;font-size:0.75rem;color:#14532d;">
+        <strong>${valides}</strong> Validés ✅
+      </div>
+      <div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:5px;
+        padding:6px 12px;font-size:0.75rem;color:#7f1d1d;">
+        <strong>${echoues}</strong> Échoués ❌
+      </div>
+      <div style="background:#f0f4ff;border:1px solid #93c5fd;border-radius:5px;
+        padding:6px 12px;font-size:0.75rem;color:#1e3a8a;">
+        <strong>${total}</strong> Essais total
+      </div>
+      <div style="background:#fafafa;border:1px solid #e2e8f0;border-radius:5px;
+        padding:6px 12px;font-size:0.75rem;color:#475569;">
+        <strong>${joueurs}</strong> Joueur(s) différent(s)
+      </div>`;
+
+    if (essais.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:#94a3b8;">Aucun essai enregistré.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = essais.map(e => {
+      const badgeResultat = e.resultat === 'Validé'
+        ? '<span style="background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:3px;font-weight:700;font-size:0.72rem;">✅ Validé</span>'
+        : '<span style="background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:3px;font-weight:700;font-size:0.72rem;">❌ Échoué</span>';
+
+      const erreursBadge = e.nb_erreurs > 0
+        ? `<span style="background:#fff7ed;color:#c2410c;padding:2px 7px;border-radius:3px;font-size:0.72rem;font-weight:700;">${e.nb_erreurs}/4</span>`
+        : `<span style="background:#f0fdf4;color:#15803d;padding:2px 7px;border-radius:3px;font-size:0.72rem;">0/4</span>`;
+
+      const detail = Array.isArray(e.erreurs_detail) && e.erreurs_detail.length > 0
+        ? `<details style="cursor:pointer;">
+            <summary style="font-size:0.72rem;color:#64748b;">Voir (${e.erreurs_detail.length})</summary>
+            <ul style="margin:4px 0 0 12px;padding:0;font-size:0.72rem;color:#475569;">
+              ${e.erreurs_detail.map(err => `<li>${err}</li>`).join('')}
+            </ul>
+          </details>`
+        : '<span style="color:#94a3b8;font-size:0.72rem;">—</span>';
+
+      return `<tr style="border-bottom:1px solid #f1f5f9;">
+        <td style="padding:8px 10px;font-weight:600;color:#1e293b;">${e.nom || '—'}</td>
+        <td style="padding:8px 10px;color:#475569;">${e.fichier || '—'}</td>
+        <td style="padding:8px 10px;color:#475569;">${e.scenario || '—'}</td>
+        <td style="padding:8px 10px;text-align:center;">${badgeResultat}</td>
+        <td style="padding:8px 10px;text-align:center;">${erreursBadge}</td>
+        <td style="padding:8px 10px;color:#64748b;font-size:0.72rem;white-space:nowrap;">${e.timestamp || '—'}</td>
+        <td style="padding:8px 10px;">${detail}</td>
+      </tr>`;
+    }).join('');
+
+  } catch(err) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:20px;color:#b91c1c;">
+      Erreur de chargement Firebase : ${err.message}</td></tr>`;
+  }
+}
+
+function viderDashboard() {
+  fermerModalAdmin();
+}
+
+function exporterCSV() {
+  const rows = document.querySelectorAll('#admin-table-body tr');
+  if (!rows.length) return;
+  const headers = ['Nom','Module','Scénario','Résultat','Erreurs','Date','Détail erreurs'];
+  const lines = [headers.join(';')];
+  rows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    if (cells.length < 6) return;
+    const ligne = [
+      cells[0].textContent.trim(),
+      cells[1].textContent.trim(),
+      cells[2].textContent.trim(),
+      cells[3].textContent.trim(),
+      cells[4].textContent.trim(),
+      cells[5].textContent.trim(),
+      cells[6].textContent.replace(/\n/g,' ').trim()
+    ].map(v => `"${v.replace(/"/g,'""')}"`).join(';');
+    lines.push(ligne);
+  });
+  const blob = new Blob(['\uFEFF' + lines.join('\n')],
+    { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `samu96_essais_${new Date().toLocaleDateString('fr-FR').replace(/\//g,'-')}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
 </body>
 </html>

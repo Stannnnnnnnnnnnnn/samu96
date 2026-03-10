@@ -1,255 +1,218 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Intranet — SAMU 96</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAMU 96 · Portail Intranet</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    :root { --bg:#07090f; --surface:#0d1117; --border:#1c2333; --accent:#0ea5e9; --accent-2:#6366f1; --ok:#22c55e; --danger:#ef4444; --warn:#f59e0b; --text:#e2e8f0; --muted:#64748b; --radius:16px; --shadow:0 0 0 1px var(--border),0 4px 24px rgba(14,165,233,.06); --shadow-strong:0 0 0 1px rgba(14,165,233,.35),0 10px 34px rgba(14,165,233,.18); }
+    *{box-sizing:border-box} html,body{margin:0;background:radial-gradient(1200px 650px at 8% -15%,rgba(14,165,233,.16),transparent 60%),radial-gradient(1000px 600px at 100% -10%,rgba(99,102,241,.16),transparent 56%),var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100%} body{overflow-y:scroll}
+    body.admin-mode .admin-only{display:inline-flex!important}.admin-only{display:none!important}
+    ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(14,165,233,.8),rgba(99,102,241,.8));border-radius:999px;border:2px solid #0b0f17}::-webkit-scrollbar-track{background:#0a0e16}
+    .topbar{height:48px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#0ea5e9 0%,#6366f1 100%);box-shadow:inset 0 -1px 0 rgba(255,255,255,.1);position:sticky;top:0;z-index:40}
+    .topbar-inner{width:min(1280px,100%);padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:800;letter-spacing:.05em;font-size:1rem;color:#f8fbff;text-shadow:0 1px 8px rgba(7,9,15,.3);white-space:nowrap;user-select:none}
+    .topbar-right{display:flex;align-items:center;gap:12px}.clock{font-variant-numeric:tabular-nums;font-weight:700;color:#ecfeff;font-size:.92rem;text-shadow:0 1px 8px rgba(7,9,15,.3);white-space:nowrap}
+    .container{width:min(1280px,100%);margin:0 auto;padding:18px 32px 44px}
+    .tabs{background:rgba(13,17,23,.85);border:1px solid var(--border);border-radius:999px;display:inline-flex;padding:5px;gap:6px;box-shadow:var(--shadow);position:sticky;top:60px;z-index:20;backdrop-filter:blur(10px)}
+    .tab-btn{border:0;background:var(--surface);color:var(--muted);padding:10px 16px;border-radius:999px;font-weight:600;cursor:pointer;transition:all 200ms ease;position:relative;isolation:isolate}.tab-btn::after{content:'';position:absolute;left:14px;right:14px;bottom:3px;height:2px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transform:scaleX(0);transform-origin:center;transition:transform 200ms ease}.tab-btn:hover{color:#dbeafe;transform:translateY(-1px)}.tab-btn.active{background:linear-gradient(90deg,var(--accent),#2ea4ee);color:#fff;box-shadow:0 8px 20px rgba(14,165,233,.28)}.tab-btn.active::after{transform:scaleX(1)}
+    .tab-panel{margin-top:22px;display:none}.tab-panel.active{display:block;animation:fadeIn 220ms ease}@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+    .section{margin-top:20px;background:rgba(7,9,15,.45);border-radius:18px;padding:16px;border:1px solid rgba(28,35,51,.8)}.section-title{margin:0 0 14px;border-left:3px solid var(--accent);padding-left:12px;font-size:1.05rem;font-weight:700;letter-spacing:.02em}.separator{height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:14px 0}
+    .card,.mini-card,.table-wrap,.filters{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);transition:transform 200ms ease,box-shadow 200ms ease}.card:hover,.mini-card:hover,.table-wrap:hover,.filters:hover{transform:translateY(-2px);box-shadow:var(--shadow-strong)}
+    .filters{padding:14px;display:grid;grid-template-columns:1fr 220px auto auto;gap:12px;align-items:center}
+    .input,.select,.btn{border:1px solid var(--border);border-radius:12px;background:#0b111d;color:var(--text);min-height:40px;padding:0 12px;font:inherit;transition:border-color 180ms ease,box-shadow 180ms ease}.input:focus,.select:focus{border-color:var(--accent);outline:0;box-shadow:0 0 0 3px rgba(14,165,233,.2)}
+    .count{color:var(--muted);font-size:.94rem;font-weight:600;text-align:right;padding-right:6px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-weight:600;padding:0 14px;white-space:nowrap}.btn:hover{border-color:rgba(14,165,233,.75)}.btn.primary{border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff}.btn.danger{border-color:rgba(239,68,68,.45);color:#fecaca;background:rgba(127,29,29,.18)}.btn.ghost{background:transparent;color:var(--muted)}
+    .auth-wrap{display:flex;align-items:center;gap:8px}.admin-badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 10px;font-size:.8rem;font-weight:700;color:#ecfdf5;background:rgba(34,197,94,.22);border:1px solid rgba(34,197,94,.45)}
+    .grid-members{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.member-card{padding:14px;display:flex;flex-direction:column;gap:10px}.member-top{display:flex;gap:12px;align-items:flex-start}
+    .avatar{width:52px;height:52px;border-radius:50%;border:1px solid rgba(14,165,233,.4);background:linear-gradient(135deg,rgba(14,165,233,.28),rgba(99,102,241,.3));display:inline-flex;align-items:center;justify-content:center;font-weight:800;letter-spacing:.04em;color:#e0f2fe;overflow:hidden;flex:0 0 auto}.avatar img{width:100%;height:100%;object-fit:cover}
+    .name{margin:0;font-size:1.06rem;font-weight:800}.grade-badge{border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;color:#fff;letter-spacing:.02em}.meta{color:var(--muted);font-size:.9rem}
+    .status{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:4px 10px;font-size:.73rem;font-weight:700;letter-spacing:.03em;width:fit-content;border:1px solid transparent}.status .dot{width:8px;height:8px;border-radius:50%;box-shadow:0 0 0 0 currentColor}
+    .status.actif{color:#86efac;background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.42)}.status.actif .dot{animation:pulse 1.8s infinite}.status.inactif{color:#94a3b8;background:rgba(100,116,139,.2);border-color:rgba(100,116,139,.4)}.status.en_formation{color:#fcd34d;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.42)}
+    .status.disponible{color:#86efac;background:rgba(34,197,94,.13);border-color:rgba(34,197,94,.45)}.status.en_intervention{color:#93c5fd;background:rgba(14,165,233,.12);border-color:rgba(14,165,233,.4)}.status.hs{color:#fca5a5;background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.42)}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 currentColor}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+    .sub-title{margin:0;font-size:.82rem;letter-spacing:.03em;text-transform:uppercase;color:#94a3b8;font-weight:700}.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{border-radius:999px;font-size:.76rem;font-weight:600;padding:4px 8px;border:1px solid rgba(100,116,139,.35);color:#cbd5e1;background:rgba(100,116,139,.14)}.chip.on{color:#dcfce7;border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.18)}
+    .formations-list{display:flex;flex-direction:column;gap:6px;margin-top:2px}.formation-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 8px;border-radius:10px;background:#0a0f1a;border:1px solid rgba(28,35,51,.8);font-size:.84rem}.formation-item small{color:var(--muted);font-variant-numeric:tabular-nums}
+    .card-actions{margin-top:auto;display:flex;justify-content:flex-end;gap:8px;padding-top:4px}.vehicle-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.mini-card{padding:12px}.mini-card .label{color:var(--muted);font-size:.84rem;margin-bottom:6px}.mini-card .value{font-size:1.42rem;font-weight:800;line-height:1}
+    .vehicle-grid{margin-top:10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.vehicle-card{overflow:hidden;padding:0;display:flex;flex-direction:column}.vehicle-head{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .vehicle-head.disponible{background:linear-gradient(135deg,rgba(21,75,45,.9),rgba(34,197,94,.25))}.vehicle-head.en_intervention{background:linear-gradient(135deg,rgba(3,52,92,.9),rgba(14,165,233,.26))}.vehicle-head.hs{background:linear-gradient(135deg,rgba(95,20,30,.9),rgba(239,68,68,.28))}
+    .veh-name{margin:0;font-size:1.04rem;font-weight:800;display:flex;align-items:center;gap:8px}.veh-type{border-radius:999px;padding:4px 8px;font-size:.72rem;border:1px solid rgba(226,232,240,.3);background:rgba(7,9,15,.3);color:#e2e8f0;font-weight:700}
+    .vehicle-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:10px;flex:1}.plate{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.91rem;color:#cbd5e1;background:#0a0f18;border:1px solid rgba(100,116,139,.3);border-radius:10px;padding:7px 10px;width:fit-content}
+    .table-wrap{overflow:auto;margin-top:14px}table{width:100%;border-collapse:collapse;min-width:680px}th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--border);font-size:.89rem}th{color:#93a4bc;font-weight:700;text-transform:uppercase;letter-spacing:.03em;font-size:.77rem;background:#0b111d;position:sticky;top:0;z-index:1}
+    tbody tr:nth-child(odd){background:#0d1117}tbody tr:nth-child(even){background:#0a0e18}.empty{color:var(--muted);text-align:center;padding:16px;border:1px dashed rgba(100,116,139,.4);border-radius:12px;background:rgba(11,17,29,.35)}
+    .modal-overlay{position:fixed;inset:0;background:rgba(5,8,14,.72);backdrop-filter:blur(2px);display:grid;place-items:center;z-index:100;opacity:0;visibility:hidden;transition:opacity 200ms ease,visibility 200ms ease;padding:16px}.modal-overlay.open{opacity:1;visibility:visible}
+    .modal{width:min(720px,100%);max-height:min(86vh,900px);overflow:auto;border-radius:18px;border:1px solid var(--border);box-shadow:var(--shadow-strong);background:#0b111d;transform:scale(.96);opacity:0;transition:transform 200ms ease,opacity 200ms ease}.modal-overlay.open .modal{transform:scale(1);opacity:1}
+    .modal-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:10px;align-items:center;position:sticky;top:0;background:#0b111d;z-index:1}.modal-title{margin:0;font-size:1.02rem;font-weight:800}.modal-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{color:#9fb0c8;font-size:.8rem;font-weight:600;letter-spacing:.02em}
+    .check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:2px}.checkbox{display:inline-flex;align-items:center;gap:8px;padding:8px;border-radius:10px;border:1px solid rgba(100,116,139,.35);background:rgba(100,116,139,.1);font-size:.86rem;color:#d1d9e5}
+    .inline-list{display:flex;flex-direction:column;gap:8px}.line-item{display:grid;grid-template-columns:1fr 128px 96px 32px;gap:8px;align-items:center}.line-item.vehicle{grid-template-columns:1fr 32px}
+    .error{color:#fca5a5;font-size:.85rem;background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.35);padding:9px 10px;border-radius:10px;display:none}.error.show{display:block}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:2px}
+    @media (max-width:1024px){.filters{grid-template-columns:1fr 1fr}.count{text-align:left;padding-right:0}.grid-members,.vehicle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vehicle-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:767px){.topbar-inner,.container{padding-left:14px;padding-right:14px}.clock{font-size:.82rem}.topbar-right{gap:8px}.tabs{width:100%;justify-content:space-between}.tab-btn{flex:1}.filters,.grid-members,.vehicle-grid,.vehicle-summary,.form-grid,.check-grid,.line-item,.line-item.vehicle{grid-template-columns:1fr}.modal-overlay{padding:0}.modal{width:100%;max-height:100vh;height:100vh;border-radius:0}.modal-actions{position:sticky;bottom:0;background:#0b111d;padding-top:8px}table{min-width:620px}}
+  </style>
 </head>
 <body>
-
-<header class="topbar">
-  <div class="topbar-left">
-    <a href="index.html" class="logo">
-      <img src="assets/logo-samu96.png" alt="Logo SAMU 96" class="logo-img">
-      <span class="logo-name"><span>96</span> · SUPPORT</span>
-    </a>
-  </div>
-  <nav class="topbar-nav"></nav>
-  <div class="topbar-right">
-    <span class="topbar-clock"></span>
-    <button class="hamburger">☰</button>
-  </div>
-</header>
-
-<div class="layout">
-  <aside class="sidebar"></aside>
-  <main class="main">
-
-    <div class="page-header">
-      <div class="breadcrumb">/ <span>INTRANET</span></div>
-      <h1 class="page-title">Intranet <span>SAMU 96</span></h1>
-      <p class="page-subtitle">Annonces internes, organigramme, règlement et informations de connexion opérationnelles.</p>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">96 · SAMU</div>
+      <div class="topbar-right">
+        <div id="clock" class="clock">--:--:--</div>
+        <div id="authArea" class="auth-wrap"></div>
+      </div>
     </div>
+  </header>
 
-    <section id="annonces" style="scroll-margin-top: 84px;">
-      <div class="section-title">Annonces / News internes</div>
-      <div class="panel">
-        <div class="panel-header">📌 Tableau d'affichage opérationnel</div>
-        <div class="panel-body">
-          <ul class="doc-list">
-            <li class="doc-item">
-              <span class="badge badge-dim">[DATE]</span>
-              <div style="flex:1;">
-                <div class="doc-name">Ouverture du portail support SAMU 96</div>
-                <div class="text-dim">Le portail support est désormais en ligne. Tous les membres sont invités à consulter les sections formations, spécialités et procédures.</div>
-                <div class="mono text-dim" style="margin-top:6px;">Auteur : Dr. Marc-Aurèle Vésale — Chef de service</div>
-              </div>
-            </li>
-            <li class="doc-item">
-              <span class="badge badge-dim">[DATE]</span>
-              <div style="flex:1;">
-                <div class="doc-name">Aucune annonce — à venir</div>
-                <div class="text-dim">Contenu à renseigner.</div>
-                <div class="mono text-dim" style="margin-top:6px;">Auteur : —</div>
-              </div>
-            </li>
-            <li class="doc-item" style="margin-bottom:0;">
-              <span class="badge badge-dim">[DATE]</span>
-              <div style="flex:1;">
-                <div class="doc-name">Aucune annonce — à venir</div>
-                <div class="text-dim">Contenu à renseigner.</div>
-                <div class="mono text-dim" style="margin-top:6px;">Auteur : —</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+  <main class="container">
+    <nav class="tabs" aria-label="Navigation principale">
+      <button type="button" class="tab-btn active" data-tab="personnel">👥 Gestion du Personnel</button>
+      <button type="button" class="tab-btn" data-tab="vehicules">🚑 Gestion des Véhicules</button>
+    </nav>
 
-    <section id="equipe" style="scroll-margin-top: 84px; margin-top: 28px;">
-      <div class="section-title">Équipe SAMU 96 — Organigramme &amp; Contacts</div>
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-meta" style="margin-top:0; padding-top:0; border-top:none; margin-bottom:10px;">
-            <span class="card-tag" style="background:#003087; color:#fff; border-color:#003087;">CHEF DE SERVICE</span>
-          </div>
-          <div class="card-title">Dr. Marc-Aurèle Vésale</div>
-          <div class="card-desc"><strong>Rôle :</strong> Chef de service SAMU 96</div>
-          <div class="card-desc" style="margin-top:8px;"><strong>Responsabilités :</strong> Direction opérationnelle, validation protocoles, gestion des effectifs</div>
-          <div class="card-desc" style="margin-top:8px;"><strong>Discord :</strong> [à renseigner]</div>
-          <div class="card-meta">
-            <span class="topbar-status" style="padding:3px 10px;"><span class="status-dot"></span>ACTIF</span>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-meta" style="margin-top:0; padding-top:0; border-top:none; margin-bottom:10px;">
-            <span class="badge badge-yellow" style="font-size:10px;">ADJOINT</span>
-          </div>
-          <div class="card-title">Dr. Jeremie Piffeteau</div>
-          <div class="card-desc"><strong>Rôle :</strong> Adjoint au chef de service</div>
-          <div class="card-desc" style="margin-top:8px;"><strong>Responsabilités :</strong> Régulation médicale, supervision formations, remplaçant chef de service</div>
-          <div class="card-desc" style="margin-top:8px;"><strong>Discord :</strong> [à renseigner]</div>
-          <div class="card-meta">
-            <span class="topbar-status" style="padding:3px 10px;"><span class="status-dot"></span>ACTIF</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-title">Postes à pourvoir</div>
-      <ul class="doc-list">
-        <li class="doc-item">
-          <span class="badge badge-yellow">RECRUTEMENT OUVERT</span>
-          <span class="doc-name">Médecin régulateur</span>
-        </li>
-        <li class="doc-item">
-          <span class="badge badge-yellow">RECRUTEMENT OUVERT</span>
-          <span class="doc-name">IDE SMUR</span>
-        </li>
-        <li class="doc-item" style="margin-bottom:0;">
-          <span class="badge badge-yellow">RECRUTEMENT OUVERT</span>
-          <span class="doc-name">Ambulancier</span>
-        </li>
-      </ul>
-    </section>
-
-    <section id="reglement" style="scroll-margin-top: 84px; margin-top: 28px;">
-      <div class="section-title">Règlement intérieur</div>
-      <div class="panel">
-        <div class="panel-header">SAMU 96 — Règlement Intérieur</div>
-        <div class="panel-body">
-          <p class="mono text-dim" style="margin-bottom:6px;">Approuvé par : Dr. Marc-Aurèle Vésale</p>
-          <p class="mono text-dim" style="margin-bottom:18px;">Version 1.0 — 2025</p>
-
-          <div class="section-title">Article 1 — Valeurs et esprit du SAMU 96</div>
-          <p style="margin-bottom:16px;">Le SAMU 96 repose sur un esprit RP médical sérieux, une immersion crédible, et une cohésion d'équipe constante. Chaque membre agit avec respect, professionnalisme et bienveillance afin de garantir une qualité de prise en charge élevée. Le respect mutuel est une base non négociable de notre fonctionnement collectif. Le dialogue est toujours privilégié avant toute mesure disciplinaire.</p>
-
-          <div class="section-title">Article 2 — Hiérarchie</div>
-          <p style="margin-bottom:16px;">L'ordre hiérarchique est défini comme suit : Chef de service → Adjoint → Médecins → IDE/IADE → Ambulanciers. En intervention, les décisions du chef de service et de l'adjoint sont à respecter sans discussion afin d'assurer la sécurité et l'efficacité opérationnelle. Hors intervention, tout membre peut exprimer un désaccord via Discord de manière respectueuse et constructive.</p>
-
-          <div class="section-title">Article 3 — Tenue et équipement</div>
-          <p style="margin-bottom:16px;">La tenue réglementaire SAMU est obligatoire sur toute intervention (uniforme configuré dans l'arsenal). L'équipement ACE+KAT complet doit être vérifié avant chaque départ. Aucune intervention n'est autorisée sans kit médical complet. Les interventions se font uniquement avec un véhicule SAMU ; l'usage d'un véhicule personnel est interdit, sauf autorisation explicite du chef de service.</p>
-
-          <div class="section-title">Article 4 — Communication radio</div>
-          <p style="margin-bottom:16px;">Toute communication en intervention passe par la radio. Le format obligatoire est : indicatif + message + « terminé ». Exemple : « SAMU 96-1 de SAMU Régulation, départ pour intervention rue des Lilas, terminé. » Les communications hors rôle (OOC) sont interdites sur les fréquences opérationnelles. Un salon Discord vocal dédié est utilisé hors intervention.</p>
-
-          <div class="section-title">Article 5 — Règles opérationnelles</div>
-          <p style="margin-bottom:16px;">Aucune intervention n'est engagée sans bilan radio au régulateur. Les protocoles ACE+KAT sont obligatoires : aucune improvisation n'est acceptée. Les niveaux de priorité P0 à P4 doivent être appliqués strictement. Chaque rôle respecte son champ de compétences : un ambulancier ne réalise pas d'IOT, un IDE administre uniquement sur prescription médicale ou protocole de soins infirmiers SMUR validé. En cas de doute sur un geste, il est obligatoire de demander validation au médecin de l'équipe ou au régulateur avant d'agir.</p>
-
-          <div class="section-title">Article 6 — Présence et astreintes</div>
-          <p style="margin-bottom:16px;">Une présence minimale d'une session par semaine est souhaitée pour maintenir la cohésion et la continuité du service. Toute absence prolongée (supérieure à 2 semaines) doit être signalée sur Discord. Les astreintes de régulation sont planifiées à l'avance ; en cas d'impossibilité, l'adjoint doit être prévenu au minimum 24 heures avant.</p>
-
-          <div class="section-title">Article 7 — Sanctions</div>
-          <p>Le cadre disciplinaire est progressif et appliqué avec souplesse, dans un esprit de dialogue avant tout. L'échelle est la suivante : 1) discussion privée sur Discord (rappel à l'ordre), 2) avertissement oral consigné, 3) avertissement écrit (2 maximum), 4) rétrogradation de grade temporaire, 5) exclusion temporaire (durée définie), 6) exclusion définitive pour fautes graves uniquement (RDM, toxicité envers l'équipe, triche répétée). Aucune sanction n'est prononcée sans échange préalable avec le membre concerné.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="liens" style="scroll-margin-top: 84px; margin-top: 28px;">
-      <div class="section-title">Liens &amp; Connexion</div>
-      <div class="grid-2">
-        <div class="card">
-          <span class="card-icon">💬</span>
-          <div class="card-title">Serveur Discord SAMU 96</div>
-          <div class="card-desc">Rejoins le Discord officiel pour les annonces, la coordination et les debriefs.</div>
-          <div class="card-meta">
-            <a href="https://discord.gg/QYfqFNSYcf" target="_blank" class="sidebar-link active" style="margin:0;">Rejoindre le Discord</a>
-          </div>
-        </div>
-        <div class="card">
-          <span class="card-icon">🩺</span>
-          <div class="card-title">SFMU</div>
-          <div class="card-desc">Références et recommandations de médecine d'urgence.</div>
-          <div class="card-meta">
-            <a href="https://www.sfmu.org" target="_blank" class="sidebar-link active" style="margin:0;">Ouvrir SFMU</a>
-          </div>
-        </div>
-        <div class="card">
-          <span class="card-icon">🎮</span>
-          <div class="card-title">Serveur Arma 3</div>
-          <div class="card-desc">IP et port de connexion au serveur de jeu. Vérifiez le launcher pour les mods requis.</div>
-          <div class="card-meta">
-            <span class="badge badge-yellow">IP — DISPONIBLE PROCHAINEMENT</span>
-            <span class="card-count text-dim">En attente de configuration serveur</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="historique" style="scroll-margin-top: 84px; margin-top: 28px;">
-      <div class="section-title">Historique interventions</div>
-      <div class="alert alert-yellow">
-        <strong>Journal d'intervention</strong>
-        Aucune intervention enregistrée pour le moment. Les interventions notables seront consignées ici par le chef de service.
-      </div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Type d'intervention</th>
-            <th>Équipe engagée</th>
-            <th>Résumé</th>
-            <th>Niveau P</th>
-            <th>Observations</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="6" class="text-dim" style="text-align:center;">Aucune donnée pour le moment.</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
+    <section id="panelPersonnel" class="tab-panel active"></section>
+    <section id="panelVehicules" class="tab-panel"></section>
   </main>
-</div>
 
-<footer class="footer">
-  <span>SAMU 96 · Portail Support · Usage interne uniquement</span>
-  <span class="topbar-clock"></span>
-</footer>
-
-<script src="nav.js"></script>
-<script src="main.js"></script>
-<script>
-  renderNav('intranet.html');
-
-  const intranetSidebar = document.querySelector('.sidebar');
-  if (intranetSidebar) {
-    intranetSidebar.insertAdjacentHTML('beforeend', `
-      <div class="sidebar-section">
-        <div class="sidebar-label">Intranet</div>
-        <a href="#annonces" class="sidebar-link"><span class="icon">📌</span>Annonces</a>
-        <a href="#equipe" class="sidebar-link"><span class="icon">👥</span>Équipe</a>
-        <a href="#reglement" class="sidebar-link"><span class="icon">📘</span>Règlement</a>
-        <a href="#liens" class="sidebar-link"><span class="icon">🔗</span>Liens & Connexion</a>
-        <a href="#historique" class="sidebar-link"><span class="icon">🗂️</span>Historique</a>
+  <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <h2 id="modalTitle" class="modal-title"></h2>
+        <button type="button" class="btn ghost" data-action="close-modal">✕</button>
       </div>
-    `);
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
 
-    const anchorLinks = Array.from(intranetSidebar.querySelectorAll('a.sidebar-link[href^="#"]'));
-    const sections = anchorLinks
-      .map((link) => document.querySelector(link.getAttribute('href')))
-      .filter(Boolean);
+  <script>
+    // ==============================
+    // Données initiales
+    // ==============================
+    const DATA = {
+      membres: [
+        { id: 1, nom: 'Dr. Elias Morel', grade: 'Chef de service', role: 'Coordination médicale et supervision opérationnelle', discord: '@EliasMorel96', statut: 'actif', photo: '', competences: { regulation: true, smur: true, acls: true, trauma: true, 'pédiatrie': true }, formations: [{ nom: 'Régulation avancée', date: '2025-02-10', 'validé': true }, { nom: 'Trauma command', date: '2024-11-21', 'validé': true }, { nom: 'Pédiatrie critique', date: '2025-06-04', 'validé': false }] },
+        { id: 2, nom: 'Léa Garnier', grade: 'IDE SMUR', role: 'Référente soins infirmiers préhospitaliers', discord: '@LeaGarnier_IDE', statut: 'en_formation', photo: '', competences: { regulation: false, smur: true, acls: true, trauma: true, 'pédiatrie': false }, formations: [{ nom: 'ACLS Provider', date: '2024-09-15', 'validé': true }, { nom: 'SMUR tactique', date: '2025-03-19', 'validé': true }, { nom: 'Pédiatrie préhospitalière', date: '2025-07-12', 'validé': false }] },
+        { id: 3, nom: 'Noah Dervaux', grade: 'Ambulancier', role: 'Conduite VSAV et logistique embarquée', discord: '@NoahDrive96', statut: 'inactif', photo: '', competences: { regulation: false, smur: true, acls: false, trauma: true, 'pédiatrie': false }, formations: [{ nom: 'Conduite urgente', date: '2024-08-30', 'validé': true }, { nom: 'Bilan primaire RP', date: '2025-01-27', 'validé': true }, { nom: 'Trauma extraction', date: '2025-05-10', 'validé': false }] }
+      ],
+      vehicules: [
+        { id: 1, nom: 'SMUR 96-Alpha', type: 'SMUR', immatriculation: 'SMU-9601-FR', statut: 'disponible', equipements: ['Monitorage multiparamétrique', 'Respirateur', 'Kit ACLS', 'Pompe perfusion'] },
+        { id: 2, nom: 'VSAV 96-Bravo', type: 'VSAV', immatriculation: 'VSA-9634-FR', statut: 'en_intervention', equipements: ['Brancard', 'Oxygénothérapie', 'Sac trauma', 'Aspirateur de mucosités'] },
+        { id: 3, nom: 'VLM 96-Charlie', type: 'VLM', immatriculation: 'VLM-9688-FR', statut: 'hs', equipements: ['Radio longue portée', 'Défibrillateur', 'Sac médical léger'] }
+      ]
+    };
 
-    function setActiveAnchor() {
-      const probe = window.scrollY + 120;
-      let activeSection = sections[0];
+    // ==============================
+    // Constantes et état UI
+    // ==============================
+    const ADMIN_PASSWORD = 'samu96admin';
+    const GRADES = ['Chef de service', 'Adjoint', 'Médecin', 'IDE SMUR', 'Ambulancier'];
+    const VEH_TYPES = ['SMUR', 'VSAV', 'VLM', 'VLI'];
+    const MEMBER_STATUS = ['actif', 'inactif', 'en_formation'];
+    const VEH_STATUS = ['disponible', 'en_intervention', 'hs'];
+    const COMP_KEYS = [{ key: 'regulation', label: 'Régulation' }, { key: 'smur', label: 'SMUR' }, { key: 'acls', label: 'ACLS' }, { key: 'trauma', label: 'Trauma' }, { key: 'pédiatrie', label: 'Pédiatrie' }];
+    const state = { activeTab: 'personnel', isAdmin: false, filters: { search: '', grade: 'Tous' }, modal: { type: null, id: null } };
+    const $ = (sel) => document.querySelector(sel);
 
-      sections.forEach((section) => {
-        if (section.offsetTop <= probe) activeSection = section;
-      });
+    // ==============================
+    // Helpers
+    // ==============================
+    function escapeHtml(value = '') { return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+    function initials(nom) { return nom.split(' ').filter(Boolean).slice(0, 2).map((p) => p[0].toUpperCase()).join(''); }
+    function gradeColor(grade) { return ({ 'Chef de service': '#003087', 'Adjoint': '#6366f1', 'Médecin': '#0ea5e9', 'IDE SMUR': '#22c55e', 'Ambulancier': '#64748b' }[grade] || '#64748b'); }
+    function statusLabel(statut) { return ({ actif: 'ACTIF', inactif: 'INACTIF', en_formation: 'EN FORMATION', disponible: 'DISPONIBLE', en_intervention: 'EN INTERVENTION', hs: 'HORS SERVICE' }[statut] || statut); }
+    function statusBadge(statut) { return `<span class="status ${statut}"><span class="dot"></span>${statusLabel(statut)}</span>`; }
+    function todayClock() { const now = new Date(); return `${now.toLocaleDateString('fr-FR', { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' })} · ${now.toLocaleTimeString('fr-FR', { hour12: false })}`; }
 
-      anchorLinks.forEach((link) => {
-        const isActive = link.getAttribute('href') === `#${activeSection.id}`;
-        link.classList.toggle('active', isActive);
-      });
+    // ==============================
+    // Topbar, auth et onglets
+    // ==============================
+    function renderAuth() { $('#authArea').innerHTML = state.isAdmin ? '<span class="admin-badge">🔑 ADMIN</span><button type="button" class="btn" data-action="logout">Déconnexion</button>' : '<button type="button" class="btn" data-action="open-auth">🔓 Connexion</button>'; document.body.classList.toggle('admin-mode', state.isAdmin); }
+    function renderTabs() { document.querySelectorAll('.tab-btn').forEach((btn) => btn.classList.toggle('active', btn.dataset.tab === state.activeTab)); $('#panelPersonnel').classList.toggle('active', state.activeTab === 'personnel'); $('#panelVehicules').classList.toggle('active', state.activeTab === 'vehicules'); }
+    function updateClock() { $('#clock').textContent = todayClock(); }
+
+    // ==============================
+    // Rendu Personnel
+    // ==============================
+    function filteredMembers() { const search = state.filters.search.toLowerCase().trim(); return DATA.membres.filter((m) => (!search || m.nom.toLowerCase().includes(search)) && (state.filters.grade === 'Tous' || m.grade === state.filters.grade)); }
+    function renderPersonnel() {
+      const members = filteredMembers();
+      $('#panelPersonnel').innerHTML = `<div class="section"><h2 class="section-title">Gestion du Personnel</h2><div class="filters"><input id="searchMember" class="input" type="text" placeholder="Rechercher par nom..." value="${escapeHtml(state.filters.search)}" /><select id="gradeFilter" class="select"><option ${state.filters.grade === 'Tous' ? 'selected' : ''}>Tous</option>${GRADES.map((g) => `<option ${state.filters.grade === g ? 'selected' : ''}>${escapeHtml(g)}</option>`).join('')}</select><div class="count">${members.length} membre(s) affiché(s)</div><button type="button" class="btn primary admin-only" data-action="add-member">+ Ajouter un membre</button></div><div class="separator"></div><div class="grid-members">${members.map((m) => { const comps = COMP_KEYS.map((c) => `<span class="chip ${m.competences[c.key] ? 'on' : ''}">${c.label}</span>`).join(''); const forms = m.formations.map((f, i) => `<div class="formation-item"><span>${f['validé'] ? '✅' : '⬜'} ${escapeHtml(f.nom)}</span><small>${f['validé'] && f.date ? escapeHtml(f.date) : '—'}</small><button type="button" class="btn ghost admin-only" data-action="toggle-formation" data-id="${m.id}" data-form-index="${i}">${f['validé'] ? 'Dévalider' : 'Valider'}</button></div>`).join(''); return `<article class="card member-card"><div class="member-top"><div class="avatar">${m.photo ? `<img src="${escapeHtml(m.photo)}" alt="${escapeHtml(m.nom)}">` : escapeHtml(initials(m.nom))}</div><div><h3 class="name">${escapeHtml(m.nom)}</h3><span class="grade-badge" style="background:${gradeColor(m.grade)}">${escapeHtml(m.grade)}</span><div class="meta" style="margin-top:6px;">${escapeHtml(m.role)}</div><div class="meta">Discord : ${escapeHtml(m.discord)}</div></div></div>${statusBadge(m.statut)}<div class="separator"></div><p class="sub-title">Compétences</p><div class="chips">${comps}</div><p class="sub-title" style="margin-top:4px;">Formations validées</p><div class="formations-list">${forms}</div><div class="card-actions"><button type="button" class="btn admin-only" data-action="edit-member" data-id="${m.id}">✏️ Modifier</button><button type="button" class="btn danger admin-only" data-action="delete-member" data-id="${m.id}">🗑️ Supprimer</button></div></article>`; }).join('')}</div>${members.length ? '' : '<div class="empty">Aucun membre ne correspond aux filtres.</div>'}</div>`;
     }
 
-    window.addEventListener('scroll', setActiveAnchor, { passive: true });
-    window.addEventListener('resize', setActiveAnchor);
-    setActiveAnchor();
-  }
-</script>
+    // ==============================
+    // Rendu Véhicules
+    // ==============================
+    function renderVehicules() {
+      const total = DATA.vehicules.length, dispo = DATA.vehicules.filter((v) => v.statut === 'disponible').length, hs = DATA.vehicules.filter((v) => v.statut === 'hs').length;
+      $('#panelVehicules').innerHTML = `<div class="section"><h2 class="section-title">Gestion des Véhicules</h2><div class="vehicle-summary"><div class="mini-card"><div class="label">Total véhicules</div><div class="value">${total}</div></div><div class="mini-card"><div class="label">Disponibles</div><div class="value" style="color:var(--ok)">${dispo}</div></div><div class="mini-card"><div class="label">Hors service</div><div class="value" style="color:var(--danger)">${hs}</div></div><div class="mini-card" style="display:flex;align-items:center;justify-content:center;"><button type="button" class="btn primary admin-only" data-action="add-vehicle">+ Ajouter un véhicule</button></div></div><div class="separator"></div><div class="vehicle-grid">${DATA.vehicules.map((v) => `<article class="card vehicle-card"><div class="vehicle-head ${v.statut}"><h3 class="veh-name">🚑 ${escapeHtml(v.nom)}</h3><span class="veh-type">${escapeHtml(v.type)}</span></div><div class="vehicle-body"><div class="plate">${escapeHtml(v.immatriculation)}</div>${statusBadge(v.statut)}<div class="separator" style="margin:2px 0;"></div><p class="sub-title">Équipements embarqués</p><div class="chips">${v.equipements.map((e) => `<span class="chip">${escapeHtml(e)}</span>`).join('')}</div><div class="card-actions"><button type="button" class="btn admin-only" data-action="edit-vehicle" data-id="${v.id}">✏️ Modifier</button><button type="button" class="btn danger admin-only" data-action="delete-vehicle" data-id="${v.id}">🗑️ Supprimer</button></div></div></article>`).join('')}</div><div class="separator"></div><div class="table-wrap"><table><thead><tr><th>Nom</th><th>Type</th><th>Immatriculation</th><th>Statut</th><th>Nb équipements</th></tr></thead><tbody>${DATA.vehicules.map((v) => `<tr><td>${escapeHtml(v.nom)}</td><td>${escapeHtml(v.type)}</td><td>${escapeHtml(v.immatriculation)}</td><td><span style="font-weight:700;color:${v.statut === 'disponible' ? '#22c55e' : v.statut === 'en_intervention' ? '#0ea5e9' : '#ef4444'}">${statusLabel(v.statut)}</span></td><td>${v.equipements.length}</td></tr>`).join('')}</tbody></table></div></div>`;
+    }
+
+    // ==============================
+    // Modales
+    // ==============================
+    function formationRowHtml(form = { nom: '', date: '', 'validé': false }, idx = Date.now()) { return `<div class="line-item" data-row="formation" data-idx="${idx}"><input class="input" data-f="nom" placeholder="Nom formation" value="${escapeHtml(form.nom || '')}"><input class="input" data-f="date" type="date" value="${escapeHtml(form.date || '')}"><label class="checkbox" style="justify-content:center;"><input type="checkbox" data-f="valide" ${form['validé'] ? 'checked' : ''}> Validé</label><button type="button" class="btn ghost" data-action="remove-row">✕</button></div>`; }
+    function equipmentRowHtml(value = '') { return `<div class="line-item vehicle" data-row="equip"><input class="input" data-equip placeholder="Équipement" value="${escapeHtml(value)}"><button type="button" class="btn ghost" data-action="remove-row">✕</button></div>`; }
+    function openModal(type, id = null) {
+      state.modal = { type, id }; const overlay = $('#modalOverlay'); const body = $('#modalBody'); const title = $('#modalTitle');
+      if (type === 'auth') { title.textContent = 'Accès administration'; body.innerHTML = '<div class="field full"><label for="adminPassword">Mot de passe</label><input id="adminPassword" type="password" class="input" placeholder="Mot de passe" /></div><div id="authError" class="error">Mot de passe incorrect.</div><div class="modal-actions"><button type="button" class="btn ghost" data-action="close-modal">Annuler</button><button type="button" class="btn primary" data-action="validate-auth">Valider</button></div>'; }
+      if (type === 'member') { const m = id ? DATA.membres.find((x) => x.id === id) : null; const formations = m ? m.formations : [{ nom: 'ACLS Provider', date: '2025-01-01', 'validé': false }, { nom: 'Trauma command', date: '2025-01-01', 'validé': false }]; title.textContent = id ? 'Modifier un membre' : 'Ajouter un membre'; body.innerHTML = `<div class="form-grid"><div class="field"><label for="mNom">Nom</label><input id="mNom" class="input" value="${escapeHtml(m?.nom || '')}" /></div><div class="field"><label for="mGrade">Grade</label><select id="mGrade" class="select">${GRADES.map((g) => `<option ${m?.grade === g ? 'selected' : ''}>${escapeHtml(g)}</option>`).join('')}</select></div><div class="field full"><label for="mRole">Rôle</label><input id="mRole" class="input" value="${escapeHtml(m?.role || '')}" /></div><div class="field"><label for="mDiscord">Discord</label><input id="mDiscord" class="input" value="${escapeHtml(m?.discord || '')}" /></div><div class="field"><label for="mStatut">Statut</label><select id="mStatut" class="select">${MEMBER_STATUS.map((s) => `<option value="${s}" ${m?.statut === s ? 'selected' : ''}>${statusLabel(s)}</option>`).join('')}</select></div><div class="field full"><label>Compétences</label><div class="check-grid">${COMP_KEYS.map((c) => `<label class="checkbox"><input type="checkbox" data-comp="${c.key}" ${m?.competences?.[c.key] ? 'checked' : ''}>${c.label}</label>`).join('')}</div></div><div class="field full"><label>Formations (toggle validé + date)</label><div id="formationRows" class="inline-list">${formations.map((f, i) => formationRowHtml(f, i)).join('')}</div><button type="button" class="btn" data-action="add-formation-row">+ Ajouter formation</button></div></div><div class="modal-actions"><button type="button" class="btn ghost" data-action="close-modal">Annuler</button><button type="button" class="btn primary" data-action="save-member">Enregistrer</button></div>`; }
+      if (type === 'vehicle') { const v = id ? DATA.vehicules.find((x) => x.id === id) : null; const equips = v ? v.equipements : ['Défibrillateur']; title.textContent = id ? 'Modifier un véhicule' : 'Ajouter un véhicule'; body.innerHTML = `<div class="form-grid"><div class="field"><label for="vNom">Nom</label><input id="vNom" class="input" value="${escapeHtml(v?.nom || '')}" /></div><div class="field"><label for="vType">Type</label><select id="vType" class="select">${VEH_TYPES.map((t) => `<option ${v?.type === t ? 'selected' : ''}>${t}</option>`).join('')}</select></div><div class="field"><label for="vImmat">Immatriculation</label><input id="vImmat" class="input" value="${escapeHtml(v?.immatriculation || '')}" /></div><div class="field"><label for="vStatut">Statut</label><select id="vStatut" class="select">${VEH_STATUS.map((s) => `<option value="${s}" ${v?.statut === s ? 'selected' : ''}>${statusLabel(s)}</option>`).join('')}</select></div><div class="field full"><label>Équipements</label><div id="equipRows" class="inline-list">${equips.map((e) => equipmentRowHtml(e)).join('')}</div><button type="button" class="btn" data-action="add-equipment-row">+ Ajouter équipement</button></div></div><div class="modal-actions"><button type="button" class="btn ghost" data-action="close-modal">Annuler</button><button type="button" class="btn primary" data-action="save-vehicle">Enregistrer</button></div>`; }
+      overlay.classList.add('open'); overlay.setAttribute('aria-hidden', 'false'); const firstInput = overlay.querySelector('input, select, button'); if (firstInput) firstInput.focus();
+    }
+    function closeModal() { const overlay = $('#modalOverlay'); overlay.classList.remove('open'); overlay.setAttribute('aria-hidden', 'true'); state.modal = { type: null, id: null }; }
+
+    // ==============================
+    // Actions CRUD
+    // ==============================
+    function saveMemberFromModal() {
+      const nom = $('#mNom').value.trim(), grade = $('#mGrade').value, role = $('#mRole').value.trim(), discord = $('#mDiscord').value.trim(), statut = $('#mStatut').value; if (!nom || !role || !discord) return;
+      const competences = {}; COMP_KEYS.forEach((c) => { competences[c.key] = Boolean(document.querySelector(`[data-comp="${c.key}"]`)?.checked); });
+      const formations = [...document.querySelectorAll('[data-row="formation"]')].map((row) => ({ nom: row.querySelector('[data-f="nom"]')?.value.trim() || '', date: row.querySelector('[data-f="date"]')?.value || '', 'validé': Boolean(row.querySelector('[data-f="valide"]')?.checked) })).filter((f) => f.nom);
+      if (state.modal.id) { const idx = DATA.membres.findIndex((m) => m.id === state.modal.id); if (idx >= 0) DATA.membres[idx] = { ...DATA.membres[idx], nom, grade, role, discord, statut, competences, formations }; }
+      else DATA.membres.push({ id: Math.max(0, ...DATA.membres.map((m) => m.id)) + 1, nom, grade, role, discord, statut, photo: '', competences, formations });
+      renderPersonnel(); closeModal();
+    }
+    function saveVehicleFromModal() {
+      const nom = $('#vNom').value.trim(), type = $('#vType').value, immatriculation = $('#vImmat').value.trim(), statut = $('#vStatut').value; if (!nom || !immatriculation) return;
+      const equipements = [...document.querySelectorAll('[data-row="equip"] [data-equip]')].map((input) => input.value.trim()).filter(Boolean);
+      if (state.modal.id) { const idx = DATA.vehicules.findIndex((v) => v.id === state.modal.id); if (idx >= 0) DATA.vehicules[idx] = { ...DATA.vehicules[idx], nom, type, immatriculation, statut, equipements }; }
+      else DATA.vehicules.push({ id: Math.max(0, ...DATA.vehicules.map((v) => v.id)) + 1, nom, type, immatriculation, statut, equipements });
+      renderVehicules(); closeModal();
+    }
+
+    // ==============================
+    // Events globaux
+    // ==============================
+    document.addEventListener('input', (event) => { if (event.target.id === 'searchMember') { state.filters.search = event.target.value; renderPersonnel(); } });
+    document.addEventListener('change', (event) => { if (event.target.id === 'gradeFilter') { state.filters.grade = event.target.value; renderPersonnel(); } });
+    document.addEventListener('click', (event) => {
+      const target = event.target.closest('[data-action], [data-tab]'); if (!target) return;
+      if (target.dataset.tab) { state.activeTab = target.dataset.tab; renderTabs(); return; }
+      const action = target.dataset.action;
+      if (action === 'open-auth') return openModal('auth');
+      if (action === 'logout') { state.isAdmin = false; renderAuth(); renderPersonnel(); renderVehicules(); return; }
+      if (action === 'validate-auth') { const pass = $('#adminPassword')?.value || ''; if (pass === ADMIN_PASSWORD) { state.isAdmin = true; renderAuth(); renderPersonnel(); renderVehicules(); closeModal(); } else $('#authError')?.classList.add('show'); return; }
+      if (action === 'close-modal') return closeModal();
+      if (!state.isAdmin && ['add-member', 'edit-member', 'delete-member', 'add-vehicle', 'edit-vehicle', 'delete-vehicle', 'toggle-formation', 'save-member', 'save-vehicle'].includes(action)) return;
+      if (action === 'add-member') return openModal('member');
+      if (action === 'edit-member') return openModal('member', Number(target.dataset.id));
+      if (action === 'delete-member') { const id = Number(target.dataset.id); if (window.confirm('Supprimer ce membre ?')) { DATA.membres = DATA.membres.filter((m) => m.id !== id); renderPersonnel(); } return; }
+      if (action === 'toggle-formation') { const id = Number(target.dataset.id), idx = Number(target.dataset.formIndex), member = DATA.membres.find((m) => m.id === id); if (!member || !member.formations[idx]) return; member.formations[idx]['validé'] = !member.formations[idx]['validé']; if (!member.formations[idx]['validé']) member.formations[idx].date = ''; if (member.formations[idx]['validé'] && !member.formations[idx].date) member.formations[idx].date = new Date().toISOString().slice(0, 10); renderPersonnel(); return; }
+      if (action === 'save-member') return saveMemberFromModal();
+      if (action === 'add-vehicle') return openModal('vehicle');
+      if (action === 'edit-vehicle') return openModal('vehicle', Number(target.dataset.id));
+      if (action === 'delete-vehicle') { const id = Number(target.dataset.id); if (window.confirm('Supprimer ce véhicule ?')) { DATA.vehicules = DATA.vehicules.filter((v) => v.id !== id); renderVehicules(); } return; }
+      if (action === 'save-vehicle') return saveVehicleFromModal();
+      if (action === 'add-formation-row') { const wrap = $('#formationRows'); if (wrap) wrap.insertAdjacentHTML('beforeend', formationRowHtml({ nom: '', date: '', 'validé': false }, Date.now())); return; }
+      if (action === 'add-equipment-row') { const wrap = $('#equipRows'); if (wrap) wrap.insertAdjacentHTML('beforeend', equipmentRowHtml('')); return; }
+      if (action === 'remove-row') { const row = target.closest('[data-row]'); if (row) row.remove(); }
+    });
+    $('#modalOverlay').addEventListener('click', (event) => { if (event.target.id === 'modalOverlay') closeModal(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && $('#modalOverlay').classList.contains('open')) closeModal(); });
+
+    // ==============================
+    // Initialisation
+    // ==============================
+    function boot() { updateClock(); setInterval(updateClock, 1000); renderAuth(); renderTabs(); renderPersonnel(); renderVehicules(); }
+    boot();
+  </script>
 </body>
 </html>
