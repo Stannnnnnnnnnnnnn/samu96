@@ -45,11 +45,69 @@
       padding:14px 18px; border-radius:0 4px 4px 0; margin-bottom:16px; font-size:13px; }
     .warn-box { background:rgba(234,179,8,0.08); border-left:3px solid #eab308;
       padding:14px 18px; border-radius:0 4px 4px 0; margin-bottom:16px; font-size:13px; }
+
+    /* Barre de progression scénario */
+    .scenario-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      background: var(--bg3, #f4f6f9);
+      border: 1px solid var(--border-dim, #ddd);
+      border-radius: 4px;
+      font-family: var(--mono, monospace);
+      font-size: 11px;
+      color: var(--text-dim, #666);
+    }
+    .scenario-progress-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--border-dim, #e0e0e0);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .scenario-progress-fill {
+      height: 100%;
+      background: var(--primary, #003087);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+    .scenario-progress-label {
+      white-space: nowrap;
+      font-weight: 700;
+      color: var(--primary, #003087);
+      min-width: 60px;
+      text-align: right;
+    }
+
+    /* Choix scénario RP — réécriture complète */
+    .scenario-choice-btn {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border-dim, #ddd);
+      border-radius: 4px;
+      background: var(--bg3, #f8f9fa);
+      cursor: pointer;
+      font-size: 0.84rem;
+      text-align: left;
+      font-family: inherit;
+      color: var(--text, #1a1a2e);
+      transition: border-color 0.15s, background 0.15s;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .scenario-choice-btn:hover {
+      border-color: var(--primary, #003087);
+      background: rgba(0, 48, 135, 0.04);
+    }
+    .scenario-choice-btn.selected {
+      border-color: var(--primary, #003087);
+      background: rgba(0, 48, 135, 0.07);
+    }
     .tree-box { background:var(--bg2,#f0f2f5); border:1px solid var(--border-dim,#ddd);
       border-radius:4px; padding:10px 16px; margin:4px 0; font-size:12px; font-family:var(--mono,monospace); }
     .tree-arrow { text-align:center; color:var(--primary,#003087); font-size:18px; margin:2px 0; }
-    .main,
-    .main * { color:#000 !important; }
   </style>
 </head>
 <body>
@@ -1037,6 +1095,7 @@
               const baseStates = scenarioData.reduce((acc, scenario) => {
                 acc[scenario.id] = {
                   stageIndex: 0,
+                  stepNum: 1,
                   errors: 0,
                   status: 'playing',
                   lastTone: null,
@@ -1070,6 +1129,7 @@
               function cloneBaseState() {
                 return {
                   stageIndex: 0,
+                  stepNum: 1,
                   errors: 0,
                   status: 'playing',
                   lastTone: null,
@@ -1086,6 +1146,109 @@
                 return 'en cours';
               }
 
+              const correctPositionPlan = {
+                1: [0, 2, 0, 1],
+                2: [1, 0, 2, 0],
+                3: [2, 1, 0, 2],
+                4: [0, 2, 1, 0],
+                5: [1, 0, 2, 1],
+                6: [2, 1, 0, 2]
+              };
+
+              const plausibleWrongLabels = [
+                'Transmettre un bilan incomplet à la régulation',
+                'Poser le badge IE avant d\'avoir les constantes',
+                'Débuter transport sans monitoring actif',
+                'Appeler le médecin avant de sécuriser les VAS',
+                'Préparer le Ferno avant de sécuriser le rachis',
+                'Oublier de noter l\'heure de pose du garrot',
+                'Défibriller sans annonce orale à l\'équipe',
+                'Confirmer ROSC sans réévaluation sur 30 secondes'
+              ];
+
+              function translateContext(text) {
+                return String(text)
+                  .replace(/reviving_score_needed/g, 'seuil ROSC')
+                  .replace(/reviving_score/g, 'activité cardiaque')
+                  .replace(/noflow_score/g, 'noflow')
+                  .replace(/life%/g, 'état général');
+              }
+
+              function translateLabelOrFeedback(text) {
+                return String(text)
+                  .replace(/reviving_score/g, 'activité cardiaque')
+                  .replace(/noflow_score/g, 'noflow')
+                  .replace(/life%/g, 'état général');
+              }
+
+              function translateVarItem(item) {
+                return String(item)
+                  .replace(/noflow_score\s*=\s*(\d+)/g, 'Lifepak · Noflow : $1')
+                  .replace(/noflow_score\s*[≈~]\s*(\d+)/g, 'Lifepak · Noflow : ~$1')
+                  .replace(/noflow_score\s+(\d+)/g, 'Lifepak · Noflow : $1')
+                  .replace(/reviving_score_needed\s*=\s*(\d+)/g, 'Lifepak · Seuil ROSC : $1')
+                  .replace(/reviving_score\s*=\s*(\d+)/g, 'Lifepak · Activité cardiaque : $1')
+                  .replace(/reviving_score\s+(\d+)/g, 'Lifepak · Activité cardiaque : $1')
+                  .replace(/life%\s*=\s*(\d+)/g, 'État général : $1%')
+                  .replace(/needed\s*=\s*(\d+)/g, 'Seuil ROSC : $1')
+                  .replace(/needed\s+(\d+)/g, 'Seuil ROSC : $1')
+                  .replace(/progression \+0\.5\/s/g, 'progression ralentie (O2 actif)')
+                  .replace(/progression \+1\/s/g, 'progression rapide (sans O2)');
+              }
+
+              function ensureThreeChoices(stage, seed) {
+                if (!stage.choices || stage.choices.length >= 3) return;
+                while (stage.choices.length < 3) {
+                  stage.choices.push({
+                    correct: false,
+                    text: plausibleWrongLabels[(seed + stage.choices.length) % plausibleWrongLabels.length],
+                    feedback: '❌ Décision plausible mais inadaptée au contexte immédiat. Reprendre la priorisation médicale.'
+                  });
+                }
+              }
+
+              function sanitizeWrongChoices(stage, seed) {
+                if (!stage.choices) return;
+                stage.choices.forEach((choice, idx) => {
+                  if (choice.correct) return;
+                  if (/attendre|sans rien faire|ne rien faire|rentrer chez elle sans aucune consigne/i.test(choice.text)) {
+                    choice.text = plausibleWrongLabels[(seed + idx) % plausibleWrongLabels.length];
+                  }
+                });
+              }
+
+              function reorderCorrectChoice(stage, targetPos) {
+                if (!stage.choices || !stage.choices.length) return;
+                const correctIndex = stage.choices.findIndex((choice) => Boolean(choice.correct));
+                if (correctIndex < 0) return;
+                const boundedTarget = Math.max(0, Math.min(targetPos, stage.choices.length - 1));
+                const correctChoice = stage.choices.splice(correctIndex, 1)[0];
+                stage.choices.splice(boundedTarget, 0, correctChoice);
+              }
+
+              function preprocessScenarios() {
+                scenarioData.forEach((scenario, sIdx) => {
+                  scenario.totalSteps = 4;
+                  scenario.stages.forEach((stage, stageIndex) => {
+                    stage.context = translateContext(stage.context);
+                    stage.vars = stage.vars.map((item) => translateVarItem(item));
+                    stage.choices.forEach((choice) => {
+                      choice.text = translateLabelOrFeedback(choice.text);
+                      choice.feedback = translateLabelOrFeedback(choice.feedback);
+                    });
+                    sanitizeWrongChoices(stage, sIdx + stageIndex);
+                    ensureThreeChoices(stage, sIdx + stageIndex);
+                  });
+
+                  const plan = correctPositionPlan[sIdx + 1] || [0, 1, 2, 0];
+                  scenario.stages.slice(0, 4).forEach((stage, i) => {
+                    reorderCorrectChoice(stage, plan[i]);
+                  });
+                });
+              }
+
+              preprocessScenarios();
+
               function renderScenarioTabs() {
                 tabsRoot.innerHTML = scenarioData.map((scenario) => {
                   const state = getState(scenario.id);
@@ -1099,7 +1262,7 @@
                       <div class="arma-scenario-summary">${escapeHtml(scenario.summary)}</div>
                       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
                         <span class="arma-mini-badge">erreurs ${state.errors}/4</span>
-                        <span class="arma-mini-badge">étape ${Math.min(state.stageIndex + 1, scenario.stages.length)}/${scenario.stages.length}</span>
+                        <span class="arma-mini-badge">étape ${Math.min(state.stepNum, scenario.totalSteps || 4)}/${scenario.totalSteps || 4}</span>
                       </div>
                     </button>
                   `;
@@ -1111,9 +1274,21 @@
                 const state = getState(activeScenarioId);
                 const stage = scenario.stages[state.stageIndex];
                 const historyEntry = state.history[0];
+                const totalSteps = scenario.totalSteps || 4;
+                const currentStep = Math.max(1, Math.min(state.stepNum, totalSteps));
+                const progressHtml = `
+                  <div class="scenario-progress">
+                    <span>ÉTAPE ${currentStep} / ${totalSteps}</span>
+                    <div class="scenario-progress-bar">
+                      <div class="scenario-progress-fill" style="width:${Math.round((currentStep / totalSteps) * 100)}%"></div>
+                    </div>
+                    <span class="scenario-progress-label" style="color:${state.errors > 0 ? '#b91c1c' : 'var(--text-dim,#888)'}">⚠ Erreurs : ${state.errors} / 4</span>
+                  </div>
+                `;
 
                 if (state.status === 'success') {
                   stageRoot.innerHTML = `
+                    ${progressHtml}
                     <div class="arma-feedback good">
                       <div class="arma-end-title">Transport réussi</div>
                       <div class="arma-end-text">${escapeHtml(scenario.successText)}</div>
@@ -1127,6 +1302,7 @@
 
                 if (state.status === 'dead' || state.status === 'failed') {
                   stageRoot.innerHTML = `
+                    ${progressHtml}
                     <div class="arma-feedback bad">
                       <div class="arma-end-title">Issue défavorable</div>
                       <div class="arma-end-text">${escapeHtml(scenario.deathText)}</div>
@@ -1160,8 +1336,9 @@
                       <h3 class="arma-stage-title">${escapeHtml(stage.label + stageTone)}</h3>
                       <div class="arma-stage-subtitle">Décision médicale à transmettre à l’IDE.</div>
                     </div>
-                    <div class="arma-progress">progression ${state.stageIndex + 1}/${scenario.stages.length}</div>
+                    <div class="arma-progress">progression ${currentStep}/${totalSteps}</div>
                   </div>
+                  ${progressHtml}
                   ${feedbackBlock}
                   <div class="warn-box"><strong>Context RP :</strong> ${escapeHtml(stage.context)}</div>
                   <div class="arma-vars">${stage.vars.map((item) => `<span class="arma-var">${escapeHtml(item)}</span>`).join('')}</div>
@@ -1169,7 +1346,7 @@
                   <div class="arma-choice-list">
                     ${stage.choices.map((choice, index) => `
                       <button class="arma-choice" data-action="choose" data-index="${index}">
-                        <span class="arma-choice-code">${escapeHtml(choice.code)}</span>
+                        <span class="arma-choice-code">${String.fromCharCode(65 + index)}</span>
                         <span class="arma-choice-text">${escapeHtml(choice.text)}</span>
                       </button>
                     `).join('')}
@@ -1235,7 +1412,7 @@
                 const correct = Boolean(choice.correct);
                 state.history.unshift({
                   stage: stage.label,
-                  choice: `${choice.code} — ${choice.text}`,
+                  choice: `${String.fromCharCode(65 + index)} — ${choice.text}`,
                   feedback: choice.feedback,
                   correct
                 });
@@ -1267,6 +1444,9 @@
                   return;
                 }
 
+                if (correct) {
+                  state.stepNum = Math.min(state.stepNum + 1, scenario.totalSteps || 4);
+                }
                 state.stageIndex += 1;
                 renderAll();
               }

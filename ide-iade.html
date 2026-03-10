@@ -51,8 +51,204 @@
       padding:14px 18px; border-radius:0 4px 4px 0; margin-bottom:16px; font-size:13px; }
     .warn-box { background:rgba(234,179,8,0.08); border-left:3px solid #eab308;
       padding:14px 18px; border-radius:0 4px 4px 0; margin-bottom:16px; font-size:13px; }
-    .main,
-    .main * { color:#000 !important; }
+    .tree-box {
+      background: var(--bg2, #f0f2f5);
+      border: 1px solid var(--border-dim, #ddd);
+      border-radius: 4px;
+      padding: 10px 16px;
+      margin: 4px 0;
+      font-size: 12px;
+      font-family: var(--mono, monospace);
+    }
+    .tree-arrow {
+      text-align: center;
+      color: var(--primary, #003087);
+      font-size: 18px;
+      margin: 2px 0;
+    }
+
+    /* Barre de progression scénario */
+    .scenario-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      background: var(--bg3, #f4f6f9);
+      border: 1px solid var(--border-dim, #ddd);
+      border-radius: 4px;
+      font-family: var(--mono, monospace);
+      font-size: 11px;
+      color: var(--text-dim, #666);
+    }
+    .scenario-progress-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--border-dim, #e0e0e0);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .scenario-progress-fill {
+      height: 100%;
+      background: var(--primary, #003087);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+    .scenario-progress-label {
+      white-space: nowrap;
+      font-weight: 700;
+      color: var(--primary, #003087);
+      min-width: 60px;
+      text-align: right;
+    }
+
+    /* Choix scénario RP — réécriture complète */
+    .scenario-choice-btn {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border-dim, #ddd);
+      border-radius: 4px;
+      background: var(--bg3, #f8f9fa);
+      cursor: pointer;
+      font-size: 0.84rem;
+      text-align: left;
+      font-family: inherit;
+      color: var(--text, #1a1a2e);
+      transition: border-color 0.15s, background 0.15s;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .scenario-choice-btn:hover {
+      border-color: var(--primary, #003087);
+      background: rgba(0, 48, 135, 0.04);
+    }
+    .scenario-choice-btn.selected {
+      border-color: var(--primary, #003087);
+      background: rgba(0, 48, 135, 0.07);
+    }
+    .briefing-card {
+      position:relative;
+      overflow:hidden;
+      margin-bottom:24px;
+      padding:24px;
+      border-radius:18px;
+      border:1px solid rgba(0,48,135,0.16);
+      background:linear-gradient(135deg, rgba(255,255,255,0.96), rgba(240,245,255,0.92));
+      box-shadow:0 18px 40px rgba(0,48,135,0.12);
+    }
+    .briefing-card::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top right, rgba(255,215,0,0.18), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(0,48,135,0.12), transparent 38%);
+      pointer-events:none;
+    }
+    .briefing-head,
+    .briefing-grid,
+    .briefing-note { position:relative; z-index:1; }
+    .briefing-head {
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    .briefing-kicker {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(0,48,135,0.08);
+      border:1px solid rgba(0,48,135,0.16);
+      font-family:var(--mono,monospace);
+      font-size:11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--primary,#003087);
+    }
+    .briefing-title {
+      margin:0 0 8px;
+      font-family:var(--head,sans-serif);
+      font-size:32px;
+      line-height:1;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:var(--text-bright,#1a1a2e);
+    }
+    .briefing-title span { color:var(--primary,#003087); }
+    .briefing-text {
+      max-width:720px;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--text-dim,#56627a);
+    }
+    .briefing-badge {
+      flex-shrink:0;
+      align-self:flex-start;
+      padding:10px 14px;
+      border-radius:14px;
+      background:#fff;
+      border:1px solid rgba(0,48,135,0.16);
+      box-shadow:0 10px 24px rgba(0,48,135,0.08);
+      font-family:var(--mono,monospace);
+      font-size:11px;
+      line-height:1.6;
+      text-transform:uppercase;
+      color:var(--primary,#003087);
+    }
+    .briefing-grid {
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:16px;
+      margin-bottom:16px;
+    }
+    .briefing-panel {
+      padding:18px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.86);
+      border:1px solid rgba(0,48,135,0.1);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+    .briefing-panel h3 {
+      margin:0 0 12px;
+      font-family:var(--head,sans-serif);
+      font-size:18px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--text-bright,#1a1a2e);
+    }
+    .briefing-list {
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:8px;
+    }
+    .briefing-list li {
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(0,48,135,0.05);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .briefing-note {
+      padding:14px 16px;
+      border-radius:14px;
+      background:rgba(255,215,0,0.12);
+      border:1px solid rgba(255,215,0,0.28);
+      font-size:13px;
+      line-height:1.65;
+      color:var(--text-bright,#1a1a2e);
+    }
+    @media (max-width: 900px) {
+      .briefing-head { flex-direction:column; }
+      .briefing-grid { grid-template-columns:1fr; }
+      .briefing-title { font-size:26px; }
+    }
   </style>
 </head>
 <body>
@@ -82,11 +278,57 @@
       <p class="page-subtitle">Support IFSI appliqué au terrain SMUR SAMU 96 : théorie validée (HAS, SFMU, ERC 2021, Vidal) et traduction opérationnelle Arma 3 RP.</p>
     </div>
 
-    <div class="alert alert-green">
-      <strong>Cadre pédagogique :</strong> chaque module suit la progression <strong>théorie médicale → application IG → scénario RP interactif</strong>.
-      Rappels de rôle IDE/IADE : pose de dispositifs (bandage hémostatique, O2, défibrillateur, Lucas 3, monitoring Lifepak 15, badges de triage), administration
-      médicamenteuse autorisée (Adrénaline en ACR, Morphine sur ordre médecin, Paracétamol, Naloxone, Biafine), maîtrise théorique VVP/IOT. Décisions exclues IDE : arrêt de réanimation, ECMO, HELISMUR, orientation SAU, annonce décès.
-    </div>
+    <section class="briefing-card">
+      <div class="briefing-head">
+        <div>
+          <div class="briefing-kicker">🎓 Briefing opérationnel IDE / IADE</div>
+          <h2 class="briefing-title">Cadre <span>pédagogique</span></h2>
+          <p class="briefing-text">
+            Chaque module est pensé comme une montée en puissance terrain : <strong>théorie médicale</strong>,
+            <strong>application IG</strong>, puis <strong>scénario RP interactif</strong>. L'objectif est de former un binôme infirmier crédible,
+            propre dans sa technique et cohérent dans son jeu en intervention.
+          </p>
+        </div>
+        <div class="briefing-badge">
+          NIVEAU VISÉ<br>
+          Lecture claire · Réflexes terrain · RP crédible
+        </div>
+      </div>
+
+      <div class="briefing-grid">
+        <article class="briefing-panel">
+          <h3>Progression</h3>
+          <ul class="briefing-list">
+            <li><strong>1.</strong> Comprendre la logique médicale avant l'action.</li>
+            <li><strong>2.</strong> Traduire les soins en mécanique serveur sans casser le réalisme.</li>
+            <li><strong>3.</strong> Jouer une scène RP propre, concise et utile à l'équipe SMUR.</li>
+          </ul>
+        </article>
+
+        <article class="briefing-panel">
+          <h3>Champ d'action autorisé</h3>
+          <ul class="briefing-list">
+            <li>Pose de dispositifs : bandage hémostatique, O2, défibrillateur, Lucas 3, Lifepak 15, badges de triage.</li>
+            <li>Administration : Adrénaline en ACR, Morphine sur ordre médecin, Paracétamol, Naloxone, Biafine.</li>
+            <li>Maîtrise théorique attendue : VVP et IOT, avec exécution dans le respect de la hiérarchie médicale.</li>
+          </ul>
+        </article>
+
+        <article class="briefing-panel">
+          <h3>Limites de rôle</h3>
+          <ul class="briefing-list">
+            <li>Pas de décision d'arrêt de réanimation.</li>
+            <li>Pas de déclenchement ECMO ou HELISMUR de sa propre initiative.</li>
+            <li>Pas d'orientation SAU ni d'annonce de décès sans validation médicale.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="briefing-note">
+        <strong>Note RP :</strong> un bon IDE / IADE ne cherche pas à « tout faire ». Il sécurise, anticipe, transmet clairement et soutient la décision médicale.
+        Le réalisme vient d'une posture calme, d'actions propres et d'un vocabulaire opérationnel maîtrisé.
+      </div>
+    </section>
 
     <div class="section-title">Modules</div>
     <div class="module-nav">
@@ -100,7 +342,7 @@
 
     <div id="mod-pharma" class="module-content active">
       <div class="panel">
-        <div class="panel-header">💊 Module 01 — Pharmacologie · Durée : 4h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-header">Module 01 — Pharmacologie · Durée : 4h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
           <div class="section-title">A. Théorie médicale</div>
           <table class="data-table">
@@ -231,7 +473,7 @@
 
     <div id="mod-gestes" class="module-content">
       <div class="panel">
-        <div class="panel-header">🩺 Module 02 — Gestes techniques · Durée : 5h00 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
+        <div class="panel-header">Module 02 — Gestes techniques · Durée : 5h00 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
         <div class="panel-body">
           <div class="section-title">A. Théorie médicale</div>
 
@@ -357,7 +599,7 @@
 
     <div id="mod-surveillance" class="module-content">
       <div class="panel">
-        <div class="panel-header">📊 Module 03 — Surveillance · Durée : 2h30 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-header">Module 03 — Surveillance · Durée : 2h30 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
           <div class="section-title">A. Paramètres vitaux et seuils d'alerte</div>
           <table class="data-table">
@@ -450,7 +692,7 @@
 
     <div id="mod-sbar" class="module-content">
       <div class="panel">
-        <div class="panel-header">📞 Module 04 — Transmissions SBAR · Durée : 2h15 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
+        <div class="panel-header">Module 04 — Transmissions SBAR · Durée : 2h15 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
         <div class="panel-body">
           <div class="section-title">A. Structure SBAR théorique (HAS)</div>
           <table class="data-table">
@@ -563,7 +805,7 @@
 
     <div id="mod-triage" class="module-content">
       <div class="panel">
-        <div class="panel-header">🏷️ Module 05 — Triage · Durée : 2h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-header">Module 05 — Triage · Durée : 2h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
           <div class="section-title">A. Méthode SIEVE (multi-victimes)</div>
           <ul class="step-list">
@@ -658,9 +900,11 @@
         .scenario-vars { font-family:monospace; font-size:0.78rem; background:#1e293b; color:#7dd3fc;
           padding:8px 12px; border-radius:4px; margin-bottom:12px; }
         .scenario-choices { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
-        .scenario-choice-btn { padding:10px 14px; border:1.5px solid #cbd5e1; border-radius:5px;
-          background:#fff; cursor:pointer; font-size:0.84rem; text-align:left; transition:background 0.15s; }
-        .scenario-choice-btn:hover { background:#f1f5f9; }
+        .scenario-choice-btn { width:100%; padding:11px 14px; border:1.5px solid var(--border-dim,#ddd); border-radius:4px;
+          background:var(--bg3,#f8f9fa); cursor:pointer; font-size:0.84rem; text-align:left; font-family:inherit;
+          color:var(--text,#1a1a2e); transition:border-color 0.15s, background 0.15s; margin-bottom:6px; display:block; }
+        .scenario-choice-btn:hover { border-color:var(--primary,#003087); background:rgba(0,48,135,0.04); }
+        .scenario-choice-btn.selected { border-color:var(--primary,#003087); background:rgba(0,48,135,0.07); }
         .scenario-feedback { padding:10px 14px; border-radius:5px; font-size:0.83rem;
           font-weight:600; margin-bottom:10px; }
         .scenario-feedback.good { background:rgba(21,128,61,0.1); color:#14532d;
@@ -714,12 +958,12 @@
       <script>
         (function () {
           const scenarioState = {
-            1: { errors: 0, errorLogs: [] },
-            2: { errors: 0, errorLogs: [] },
-            3: { errors: 0, errorLogs: [] },
-            4: { errors: 0, errorLogs: [] },
-            5: { errors: 0, errorLogs: [] },
-            6: { errors: 0, errorLogs: [] }
+            1: { errors: 0, errorLogs: [], stepNum: 1 },
+            2: { errors: 0, errorLogs: [], stepNum: 1 },
+            3: { errors: 0, errorLogs: [], stepNum: 1 },
+            4: { errors: 0, errorLogs: [], stepNum: 1 },
+            5: { errors: 0, errorLogs: [], stepNum: 1 },
+            6: { errors: 0, errorLogs: [], stepNum: 1 }
           };
 
           const scenarios = {
@@ -979,6 +1223,135 @@
             }
           };
 
+          const correctPositionPlan = {
+            1: [0, 2, 0, 1],
+            2: [1, 0, 2, 0],
+            3: [2, 1, 0, 2],
+            4: [0, 2, 1, 0],
+            5: [1, 0, 2, 1],
+            6: [2, 1, 0, 2]
+          };
+
+          const plausibleWrongLabels = [
+            'Transmettre un bilan incomplet à la régulation',
+            'Poser le badge IE avant d\'avoir les constantes',
+            'Débuter transport sans monitoring actif',
+            'Appeler le médecin avant de sécuriser les VAS',
+            'Préparer le Ferno avant de sécuriser le rachis',
+            'Oublier de noter l\'heure de pose du garrot',
+            'Défibriller sans annonce orale à l\'équipe',
+            'Confirmer ROSC sans réévaluation sur 30 secondes'
+          ];
+
+          function translateContext(text) {
+            return text
+              .replace(/reviving_score_needed/g, 'seuil ROSC')
+              .replace(/reviving_score/g, 'activité cardiaque')
+              .replace(/noflow_score/g, 'noflow')
+              .replace(/life%/g, 'état général');
+          }
+
+          function translateLabelOrFeedback(text) {
+            return text
+              .replace(/reviving_score/g, 'activité cardiaque')
+              .replace(/noflow_score/g, 'noflow')
+              .replace(/life%/g, 'état général');
+          }
+
+          function translateVars(text) {
+            return text
+              .replace(/noflow_score\s*=\s*(\d+)/g, 'Lifepak · Noflow : $1')
+              .replace(/reviving_score_needed\s*=\s*(\d+)/g, 'Lifepak · Seuil ROSC : $1')
+              .replace(/reviving_score\s*=\s*(\d+)/g, 'Lifepak · Activité cardiaque : $1')
+              .replace(/life%\s*=\s*(\d+)/g, 'État général : $1%')
+              .replace(/noflow_score\s*[≈~]\s*(\d+)/g, 'Lifepak · Noflow : ~$1')
+              .replace(/needed\s*=\s*(\d+)/g, 'Seuil ROSC : $1')
+              .replace(/progression \+0\.5\/s/g, 'progression ralentie (O2 actif)')
+              .replace(/progression \+1\/s/g, 'progression rapide (sans O2)');
+          }
+
+          function ensureThreeChoices(stage, seed) {
+            if (!stage.choices || stage.choices.length >= 3) return;
+            const falseChoice = stage.choices.find(function (c) { return !c.correct; });
+            const fallbackNext = falseChoice ? falseChoice.next : 'death';
+            while (stage.choices.length < 3) {
+              const idx = (seed + stage.choices.length) % plausibleWrongLabels.length;
+              stage.choices.push({
+                label: plausibleWrongLabels[idx],
+                correct: false,
+                feedback: '❌ Décision plausible mais inadaptée au contexte immédiat. Reprendre la priorisation terrain.',
+                next: fallbackNext
+              });
+            }
+          }
+
+          function sanitizeWrongChoices(stage, seed) {
+            if (!stage.choices) return;
+            stage.choices.forEach(function (choice, idx) {
+              if (choice.correct) return;
+              if (/attendre|ne rien faire|sans rien faire/i.test(choice.label)) {
+                choice.label = plausibleWrongLabels[(seed + idx) % plausibleWrongLabels.length];
+              }
+            });
+          }
+
+          function reorderCorrectChoice(stage, targetPos) {
+            if (!stage.choices || !stage.choices.length) return;
+            const correctIndex = stage.choices.findIndex(function (c) { return c.correct; });
+            if (correctIndex < 0) return;
+            const boundedTarget = Math.max(0, Math.min(targetPos, stage.choices.length - 1));
+            const correctChoice = stage.choices.splice(correctIndex, 1)[0];
+            stage.choices.splice(boundedTarget, 0, correctChoice);
+          }
+
+          function getFavorableChoiceStages(scenarioId) {
+            const ids = [];
+            let currentId = 's' + scenarioId + '_e1';
+            const guard = new Set();
+            while (currentId && !guard.has(currentId)) {
+              guard.add(currentId);
+              const stage = getStage(scenarioId, currentId);
+              if (!stage || stage.type !== 'choice') break;
+              ids.push(currentId);
+              const good = stage.choices.find(function (c) { return c.correct; });
+              if (!good) break;
+              currentId = good.next;
+              if (ids.length >= 8) break;
+            }
+            return ids;
+          }
+
+          function preprocessScenarios() {
+            Object.keys(scenarios).forEach(function (sid) {
+              const scenarioId = Number(sid);
+              const scenario = scenarios[scenarioId];
+              scenario.totalSteps = 4;
+
+              scenario.stages.forEach(function (stage, stageIndex) {
+                if (stage.context) stage.context = translateContext(stage.context);
+                if (stage.vars) stage.vars = translateVars(stage.vars);
+                if (!stage.choices) return;
+
+                stage.choices.forEach(function (choice) {
+                  choice.label = translateLabelOrFeedback(choice.label);
+                  choice.feedback = translateLabelOrFeedback(choice.feedback);
+                });
+
+                sanitizeWrongChoices(stage, scenarioId + stageIndex);
+                ensureThreeChoices(stage, scenarioId + stageIndex);
+              });
+
+              const pathIds = getFavorableChoiceStages(scenarioId);
+              const plan = correctPositionPlan[scenarioId] || [0, 1, 2, 0];
+              pathIds.slice(0, 4).forEach(function (stageId, idx) {
+                const stage = getStage(scenarioId, stageId);
+                if (stage) reorderCorrectChoice(stage, plan[idx]);
+              });
+            });
+          }
+
+          preprocessScenarios();
+
           function getStage(scenarioId, stageId) {
             return scenarios[scenarioId].stages.find(function (s) { return s.id === stageId; });
           }
@@ -986,24 +1359,33 @@
           function restartScenario(scenarioId) {
             scenarioState[scenarioId].errors = 0;
             scenarioState[scenarioId].errorLogs = [];
-            renderStage(scenarioId, 's' + scenarioId + '_e1', null);
+            scenarioState[scenarioId].stepNum = 1;
+            renderStage(scenarioId, 's' + scenarioId + '_e1', scenarioState[scenarioId].errors, scenarioState[scenarioId].errorLogs, scenarioState[scenarioId].stepNum, null);
           }
 
-          function renderStage(scenarioId, stageId, feedbackData) {
+          function renderStage(scenarioId, stageId, errors, errorsList, stepNum, feedbackData) {
             const player = document.querySelector('.scenario-player[data-scenario="' + scenarioId + '"]');
             const container = player.querySelector('.scenario-stage');
             const state = scenarioState[scenarioId];
+            const scenario = scenarios[scenarioId];
             const stage = getStage(scenarioId, stageId) || getStage(scenarioId, 'death');
+            const totalSteps = scenario.totalSteps || 4;
+            const currentErrors = typeof errors === 'number' ? errors : state.errors;
+            const currentStep = Math.max(1, Math.min(stepNum || state.stepNum || 1, totalSteps));
 
-            let html = '<div class="scenario-errors">⚠️ Erreurs : ' + state.errors + ' / 4</div>';
+            let html = '<div class="scenario-progress">'
+              + '<span>ÉTAPE ' + currentStep + ' / ' + totalSteps + '</span>'
+              + '<div class="scenario-progress-bar"><div class="scenario-progress-fill" style="width:' + Math.round((currentStep / totalSteps) * 100) + '%"></div></div>'
+              + '<span class="scenario-progress-label" style="color:' + (currentErrors > 0 ? '#b91c1c' : 'var(--text-dim,#888)') + '">⚠ Erreurs : ' + currentErrors + ' / 4</span>'
+              + '</div>';
 
             if (feedbackData) {
               html += '<div class="scenario-feedback ' + (feedbackData.correct ? 'good' : 'bad') + '">' + feedbackData.text + '</div>';
             }
 
             if (stage.type === 'death') {
-              const logs = state.errorLogs.length
-                ? '<ul style="text-align:left; margin-top:10px;">' + state.errorLogs.map(function (e) { return '<li>' + e + '</li>'; }).join('') + '</ul>'
+              const logs = (errorsList || state.errorLogs).length
+                ? '<ul style="text-align:left; margin-top:10px;">' + (errorsList || state.errorLogs).map(function (e) { return '<li>' + e + '</li>'; }).join('') + '</ul>'
                 : '<p>Aucune erreur tracée.</p>';
               html += '<div class="scenario-death"><h3>PATIENT DÉCÉDÉ</h3><div class="scenario-context">' + stage.context + '</div><p>' + stage.message + '</p><p><strong>Erreurs ayant conduit à ce résultat :</strong></p>' + logs + '<button class="scenario-restart-btn" data-restart="' + scenarioId + '">↺ Recommencer</button></div>';
               container.innerHTML = html;
@@ -1051,17 +1433,22 @@
             const isCorrect = choiceBtn.getAttribute('data-correct') === '1';
             const feedback = decodeURIComponent(choiceBtn.getAttribute('data-feedback'));
             const state = scenarioState[scenarioId];
+            const scenario = scenarios[scenarioId];
+            const totalSteps = scenario.totalSteps || 4;
+            const nextStage = getStage(scenarioId, next);
 
             if (!isCorrect) {
               state.errors += 1;
               state.errorLogs.push(feedback);
               if (state.errors >= 4) {
-                renderStage(scenarioId, 'death', { correct: false, text: feedback });
+                renderStage(scenarioId, 'death', state.errors, state.errorLogs, state.stepNum, { correct: false, text: feedback });
                 return;
               }
+            } else if (nextStage && nextStage.type === 'choice') {
+              state.stepNum = Math.min(state.stepNum + 1, totalSteps);
             }
 
-            renderStage(scenarioId, next, { correct: isCorrect, text: feedback });
+            renderStage(scenarioId, next, state.errors, state.errorLogs, state.stepNum, { correct: isCorrect, text: feedback });
           });
         })();
       </script>
