@@ -59,21 +59,14 @@
     <div class="page-header">
       <div class="breadcrumb">/ <span>FORMATIONS</span> / <span>IDE / IADE</span></div>
       <h1 class="page-title">Parcours <span>IDE / IADE</span></h1>
-      <p class="page-subtitle">Formation infirmière spécialisée urgences : pharmacologie, techniques invasives, surveillance clinique, triage et scénarios Arma 3 SAMU 96.</p>
+      <p class="page-subtitle">Support IFSI appliqué au terrain SMUR SAMU 96 : théorie validée (HAS, SFMU, ERC 2021, Vidal) et traduction opérationnelle Arma 3 RP.</p>
     </div>
 
-    <div class="section-title">Objectifs de formation</div>
-    <table class="data-table">
-      <thead><tr><th>Objectif</th><th>Niveau visé</th><th>Évaluation</th></tr></thead>
-      <tbody>
-        <tr><td>Maîtriser les thérapeutiques d'urgence et leurs précautions d'emploi.</td><td><span class="badge badge-red">EXPERT</span></td><td>Cas cliniques + calcul de doses</td></tr>
-        <tr><td>Réaliser les gestes techniques selon check-lists sécurité.</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td><td>Ateliers procéduraux supervisés</td></tr>
-        <tr><td>Assurer une surveillance post-intervention structurée.</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td><td>Audit dossier + simulation monitorée</td></tr>
-        <tr><td>Transmettre un bilan SBAR complet et actionnable.</td><td><span class="badge badge-red">EXPERT</span></td><td>Mise en situation SMUR complète</td></tr>
-        <tr><td>Appliquer les méthodes de triage multi-victimes (SIEVE).</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td><td>Simulation polytrauma</td></tr>
-        <tr><td>Intervenir efficacement dans les scénarios Arma 3 réalistes.</td><td><span class="badge badge-red">EXPERT</span></td><td>Mise en situation complète serveur</td></tr>
-      </tbody>
-    </table>
+    <div class="alert alert-green">
+      <strong>Cadre pédagogique :</strong> chaque module suit la progression <strong>théorie médicale → application IG → scénario RP interactif</strong>.
+      Rappels de rôle IDE/IADE : pose de dispositifs (bandage hémostatique, O2, défibrillateur, Lucas 3, monitoring Lifepak 15, badges de triage), administration
+      médicamenteuse autorisée (Adrénaline en ACR, Morphine sur ordre médecin, Paracétamol, Naloxone, Biafine), maîtrise théorique VVP/IOT. Décisions exclues IDE : arrêt de réanimation, ECMO, HELISMUR, orientation SAU, annonce décès.
+    </div>
 
     <div class="section-title">Modules</div>
     <div class="module-nav">
@@ -85,175 +78,686 @@
       <button class="mod-btn" onclick="showModule('arma')">06 · Scénarios Arma 3</button>
     </div>
 
-    <!-- MODULE 1 : PHARMACOLOGIE -->
     <div id="mod-pharma" class="module-content active">
       <div class="panel">
-        <div class="panel-header">💊 Module 01 — Pharmacologie urgences · Durée : 4h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
+        <div class="panel-header">💊 Module 01 — Pharmacologie · Durée : 4h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
-          <div class="alert alert-yellow"><strong>Cadre :</strong> prescription médicale obligatoire hors protocole anticipé. Références : ERC 2021, SFMU, HAS.</div>
-          <div class="section-title">Théorie</div>
+          <div class="section-title">A. Théorie médicale</div>
           <table class="data-table">
-            <thead><tr><th>Médicament</th><th>Effet clinique</th><th>Repère RP</th><th>Risque</th></tr></thead>
+            <thead>
+              <tr><th>Médicament</th><th>Mécanisme d'action</th><th>Effets attendus</th><th>Précautions / CI</th></tr>
+            </thead>
             <tbody>
-              <tr><td>Adrénaline</td><td>vasoconstriction, perfusion cérébrale</td><td>ACR uniquement</td><td>tachycardie</td></tr>
-              <tr><td>Morphine</td><td>antalgie forte</td><td>sur ordre médecin</td><td>dépression respiratoire</td></tr>
-              <tr><td>Naloxone</td><td>antidote opioïdes</td><td>overdose morphinique</td><td>re-narcotisation à ~45 min</td></tr>
-              <tr><td>Paracétamol</td><td>antalgie modérée</td><td>patient stable</td><td>surdose hépatique</td></tr>
+              <tr>
+                <td>Adrénaline 1mg IV/IO</td>
+                <td>Agoniste alpha-1 prédominant → vasoconstriction périphérique, ↑ pression de perfusion coronaire et cérébrale.</td>
+                <td>Amélioration de la perfusion pendant ACR ; utilisée sur cycles impairs (ERC 2021 : 1-3-5...).</td>
+                <td>Indication : ACR confirmé ; CI relative : tachycardie ventriculaire non traitée.</td>
+              </tr>
+              <tr>
+                <td>Morphine 0.1mg/kg IV titration</td>
+                <td>Agoniste μ-opioïde central.</td>
+                <td>Antalgie puissante, diminution réponse neurovégétative au stress douloureux.</td>
+                <td>Nausées/vomissements, dépression respiratoire dose-dépendante ; CI : allergie, dépression respi, TC non évalué.</td>
+              </tr>
+              <tr>
+                <td>Naloxone 0.4mg IV/IM/SC</td>
+                <td>Antagoniste compétitif des récepteurs μ.</td>
+                <td>Levée de dépression respiratoire opioïde.</td>
+                <td>Durée d'action courte (~45 min) ; risque re-narcotisation ; indication exclusive : overdose opioïdes.</td>
+              </tr>
+              <tr>
+                <td>Paracétamol 1g IVL</td>
+                <td>Inhibition de la cyclooxygénase centrale.</td>
+                <td>Effet antalgique/antipyrétique.</td>
+                <td>CI : insuffisance hépatique.</td>
+              </tr>
+              <tr>
+                <td>Biafine (cutanée)</td>
+                <td>Émulsion hydrophile à effet calmant.</td>
+                <td>Apaisement des brûlures superficielles.</td>
+                <td>Pas d'effet anti-infectieux démontré ; pas d'indication brûlures &gt; 2e degré profond.</td>
+              </tr>
             </tbody>
           </table>
-          <div class="section-title">Application IG</div>
-          <table class="data-table">
-            <thead><tr><th>Action</th><th>Effet serveur</th><th>Justification</th></tr></thead>
-            <tbody>
-              <tr><td>Adrénaline</td><td><span class="badge badge-yellow">noflow_score -80 à -120</span></td><td>↑ pression de perfusion</td></tr>
-              <tr><td>Défibrillation</td><td><span class="badge badge-green">reviving +20 à +30</span> / <span class="badge badge-yellow">noflow -40 à -60</span></td><td>dépolarisation myocardique</td></tr>
-              <tr><td>O2 bouteille (unique)</td><td><span class="badge badge-yellow">noflow -100 à -200</span> puis pente +0.5/s</td><td>ralentit l'hypoxie</td></tr>
-            </tbody>
-          </table>
-          <div class="section-title">Scénario RP interactif</div>
-          <div class="info-box">Overdose opioïde : FR 6, GCS 6. Priorité ?</div>
-          <label><input type="radio" name="m1" value="0"> Adrénaline immédiate</label><br>
-          <label><input type="radio" name="m1" value="1"> VAS + O2 + appel médecin</label><br>
-          <button onclick="check('m1',1,'m1fb')">Valider</button>
-          <div id="m1fb"></div>
+
+          <div class="section-title">B. Correspondance IG</div>
+          <div class="info-box">
+            <strong>Application Arma 3 — Table de correspondance médicaments</strong>
+            <table class="data-table" style="margin-top:10px;">
+              <thead>
+                <tr><th>Médicament IG</th><th>Effet codé serveur</th><th>Justification médicale</th><th>Conditions d'usage RP</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Adrénaline</td><td><span class="badge badge-yellow">noflow_score -80 à -120</span></td><td>Vasoconstriction → ↑ perfusion cérébrale</td><td>ACR confirmé, cycles impairs</td></tr>
+                <tr><td>Morphine</td><td>Suppression douleur + nausées</td><td>Agonisme μ : antalgie + effet émétisant</td><td>Ordre médecin obligatoire</td></tr>
+                <tr><td>Naloxone</td><td>Contre-mesure overdose</td><td>Antagonisme compétitif μ</td><td>Stupéfiant identifié ou fortement suspecté</td></tr>
+                <tr><td>Paracétamol</td><td><span class="badge badge-green">+20% puis +30% vie</span></td><td>Antalgie + stabilisation hémodynamique modélisée</td><td>Douleur modérée, pas d'ACR</td></tr>
+                <tr><td>Bouteille O2</td><td><span class="badge badge-yellow">noflow_score -100 à -200</span> (unique) puis pente <span class="badge badge-dim">+0.5/s</span></td><td>↑ contenu artériel O2, ralentit anoxie</td><td>Dès ACR confirmé</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="section-title">C. Cas clinique — Overdose morphinique</div>
+          <div class="warn-box">Situation : patient inconscient, FC 42, FR 6, GCS 6. Mécanique IG associée : risque respiratoire majeur sans critère de chocable immédiat.</div>
+
+          <div class="panel">
+            <div class="panel-header">Étape 1</div>
+            <div class="panel-body">
+              <p>Patient retrouvé inconscient. Que faites-vous en premier ?</p>
+              <label><input type="radio" name="ph1" value="A"> A) Adrénaline directement</label><br>
+              <label><input type="radio" name="ph1" value="B"> B) Sécuriser les voies aériennes + O2 + appeler le médecin</label><br>
+              <label><input type="radio" name="ph1" value="C"> C) Défibrillateur</label><br>
+              <button onclick="validatePharma('ph1','B','phfb1')">Valider l'étape 1</button>
+              <div id="phfb1"></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">Étape 2</div>
+            <div class="panel-body">
+              <p>Le médecin prescrit Naloxone 0.4mg IV. La FR remonte à 14. Quelle surveillance s'impose ?</p>
+              <label><input type="radio" name="ph2" value="A"> A) Aucune, le patient est stabilisé</label><br>
+              <label><input type="radio" name="ph2" value="B"> B) Surveillance continue FR + SpO2 + conscience toutes les 5min, re-dose si re-narcotisation</label><br>
+              <label><input type="radio" name="ph2" value="C"> C) Administrer Morphine pour la douleur</label><br>
+              <button onclick="validatePharma('ph2','B','phfb2')">Valider l'étape 2</button>
+              <div id="phfb2"></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">Étape 3</div>
+            <div class="panel-body">
+              <p>50 min après, FR redescend à 8 et le patient est somnolent. Que faites-vous ?</p>
+              <label><input type="radio" name="ph3" value="A"> A) Attendre l'évolution naturelle</label><br>
+              <label><input type="radio" name="ph3" value="B"> B) Appeler le médecin en urgence + préparer 2e dose Naloxone</label><br>
+              <label><input type="radio" name="ph3" value="C"> C) Adrénaline</label><br>
+              <button onclick="validatePharma('ph3','B','phfb3')">Valider l'étape 3</button>
+              <div id="phfb3"></div>
+            </div>
+          </div>
         </div>
       </div>
+      <script>
+        function validatePharma(group, good, targetId) {
+          const pick = document.querySelector('input[name="' + group + '"]:checked');
+          const target = document.getElementById(targetId);
+          if (!pick) {
+            target.innerHTML = '<div class="alert alert-yellow">Choisissez une réponse avant validation.</div>';
+            return;
+          }
+          if (pick.value === good) {
+            target.innerHTML = '<div class="alert alert-green"><strong>Correct.</strong> Décision conforme aux recommandations : priorité VAS/O2, surveillance rapprochée, prévention de la re-narcotisation.</div>';
+            return;
+          }
+          const map = {
+            ph1: {
+              A: 'Incorrect : pas d\'ACR confirmé, adrénaline non indiquée.',
+              C: 'Incorrect : absence de FV/TV sans pouls, défibrillation non indiquée.'
+            },
+            ph2: {
+              A: 'Incorrect : la Naloxone dure peu (~45 min), risque de re-narcotisation.',
+              C: 'Incorrect : contre-indication pratique immédiate post-Naloxone dans ce contexte.'
+            },
+            ph3: {
+              A: 'Incorrect : détérioration respiratoire active, non observée passivement.',
+              C: 'Incorrect : l\'adrénaline n\'est pas le traitement de la re-narcotisation opioïde.'
+            }
+          };
+          target.innerHTML = '<div class="alert alert-red"><strong>Incorrect.</strong> ' + (map[group][pick.value] || 'Reprenez la logique clinique.') + '</div>';
+        }
+      </script>
     </div>
 
-    <!-- MODULE 2 : GESTES -->
     <div id="mod-gestes" class="module-content">
       <div class="panel">
         <div class="panel-header">🩺 Module 02 — Gestes techniques · Durée : 5h00 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
         <div class="panel-body">
-          <div class="section-title">Théorie</div>
+          <div class="section-title">A. Théorie médicale</div>
+
+          <div class="info-box"><strong>VVP (Voie Veineuse Périphérique)</strong> — non implémentée IG à ce jour, mais maîtrise théorique obligatoire.</div>
           <ul class="step-list">
-            <li class="step-item"><span class="step-num">01</span><span class="step-text">VVP : asepsie, reflux, fixation, flush.</span></li>
-            <li class="step-item"><span class="step-num">02</span><span class="step-text">IOT : décision médicale exclusive, IDE assiste.</span></li>
-            <li class="step-item"><span class="step-num">03</span><span class="step-text">Défibrillation : FV/TV sans pouls uniquement.</span></li>
+            <li class="step-item"><span class="step-num">1</span><span class="step-text"><strong>Choix du site :</strong> pli du coude (1re intention), avant-bras, dos de la main. Éviter membre lymphœdémateux ou côté curage ganglionnaire.</span></li>
+            <li class="step-item"><span class="step-num">2</span><span class="step-text"><strong>Matériel :</strong> cathéter IV, prolongateur, seringue 5mL NaCl 0.9%, pansement transparent stérile, garrot, antiseptique alcoolique.</span></li>
+            <li class="step-item"><span class="step-num">3</span><span class="step-text"><strong>Asepsie cutanée :</strong> décontamination 30s puis séchage complet avant ponction.</span></li>
+            <li class="step-item"><span class="step-num">4</span><span class="step-text"><strong>Ponction :</strong> biseau haut, angle 15–30°, reflux sanguin, avancer cathéter seul, retirer mandrin.</span></li>
+            <li class="step-item"><span class="step-num">5</span><span class="step-text"><strong>Fixation :</strong> pansement transparent stérile + traçabilité heure/calibre/site.</span></li>
+            <li class="step-item"><span class="step-num">6</span><span class="step-text"><strong>Flush :</strong> 5mL NaCl 0.9% ; absence de résistance = VVP perméable.</span></li>
+            <li class="step-item"><span class="step-num">7</span><span class="step-text"><strong>Surveillance :</strong> rougeur, douleur ou œdème = ablation immédiate.</span></li>
           </ul>
-          <div class="section-title">Application IG</div>
-          <div class="info-box">Massage 8s : +1 à +9 reviving selon profil, baisse noflow de -2 à -20.</div>
-          <div class="section-title">Scénario RP interactif</div>
-          <div class="warn-box">Trauma balistique cuisse, PA 80/50, FC 128 : action prioritaire ?</div>
-          <label><input type="radio" name="m2" value="0"> VVP d'abord</label><br>
-          <label><input type="radio" name="m2" value="1"> Garrot proximal immédiat</label><br>
-          <button onclick="check('m2',1,'m2fb')">Valider</button>
-          <div id="m2fb"></div>
+
+          <table class="data-table">
+            <thead><tr><th>Calibre VVP</th><th>Débit théorique</th><th>Indication clinique</th></tr></thead>
+            <tbody>
+              <tr><td>14G orange</td><td>~330mL/min</td><td>Choc hémorragique, remplissage massif</td></tr>
+              <tr><td>16G gris</td><td>~180mL/min</td><td>Urgence vitale, trauma grave</td></tr>
+              <tr><td>18G vert</td><td>~90mL/min</td><td>Urgence standard, médicaments IV</td></tr>
+              <tr><td>20G rose</td><td>~60mL/min</td><td>Thérapeutique courante, patient stable</td></tr>
+            </tbody>
+          </table>
+
+          <div class="warn-box"><strong>IOT (Intubation Oro-Trachéale)</strong> — non implémentée IG ; formation théorique active. Indications : GCS ≤ 8, détresse respiratoire réfractaire, protection VAS pré-transport. Décision médicale exclusive.</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">Aspiration mucosités si besoin (aspirateur Schiller).</span></li>
+            <li class="step-item"><span class="step-num">2</span><span class="step-text">Prémédication prescrite (atropine pédiatrique, sédation sur ordre médecin).</span></li>
+            <li class="step-item"><span class="step-num">3</span><span class="step-text">Pré-oxygénation O2 haute concentration 3–5 min.</span></li>
+            <li class="step-item"><span class="step-num">4</span><span class="step-text">Contrôle position : auscultation bilatérale + CO2 colorimétrique si disponible.</span></li>
+            <li class="step-item"><span class="step-num">5</span><span class="step-text">Fixation + surveillance continue SpO2/FR.</span></li>
+          </ul>
+
+          <div class="section-title">Défibrillation</div>
+          <p>Indications : FV/TV sans pouls uniquement. Ne jamais choquer asystolie ni dissociation électromécanique.</p>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">RCP en cours, interruption analyse &lt; 5 secondes.</span></li>
+            <li class="step-item"><span class="step-num">2</span><span class="step-text">Électrodes sous-claviculaire droite + apex gauche (ou antéro-postérieur).</span></li>
+            <li class="step-item"><span class="step-num">3</span><span class="step-text">Annonce « CHOC, JE CHOQUE », sécurité opératoire.</span></li>
+            <li class="step-item"><span class="step-num">4</span><span class="step-text">Choc puis reprise RCP immédiate sans check pouls.</span></li>
+            <li class="step-item"><span class="step-num">5</span><span class="step-text">Réanalyse toutes les 2 minutes (ERC 2021).</span></li>
+          </ul>
+          <div class="info-box">Effet IG Lifepak 15 défibrillateur : <span class="badge badge-green">reviving_score +20 à +30</span>, <span class="badge badge-yellow">noflow_score -40 à -60</span>, <span class="badge badge-red">1 chance/6 de ROSC instantané</span>.</div>
+
+          <div class="section-title">Bandage hémostatique / Garrot</div>
+          <p>Bandage hémostatique : plaie compressible (membre/torse). Garrot : hémorragie artérielle de membre ou échec compression directe.</p>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">Garrot proximal (5–7cm au-dessus plaie).</span></li>
+            <li class="step-item"><span class="step-num">2</span><span class="step-text">Serrer jusqu'à arrêt saignement, noter heure.</span></li>
+            <li class="step-item"><span class="step-num">3</span><span class="step-text">Ne pas desserrer sans ordre médecin (risque relargage toxines/choc).</span></li>
+          </ul>
+          <div class="info-box">Effet IG bandage hémostatique : <span class="badge badge-green">+20% vie</span>.</div>
+
+          <div class="section-title">Monitoring Lifepak 15</div>
+          <p>Paramètres IG : FC, SpO2, données état patient. Utilisation RP : monitorer dès arrivée, transmettre au médecin par radio ou /me. Relevés : SpO2/FC en continu, TA toutes 5min si instable.</p>
+
+          <div class="section-title">B. Cas clinique — Trauma balistique membre inférieur</div>
+          <div class="panel">
+            <div class="panel-header">Étape 1</div>
+            <div class="panel-body">
+              <p>Patient touché cuisse droite, saignement abondant, PA 80/50, FC 128. Action prioritaire ?</p>
+              <label><input type="radio" name="ge1" value="A"> A) Poser VVP et remplissage en premier</label><br>
+              <label><input type="radio" name="ge1" value="B"> B) Garrot proximal cuisse droite immédiatement</label><br>
+              <label><input type="radio" name="ge1" value="C"> C) Monitoring Lifepak 15</label><br>
+              <button onclick="validateGestes('ge1','B','gefb1')">Valider l'étape 1</button>
+              <div id="gefb1"></div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">Étape 2</div>
+            <div class="panel-body">
+              <p>Garrot posé, saignement stoppé, FC 118, SpO2 94%. Que faites-vous ?</p>
+              <label><input type="radio" name="ge2" value="A"> A) O2 haute concentration + appel médecin pour antalgie</label><br>
+              <label><input type="radio" name="ge2" value="B"> B) Retirer le garrot car saignement arrêté</label><br>
+              <label><input type="radio" name="ge2" value="C"> C) Défibrillateur</label><br>
+              <button onclick="validateGestes('ge2','A','gefb2')">Valider l'étape 2</button>
+              <div id="gefb2"></div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">Étape 3</div>
+            <div class="panel-body">
+              <p>Médecin : Morphine ; EVA 8. Après administration, SpO2 chute à 89%. Conduite ?</p>
+              <label><input type="radio" name="ge3" value="A"> A) Donner une 2e dose de Morphine</label><br>
+              <label><input type="radio" name="ge3" value="B"> B) Arrêter administration, O2, appel médecin, préparer Naloxone</label><br>
+              <label><input type="radio" name="ge3" value="C"> C) Attendre que la douleur passe</label><br>
+              <button onclick="validateGestes('ge3','B','gefb3')">Valider l'étape 3</button>
+              <div id="gefb3"></div>
+            </div>
+          </div>
         </div>
       </div>
+      <script>
+        function validateGestes(group, good, targetId) {
+          const pick = document.querySelector('input[name="' + group + '"]:checked');
+          const target = document.getElementById(targetId);
+          if (!pick) {
+            target.innerHTML = '<div class="alert alert-yellow">Choisissez une réponse avant validation.</div>';
+            return;
+          }
+          if (pick.value === good) {
+            target.innerHTML = '<div class="alert alert-green"><strong>Correct.</strong> Priorisation conforme damage control et surveillance post-antalgie.</div>';
+            return;
+          }
+          const map = {
+            ge1: {
+              A: 'Incorrect : l\'hémorragie non contrôlée tue avant le remplissage.',
+              C: 'Incorrect : le monitoring ne précède pas le contrôle hémorragique.'
+            },
+            ge2: {
+              B: 'Incorrect : la dépose du garrot est une décision médicale.',
+              C: 'Incorrect : pas d\'indication de rythme choquable.'
+            },
+            ge3: {
+              A: 'Incorrect : risque de dépression respiratoire aggravée.',
+              C: 'Incorrect : SpO2 à 89% impose action immédiate.'
+            }
+          };
+          target.innerHTML = '<div class="alert alert-red"><strong>Incorrect.</strong> ' + (map[group][pick.value] || 'Revoir la check-list.') + '</div>';
+        }
+      </script>
     </div>
 
-    <!-- MODULE 3 : SURVEILLANCE -->
     <div id="mod-surveillance" class="module-content">
       <div class="panel">
         <div class="panel-header">📊 Module 03 — Surveillance · Durée : 2h30 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
-          <div class="section-title">Théorie</div>
+          <div class="section-title">A. Paramètres vitaux et seuils d'alerte</div>
           <table class="data-table">
-            <thead><tr><th>Paramètre</th><th>Fréquence</th><th>Seuil alerte</th></tr></thead>
+            <thead><tr><th>Paramètre</th><th>Valeur normale adulte</th><th>Fréquence surveillance standard</th><th>Fréquence si instable</th><th>Seuil d'alerte → action</th></tr></thead>
             <tbody>
-              <tr><td>SpO2</td><td>continue</td><td>&lt; 94%</td></tr>
-              <tr><td>FC</td><td>continue</td><td>&lt; 40 / &gt; 150</td></tr>
-              <tr><td>FR</td><td>5-15 min</td><td>&lt; 8 / &gt; 30</td></tr>
-              <tr><td>GCS</td><td>5-15 min</td><td>chute ≥ 2</td></tr>
+              <tr><td>SpO2</td><td>≥95%</td><td>Continue</td><td>Continue</td><td>&lt;94% → O2 ; &lt;90% → urgence respiratoire, appel médecin</td></tr>
+              <tr><td>FC</td><td>60–100 bpm</td><td>Continue</td><td>Continue</td><td>&lt;40 ou &gt;150 → ECG, appel médecin immédiat</td></tr>
+              <tr><td>PAS</td><td>90–140 mmHg</td><td>Toutes 5 min</td><td>Toutes 2–3 min</td><td>&lt;90 → choc à exclure ; &gt;180 → urgence HTA</td></tr>
+              <tr><td>FR</td><td>12–20/min</td><td>Toutes 15 min</td><td>Toutes 5 min</td><td>&lt;8 ou &gt;30 → détresse, appel médecin</td></tr>
+              <tr><td>GCS</td><td>15</td><td>Toutes 15 min</td><td>Toutes 5 min</td><td>Chute ≥2 points → alerte médecin</td></tr>
+              <tr><td>Glycémie cap</td><td>0.7–1.10 g/L</td><td>À l'arrivée</td><td>Toutes 30 min</td><td>&lt;0.5 ou &gt;3 → action immédiate</td></tr>
+              <tr><td>Température</td><td>36–37.5°C</td><td>À l'arrivée</td><td>Si hypothermie : toutes 15 min</td><td>&lt;35°C → couverture survie, réchauffement actif</td></tr>
             </tbody>
           </table>
-          <div class="section-title">Application IG</div>
-          <div class="info-box">Après ROSC : objectif maintenir <span class="badge badge-dim">noflow_score &lt; 800</span> et suivre dégradation neuro-respiratoire.</div>
-          <div class="section-title">Scénario RP interactif</div>
-          <div class="warn-box">Post-ROSC : SpO2 chute 88%, FR 10.</div>
-          <label><input type="radio" name="m3" value="1"> O2 + libération VAS + appel médecin</label><br>
-          <label><input type="radio" name="m3" value="0"> Attendre 10 min</label><br>
-          <button onclick="check('m3',1,'m3fb')">Valider</button>
-          <div id="m3fb"></div>
+
+          <div class="section-title">B. Surveillance post-médicament</div>
+          <table class="data-table">
+            <thead><tr><th>Médicament administré</th><th>Paramètre à surveiller</th><th>Délai apparition EI</th><th>Signe d'alarme → action</th></tr></thead>
+            <tbody>
+              <tr><td>Morphine</td><td>SpO2 + FR + conscience</td><td>5–15 min</td><td>FR &lt;12 ou SpO2 &lt;94% → Naloxone prête + appel médecin</td></tr>
+              <tr><td>Adrénaline</td><td>FC + TA</td><td>1–3 min</td><td>Tachycardie &gt;150 → signaler médecin</td></tr>
+              <tr><td>Naloxone</td><td>FR + conscience + récidive</td><td>~45 min</td><td>Re-narcotisation → re-dose sur ordre médecin</td></tr>
+              <tr><td>Paracétamol</td><td>Douleur (EVA)</td><td>~30 min</td><td>Pas d'amélioration → réévaluation médicale</td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">C. Surveillance spécifique post-réanimation (ROSC)</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">Monitoring continu FC/SpO2/FR obligatoire.</span></li>
+            <li class="step-item"><span class="step-num">2</span><span class="step-text">Réévaluation GCS toutes les 5 min.</span></li>
+            <li class="step-item"><span class="step-num">3</span><span class="step-text">TA toutes les 5 min (risque hypotension post-ROSC).</span></li>
+            <li class="step-item"><span class="step-num">4</span><span class="step-text">Glycémie capillaire à la reprise (hypoglycémie fréquente).</span></li>
+            <li class="step-item"><span class="step-num">5</span><span class="step-text">Couverture survie + prévention hypothermie.</span></li>
+            <li class="step-item"><span class="step-num">6</span><span class="step-text">Aucun médicament sans ordre médecin post-ROSC.</span></li>
+            <li class="step-item"><span class="step-num">7</span><span class="step-text">Préparation transport immédiat après stabilisation.</span></li>
+          </ul>
+
+          <div class="section-title">D. Cas clinique — Surveillance post-ROSC</div>
+          <div class="panel">
+            <div class="panel-header">Étape 1</div>
+            <div class="panel-body">
+              <p>ROSC obtenu. FC 95, SpO2 92%, GCS 8, FR 18. Que surveille-t-on en priorité ?</p>
+              <label><input type="radio" name="su1" value="A"> A) Seulement la FC</label><br>
+              <label><input type="radio" name="su1" value="B"> B) SpO2 + FC + GCS + FR en continu, TA toutes 5 min</label><br>
+              <label><input type="radio" name="su1" value="C"> C) Rien, le patient est stabilisé</label><br>
+              <button onclick="validateSurv('su1','B','sufb1')">Valider l'étape 1</button>
+              <div id="sufb1"></div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">Étape 2</div>
+            <div class="panel-body">
+              <p>8 min après ROSC, SpO2 88%, FR 10. Que faites-vous ?</p>
+              <label><input type="radio" name="su2" value="A"> A) Adrénaline</label><br>
+              <label><input type="radio" name="su2" value="B"> B) O2 haute concentration + repositionnement VAS + appel médecin immédiat</label><br>
+              <label><input type="radio" name="su2" value="C"> C) Attendre</label><br>
+              <button onclick="validateSurv('su2','B','sufb2')">Valider l'étape 2</button>
+              <div id="sufb2"></div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">Étape 3</div>
+            <div class="panel-body">
+              <p>Glycémie capillaire : 0.45 g/L. Votre interprétation ?</p>
+              <label><input type="radio" name="su3" value="A"> A) Normal</label><br>
+              <label><input type="radio" name="su3" value="B"> B) Hypoglycémie sévère → alerte médecin, préparer G30% si prescrit</label><br>
+              <label><input type="radio" name="su3" value="C"> C) Administrer Morphine pour le confort</label><br>
+              <button onclick="validateSurv('su3','B','sufb3')">Valider l'étape 3</button>
+              <div id="sufb3"></div>
+            </div>
+          </div>
         </div>
       </div>
+      <script>
+        function validateSurv(group, good, targetId) {
+          const pick = document.querySelector('input[name="' + group + '"]:checked');
+          const target = document.getElementById(targetId);
+          if (!pick) {
+            target.innerHTML = '<div class="alert alert-yellow">Choisissez une réponse avant validation.</div>';
+            return;
+          }
+          if (pick.value === good) {
+            target.innerHTML = '<div class="alert alert-green"><strong>Correct.</strong> Surveillance multiparamétrique et réponse anticipée conformes.</div>';
+          } else {
+            target.innerHTML = '<div class="alert alert-red"><strong>Incorrect.</strong> Reprendre la logique de surveillance continue post-ROSC.</div>';
+          }
+        }
+      </script>
     </div>
 
-    <!-- MODULE 4 : SBAR -->
     <div id="mod-sbar" class="module-content">
       <div class="panel">
         <div class="panel-header">📞 Module 04 — Transmissions SBAR · Durée : 2h15 · <span style="color:var(--yellow,#eab308)">EN COURS</span></div>
         <div class="panel-body">
-          <div class="section-title">Théorie</div>
+          <div class="section-title">A. Structure SBAR théorique (HAS)</div>
           <table class="data-table">
-            <thead><tr><th>Bloc</th><th>Contenu attendu</th><th>Exemple</th></tr></thead>
+            <thead><tr><th>Composante</th><th>Définition</th><th>Exemple phrase-type SMUR</th></tr></thead>
             <tbody>
-              <tr><td>S</td><td>qui/où/problème</td><td>"ACR récupéré"</td></tr>
-              <tr><td>B</td><td>ATCD, traitements</td><td>"HTA, diabète"</td></tr>
-              <tr><td>A</td><td>constantes + gestes</td><td>"PA 90/60, GCS 8"</td></tr>
-              <tr><td>R</td><td>demande précise</td><td>"préparer accueil réa"</td></tr>
+              <tr><td><strong>S — Situation</strong></td><td>Qui appelle, pour quel patient, quel problème immédiat</td><td>« SAMU 96, conducteur homme 52 ans, choc hémodynamique post-AVP. »</td></tr>
+              <tr><td><strong>B — Background</strong></td><td>Contexte médical, ATCD, traitements, circonstances</td><td>« ATCD HTA, sous ramipril, AVP haute cinétique frontal. »</td></tr>
+              <tr><td><strong>A — Assessment</strong></td><td>Évaluation clinique et actions déjà faites</td><td>« PA 85/55 en aggravation, FC 132, Morphine 3mg IV à 14h32. »</td></tr>
+              <tr><td><strong>R — Recommendation</strong></td><td>Demande claire à l'équipe receveuse</td><td>« Préparer filière trauma CHU, ETA 6 min, accueil monitoré immédiat. »</td></tr>
             </tbody>
           </table>
-          <div class="section-title">Application IG</div>
-          <div class="info-box">Transmission radio utile si <span class="mono">noflow_score</span> haut ou patient IE/UR.</div>
-          <div class="section-title">Scénario RP interactif</div>
-          <div class="warn-box">Classer : "PA 90/60, FC 110" dans SBAR</div>
-          <label><input type="radio" name="m4" value="1"> A — Assessment</label><br>
-          <label><input type="radio" name="m4" value="0"> B — Background</label><br>
-          <button onclick="check('m4',1,'m4fb')">Valider</button>
-          <div id="m4fb"></div>
+          <div class="warn-box">Le SBAR est la norme HAS de transmission urgente inter-professionnelle.</div>
+
+          <div class="section-title">B. Bilan SMUR terrain complet</div>
+          <div class="info-box mono">
+[S] Identité : homme 58 ans, ACR récupéré, domicile secteur nord, ROSC 16h14.<br>
+[B] ATCD : HTA/diabète ; traitement : ramipril 5mg ; allergies : inconnues ; contexte : malaise puis effondrement.<br>
+[A] FC 96, PA 102/64, SpO2 93% sous O2, FR 18, GCS 8, T° 35.8, glycémie 0.92 ; gestes : RCP + défibrillation ; médicaments : Adrénaline 1mg IV cycles impairs.<br>
+[R] Destination CHU réanimation, ETA 7 min, demande : box monitoré + équipe receveuse prête.
+          </div>
+
+          <div class="section-title">C. Erreurs fréquentes en transmission</div>
+          <table class="data-table">
+            <thead><tr><th>Erreur</th><th>Risque</th><th>Correction</th></tr></thead>
+            <tbody>
+              <tr><td>Omettre médicaments administrés</td><td>Surdosage accidentel à la réception</td><td>Citer molécule + dose + voie + heure</td></tr>
+              <tr><td>Oublier contexte cinétique</td><td>Sous-estimation gravité trauma</td><td>Préciser mécanisme : vitesse, hauteur, arme</td></tr>
+              <tr><td>Transmettre sans demande explicite</td><td>Équipe receveuse non préparée</td><td>Terminer par recommendation concrète</td></tr>
+              <tr><td>Donner constantes sans tendance</td><td>Snapshot trompeur</td><td>Préciser stabilité ou aggravation dans le temps</td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-title">D. Cas clinique — Rédiger un bilan SBAR</div>
+          <div class="warn-box">Situation : AVP, conducteur inconscient, PA 85/55, FC 132, SpO2 96%, GCS 9, fracture fémur gauche suspectée, Morphine 3mg IV sur ordre médecin.</div>
+          <div class="grid-2">
+            <div class="panel">
+              <div class="panel-header">Éléments à classer</div>
+              <div class="panel-body">
+                <p><strong>1)</strong> AVP haute cinétique<br>
+                  <button onclick="assignSbar(1,'S')">Affecter à S</button>
+                  <button onclick="assignSbar(1,'B')">Affecter à B</button>
+                  <button onclick="assignSbar(1,'A')">Affecter à A</button>
+                  <button onclick="assignSbar(1,'R')">Affecter à R</button></p>
+                <p><strong>2)</strong> ATCD HTA<br>
+                  <button onclick="assignSbar(2,'S')">S</button><button onclick="assignSbar(2,'B')">B</button><button onclick="assignSbar(2,'A')">A</button><button onclick="assignSbar(2,'R')">R</button></p>
+                <p><strong>3)</strong> PA 85/55 en aggravation<br>
+                  <button onclick="assignSbar(3,'S')">S</button><button onclick="assignSbar(3,'B')">B</button><button onclick="assignSbar(3,'A')">A</button><button onclick="assignSbar(3,'R')">R</button></p>
+                <p><strong>4)</strong> Transport CHU trauma, ETA 6 min<br>
+                  <button onclick="assignSbar(4,'S')">S</button><button onclick="assignSbar(4,'B')">B</button><button onclick="assignSbar(4,'A')">A</button><button onclick="assignSbar(4,'R')">R</button></p>
+                <p><strong>5)</strong> Morphine 3mg IV à 14h32<br>
+                  <button onclick="assignSbar(5,'S')">S</button><button onclick="assignSbar(5,'B')">B</button><button onclick="assignSbar(5,'A')">A</button><button onclick="assignSbar(5,'R')">R</button></p>
+                <p><strong>6)</strong> GCS 9<br>
+                  <button onclick="assignSbar(6,'S')">S</button><button onclick="assignSbar(6,'B')">B</button><button onclick="assignSbar(6,'A')">A</button><button onclick="assignSbar(6,'R')">R</button></p>
+                <p><strong>7)</strong> Conducteur, homme 52 ans<br>
+                  <button onclick="assignSbar(7,'S')">S</button><button onclick="assignSbar(7,'B')">B</button><button onclick="assignSbar(7,'A')">A</button><button onclick="assignSbar(7,'R')">R</button></p>
+                <p><strong>8)</strong> Traitement : ramipril 5mg<br>
+                  <button onclick="assignSbar(8,'S')">S</button><button onclick="assignSbar(8,'B')">B</button><button onclick="assignSbar(8,'A')">A</button><button onclick="assignSbar(8,'R')">R</button></p>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header">Répartition actuelle</div>
+              <div class="panel-body">
+                <div id="sbar-state" class="mono"></div>
+                <button onclick="checkSbar()">Vérifier le classement</button>
+                <div id="sbar-feedback"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <script>
+        const sbarAnswers = { 1: 'B', 2: 'B', 3: 'A', 4: 'R', 5: 'A', 6: 'A', 7: 'S', 8: 'B' };
+        const sbarAssign = {};
+        function renderSbarState() {
+          const labels = {
+            1: 'AVP haute cinétique',
+            2: 'ATCD HTA',
+            3: 'PA 85/55 en aggravation',
+            4: 'Transport CHU trauma, ETA 6 min',
+            5: 'Morphine 3mg IV à 14h32',
+            6: 'GCS 9',
+            7: 'Conducteur, homme 52 ans',
+            8: 'Traitement : ramipril 5mg'
+          };
+          let out = '';
+          Object.keys(labels).forEach(function (k) {
+            out += k + '. ' + labels[k] + ' => [' + (sbarAssign[k] || '?') + ']<br>';
+          });
+          document.getElementById('sbar-state').innerHTML = out;
+        }
+        function assignSbar(id, bucket) {
+          sbarAssign[id] = bucket;
+          renderSbarState();
+        }
+        function checkSbar() {
+          const target = document.getElementById('sbar-feedback');
+          let score = 0;
+          for (const k in sbarAnswers) {
+            if (sbarAssign[k] === sbarAnswers[k]) score++;
+          }
+          if (score === 8) {
+            target.innerHTML = '<div class="alert alert-green"><strong>Excellent.</strong> Classement SBAR complet et exploitable par l\'équipe receveuse.</div>';
+          } else {
+            target.innerHTML = '<div class="alert alert-red"><strong>Résultat :</strong> ' + score + '/8 correct. Reprendre la logique : S = identité/motif, B = contexte/ATCD, A = constantes/gestes, R = demande opérationnelle.</div>';
+          }
+        }
+        renderSbarState();
+      </script>
     </div>
 
-    <!-- MODULE 5 : TRIAGE -->
     <div id="mod-triage" class="module-content">
       <div class="panel">
         <div class="panel-header">🏷️ Module 05 — Triage · Durée : 2h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
-          <div class="section-title">Théorie</div>
+          <div class="section-title">A. Méthode SIEVE (multi-victimes)</div>
           <ul class="step-list">
-            <li class="step-item"><span class="step-num">M</span><span class="step-text">marche = UV</span></li>
-            <li class="step-item"><span class="step-num">V/F</span><span class="step-text">ventilation/FR anormale = IE</span></li>
-            <li class="step-item"><span class="step-num">T/C</span><span class="step-text">TRC &gt; 2s ou conscience altérée = IE/UR</span></li>
+            <li class="step-item"><span class="step-num">M</span><span class="step-text"><strong>Marche :</strong> patient ambulatoire orienté vers regroupement = <span class="badge badge-green">UV</span>. Exemple RP : victime se déplace seule après AVP.</span></li>
+            <li class="step-item"><span class="step-num">V</span><span class="step-text"><strong>Ventilation :</strong> pas de ventilation après ouverture VAS = priorisation extrême ; FR &lt;10 ou &gt;29 = <span class="badge badge-red">IE</span>.</span></li>
+            <li class="step-item"><span class="step-num">FR</span><span class="step-text"><strong>Fréquence respiratoire :</strong> zone 10–29/min plus favorable ; hors zone = urgence majeure.</span></li>
+            <li class="step-item"><span class="step-num">TRC</span><span class="step-text"><strong>Temps de recoloration capillaire :</strong> &gt;2s ou absence pouls radial = choc probable, classer <span class="badge badge-red">IE</span> ou <span class="badge badge-yellow">UR</span> selon conscience.</span></li>
           </ul>
-          <div class="section-title">Application IG</div>
+
+          <div class="section-title">B. Badges de triage SAMU 96</div>
           <table class="data-table">
-            <thead><tr><th>Badge</th><th>Indication</th><th>Moyen</th></tr></thead>
+            <thead><tr><th>Badge</th><th>Signification médicale</th><th>Critères d'attribution</th><th>Traduction IG Arma 3</th></tr></thead>
             <tbody>
-              <tr><td><span class="badge badge-red">IE</span></td><td>détresse vitale</td><td>P0/UMH</td></tr>
-              <tr><td><span class="badge badge-yellow">UR</span></td><td>urgence relative</td><td>P1-P2</td></tr>
-              <tr><td><span class="badge badge-green">UV</span></td><td>stable</td><td>P2-P3</td></tr>
+              <tr><td><span class="badge badge-red">IE</span></td><td>Immédiat/Extrême</td><td>Détresse vitale immédiate, ACR ou risque d'ACR</td><td>P0, UMH/HELISMUR</td></tr>
+              <tr><td><span class="badge badge-yellow">UR</span></td><td>Urgence Relative</td><td>Urgence potentielle, constantes limites</td><td>P1–P2, VSAV + médecin</td></tr>
+              <tr><td><span class="badge badge-green">UV</span></td><td>Urgence Vraie</td><td>Patient stable avec pathologie réelle</td><td>P2–P3, VSAV</td></tr>
+              <tr><td><span class="badge badge-dim">DCD</span></td><td>Décès constaté / réanimation futile</td><td>noFlow &gt; 800 ou constat clinique médical</td><td>Aucun moyen engagé</td></tr>
             </tbody>
           </table>
-          <div class="section-title">Scénario RP interactif</div>
-          <div class="warn-box">Victime marche, GCS 15, SpO2 97% : badge ?</div>
-          <label><input type="radio" name="m5" value="1"> UV</label><br>
-          <label><input type="radio" name="m5" value="0"> IE</label><br>
-          <button onclick="check('m5',1,'m5fb')">Valider</button>
-          <div id="m5fb"></div>
+          <div class="alert alert-red">Le badge DCD est une <strong>décision médicale exclusive</strong>. L'IDE ne pose jamais un badge DCD sans ordre médecin.</div>
+
+          <div class="section-title">C. Erreurs de triage fréquentes en RP</div>
+          <ul class="step-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">Sur-triage systématique en IE → saturation inutile des moyens lourds.</span></li>
+            <li class="step-item"><span class="step-num">2</span><span class="step-text">Sous-triage des patients silencieux mais instables.</span></li>
+            <li class="step-item"><span class="step-num">3</span><span class="step-text">Triage sans monitoring initial minimum (SpO2/FC).</span></li>
+            <li class="step-item"><span class="step-num">4</span><span class="step-text">Badge DCD posé par IDE seule.</span></li>
+            <li class="step-item"><span class="step-num">5</span><span class="step-text">Absence de réévaluation après geste thérapeutique.</span></li>
+          </ul>
+
+          <div class="section-title">D. Cas clinique — Multi-victimes AVP</div>
+          <div class="panel">
+            <div class="panel-header">Victime 1</div>
+            <div class="panel-body">
+              <p>Marche seule, plaie front saignante, GCS 15, SpO2 97%.</p>
+              <label><input type="radio" name="tr1" value="IE"> IE</label>
+              <label><input type="radio" name="tr1" value="UR"> UR</label>
+              <label><input type="radio" name="tr1" value="UV"> UV</label>
+              <label><input type="radio" name="tr1" value="DCD"> DCD</label>
+              <br><button onclick="validateTriage('tr1','UV','trfb1','Victime stable ambulatoire = UV (vert).')">Valider victime 1</button>
+              <div id="trfb1"></div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">Victime 2</div>
+            <div class="panel-body">
+              <p>Inconsciente, FR 32, pas de pouls radial.</p>
+              <label><input type="radio" name="tr2" value="IE"> IE</label>
+              <label><input type="radio" name="tr2" value="UR"> UR</label>
+              <label><input type="radio" name="tr2" value="UV"> UV</label>
+              <label><input type="radio" name="tr2" value="DCD"> DCD</label>
+              <br><button onclick="validateTriage('tr2','IE','trfb2','Détresse vitale immédiate = IE (rouge).')">Valider victime 2</button>
+              <div id="trfb2"></div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">Victime 3</div>
+            <div class="panel-body">
+              <p>Respire après ouverture VAS, FR 16, TRC 3s.</p>
+              <label><input type="radio" name="tr3" value="IE"> IE</label>
+              <label><input type="radio" name="tr3" value="UR"> UR</label>
+              <label><input type="radio" name="tr3" value="UV"> UV</label>
+              <label><input type="radio" name="tr3" value="DCD"> DCD</label>
+              <br><button onclick="validateTriage('tr3','UR','trfb3','Perfusion altérée sans arrêt = UR (jaune).')">Valider victime 3</button>
+              <div id="trfb3"></div>
+            </div>
+          </div>
         </div>
       </div>
+      <script>
+        function validateTriage(group, good, targetId, explain) {
+          const pick = document.querySelector('input[name="' + group + '"]:checked');
+          const target = document.getElementById(targetId);
+          if (!pick) {
+            target.innerHTML = '<div class="alert alert-yellow">Sélectionnez un badge.</div>';
+            return;
+          }
+          if (pick.value === good) {
+            target.innerHTML = '<div class="alert alert-green"><strong>Correct.</strong> ' + explain + '</div>';
+          } else {
+            target.innerHTML = '<div class="alert alert-red"><strong>Incorrect.</strong> Refaire le triage SIEVE en respectant FR, perfusion et conscience.</div>';
+          }
+        }
+      </script>
     </div>
 
-    <!-- MODULE 6 : SCÉNARIOS ARMA 3 -->
     <div id="mod-arma" class="module-content">
       <div class="panel">
         <div class="panel-header">🎮 Module 06 — Scénarios Arma 3 · Durée : 3h00 · <span style="color:var(--green,#22c55e)">DISPONIBLE</span></div>
         <div class="panel-body">
-          <div class="info-box">6 situations complètes avec ordre d'actions, check-list et justification.</div>
+          <div class="info-box">Ce module simule des situations terrain réelles du serveur SAMU 96. Chaque scénario est basé sur les mécaniques exactes du système médical IG. L'objectif est de savoir prendre les bonnes décisions dans l'ordre correct, en respectant les rôles IDE/IADE.</div>
 
-          <details><summary><strong>Scénario 1 — ACR</strong></summary><p>Etat : noflow_score 482, reviving_needed 62.</p><ul><li>O2</li><li>Adrénaline</li><li>RCP/Lucas</li><li>Défibrillation si rythme choquable</li></ul><p><em>Justification :</em> limiter noflow et atteindre seuil reviving.</p></details>
-          <details><summary><strong>Scénario 2 — Trauma balistique</strong></summary><p>Etat : life 38%, PA 78/48.</p><ul><li>Garrot</li><li>Bandage</li><li>Monitoring</li><li>Transport IE</li></ul><p><em>Justification :</em> damage control hémorragique.</p></details>
-          <details><summary><strong>Scénario 3 — Overdose opioïde</strong></summary><p>Etat : FR 5, GCS 5, SpO2 85%.</p><ul><li>O2</li><li>Appel médecin</li><li>Naloxone prescrite</li><li>Surveillance 45 min</li></ul><p><em>Justification :</em> antidote + risque re-narcotisation.</p></details>
-          <details><summary><strong>Scénario 4 — AVP polytrauma</strong></summary><p>Etat : GCS 7, FR 24, PA 95/60.</p><ul><li>Immobilisation rachis</li><li>O2</li><li>Contrôle hémorragie</li><li>Transport médicalisé</li></ul><p><em>Justification :</em> éviter aggravation neurologique.</p></details>
-          <details><summary><strong>Scénario 5 — Coma éthylique</strong></summary><p>Etat : glycémie 0.48 g/L, FR 12.</p><ul><li>PLS</li><li>O2</li><li>Surveillance continue</li><li>Appel médecin</li></ul><p><em>Justification :</em> prévention aspiration/hypoxie.</p></details>
-          <details><summary><strong>Scénario 6 — Brûlures</strong></summary><p>2 victimes, suspicion inhalation fumées.</p><ul><li>Victime A IE : O2 + médecin</li><li>Victime B UV : soins locaux</li><li>Transport hiérarchisé</li></ul><p><em>Justification :</em> priorité aux voies aériennes.</p></details>
+          <details>
+            <summary><strong>SCÉNARIO 1 — ACR</strong></summary>
+            <div class="warn-box">Contexte RP : « GOLF-96 sur intervention, homme 58 ans, ACR depuis environ 3 min à votre arrivée. noflow_score : 482. reviving_score_needed : 62. »</div>
+            <div class="info-box">Variables initiales : noflow_score = 482 ; reviving_score = 0 ; reviving_score_needed = 62 ; life% = 0.</div>
+            <ul class="step-list">
+              <li class="step-item"><input type="checkbox"> <span class="step-text">O2 immédiatement (noflow -100 à -200, puis progression ralentie à +0.5/s).</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Adrénaline (noflow -80 à -120).</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Massages manuels en attendant Lucas 3.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Poser Lucas 3 (aide mécanique, optimisation cycles).</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Défibrillateur si rythme indiqué (reviving +20 à +30 ; noflow -40 à -60 ; 1/6 ROSC instantané).</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">ECMO si noflow proche 800 sans ROSC.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Appel médecin pour décision d'arrêt si noflow &gt; 800.</span></li>
+            </ul>
+            <div class="alert alert-green">Résultat attendu : ROSC possible si reviving_score ≥ reviving_score_needed et noflow_score &lt; 800.</div>
+            <div class="alert alert-red">Erreur critique : retarder O2 ou interrompre RCP trop longtemps, conduisant à noflow &gt; 800 (réanimation quasi impossible, reviving_needed +40).</div>
+            <div class="info-box"><strong>Justification médicale :</strong> O2 en premier pour freiner anoxie ; adrénaline et compressions maintiennent perfusion ; ECMO = dernier recours quand l'algorithme classique échoue.</div>
+          </details>
+
+          <details>
+            <summary><strong>SCÉNARIO 2 — TRAUMA BALISTIQUE</strong></summary>
+            <div class="warn-box">Contexte RP : « Fusillade centre-ville. Victime GSW cuisse droite, saignement artériel, life% 38%, PA 78/48, FC 135. »</div>
+            <div class="info-box">Variables initiales : life% = 38 ; pain_level élevé ; hémorragie active.</div>
+            <ul class="step-list">
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Sécuriser la scène (FDO présentes ?).</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Garrot proximal cuisse droite.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Bandage hémostatique plaie (+20% vie IG).</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Monitoring Lifepak 15.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">O2.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Appel médecin (Morphine si prescrite).</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Badge IE.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Brancard Ferno F2 + transport.</span></li>
+            </ul>
+            <div class="alert alert-green">Résultat attendu : hémorragie contrôlée, stabilisation minimale avant évacuation.</div>
+            <div class="alert alert-red">Erreur critique : débuter remplissage/antalgie avant contrôle hémorragique.</div>
+            <div class="info-box"><strong>Justification médicale :</strong> damage control hémorragique : le garrot prime sur tout autre geste.</div>
+          </details>
+
+          <details>
+            <summary><strong>SCÉNARIO 3 — OVERDOSE STUPÉFIANT</strong></summary>
+            <div class="warn-box">Contexte RP : « Personne inconsciente dans un véhicule, seringues visibles. FR 5, GCS 5, SpO2 85%. »</div>
+            <div class="info-box">Variables initiales : FR 5 ; SpO2 85 ; GCS 5 ; suspicion opioïdes forte.</div>
+            <ul class="step-list">
+              <li class="step-item"><input type="checkbox"> <span class="step-text">O2.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Monitoring Lifepak 15.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Appel médecin.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Naloxone 0.4mg sur prescription.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Surveillance FR + conscience toutes les 5 min.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Si re-narcotisation à ~45 min : médecin + re-dose.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Badge selon évolution clinique.</span></li>
+            </ul>
+            <div class="alert alert-green">Résultat attendu : récupération respiratoire transitoire puis surveillance active prolongée.</div>
+            <div class="alert alert-red">Erreur critique : considérer le patient « guéri » après une seule dose de Naloxone.</div>
+            <div class="info-box"><strong>Justification médicale :</strong> la Naloxone a une durée brève ; le risque principal est la re-narcotisation différée.</div>
+          </details>
+
+          <details>
+            <summary><strong>SCÉNARIO 4 — AVP POLYTRAUMATISME</strong></summary>
+            <div class="warn-box">Contexte RP : « AVP frontal, conducteur inconscient éjecté. GCS 7, FR 24, PA 95/60, FC 118, suspicion fracture rachis. »</div>
+            <div class="info-box">Variables initiales : GCS 7 ; risque rachidien majeur ; instabilité hémodynamique relative.</div>
+            <ul class="step-list">
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Sécuriser scène.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Immobilisation rachis (pas de mobilisation intempestive).</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">O2.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Monitoring.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Bandage si hémorragie visible.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Lucas 3 si ACR.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Ferno F2 avec MID.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Badge IE + transport ; médecin décide IOT.</span></li>
+            </ul>
+            <div class="alert alert-green">Résultat attendu : transport sécurisé sans aggravation neurologique secondaire.</div>
+            <div class="alert alert-red">Erreur critique : mobilisation sans protection rachidienne.</div>
+            <div class="info-box"><strong>Justification médicale :</strong> la protection rachidienne précoce réduit le risque de lésion médullaire secondaire.</div>
+          </details>
+
+          <details>
+            <summary><strong>SCÉNARIO 5 — COMA ÉTHYLIQUE</strong></summary>
+            <div class="warn-box">Contexte RP : « Homme inconscient, odeur alcool forte, GCS 9, FR 12, SpO2 94%, glycémie 0.48 g/L. »</div>
+            <div class="info-box">Variables initiales : GCS 9 ; glycémie basse ; risque aspiration vomissements.</div>
+            <ul class="step-list">
+              <li class="step-item"><input type="checkbox"> <span class="step-text">PLS.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">O2.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Monitoring.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Appel médecin.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Traitement coma éthylique sur prescription (implémentation en cours).</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Surveillance horaire FC/SpO2/conscience.</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Aspiration mucosités en cas vomissements (Schiller).</span></li>
+              <li class="step-item"><input type="checkbox"> <span class="step-text">Badge UR.</span></li>
+            </ul>
+            <div class="alert alert-green">Résultat attendu : prévention inhalation + surveillance rapprochée en attente protocole complet.</div>
+            <div class="alert alert-red">Erreur critique : absence de PLS et défaut de protection des voies aériennes.</div>
+            <div class="info-box"><strong>Justification médicale :</strong> en attendant l'implémentation IG spécifique, prise en charge symptomatique et monitorage serré sont prioritaires.</div>
+          </details>
+
+          <details>
+            <summary><strong>SCÉNARIO 6 — BRÛLURES</strong></summary>
+            <div class="warn-box">Contexte RP : « Incendie industriel, 2 victimes. A : brûlures face + torse 2e degré, SpO2 93%, voix rauque. B : brûlure main droite 1er degré, stable. »</div>
+            <div class="info-box">Variables initiales : Victime A = suspicion inhalation ; Victime B = lésion superficielle localisée.</div>
+            <ul class="step-list">
+              <li class="step-item"><span class="step-num">A</span><span class="step-text"><input type="checkbox"> Victime A (IE) : O2 prioritaire (risque œdème VAS).</span></li>
+              <li class="step-item"><span class="step-num">A</span><span class="step-text"><input type="checkbox"> Biafine sur zones accessibles.</span></li>
+              <li class="step-item"><span class="step-num">A</span><span class="step-text"><input type="checkbox"> Badge IE + appel médecin urgent (risque IOT rapide).</span></li>
+              <li class="step-item"><span class="step-num">A</span><span class="step-text"><input type="checkbox"> Ne pas poser de pansements occlusifs sur brûlures étendues.</span></li>
+              <li class="step-item"><span class="step-num">B</span><span class="step-text"><input type="checkbox"> Victime B (UV) : Biafine + badge UV + surveillance + transport différé.</span></li>
+            </ul>
+            <div class="alert alert-green">Résultat attendu : priorisation correcte des voies aériennes de la victime A.</div>
+            <div class="alert alert-red">Erreur critique : traiter d'abord la victime B et retarder la prise en charge inhalation fumées.</div>
+            <div class="info-box"><strong>Justification médicale :</strong> inhalation de fumées → œdème VAS progressif, d'où possible IOT préventive sur décision médecin. Biafine limitée aux brûlures superficielles et non anti-infectieuse.</div>
+          </details>
         </div>
       </div>
     </div>
 
-    <div class="section-title" style="margin-top:32px;">Tableau des compétences visées</div>
+    <div class="section-title" style="margin-top:32px;">Tableau des compétences</div>
     <table class="data-table">
       <thead><tr><th>Compétence</th><th>Domaine</th><th>Niveau</th></tr></thead>
       <tbody>
-        <tr><td>Adapter une thérapeutique d'urgence au terrain</td><td>Pharmacologie</td><td><span class="badge badge-red">EXPERT</span></td></tr>
-        <tr><td>Réaliser gestes techniques sécurisés</td><td>Gestes</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
-        <tr><td>Assurer surveillance clinique</td><td>Surveillance</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
-        <tr><td>Transmettre au format SBAR</td><td>Communication</td><td><span class="badge badge-red">EXPERT</span></td></tr>
-        <tr><td>Trier multi-victimes (SIEVE)</td><td>Triage</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
-        <tr><td>Agir en scénarios SAMU 96 Arma 3</td><td>Opérationnel</td><td><span class="badge badge-red">EXPERT</span></td></tr>
+        <tr><td>Ajuster une thérapeutique d'urgence selon indication, dose et contre-indication</td><td>Pharmacologie</td><td><span class="badge badge-red">EXPERT</span></td></tr>
+        <tr><td>Réaliser et assister les gestes techniques critiques (VVP/IOT/Défibrillation)</td><td>Gestes techniques</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
+        <tr><td>Conduire une surveillance clinique et monitorée continue, incluant post-ROSC</td><td>Surveillance</td><td><span class="badge badge-red">EXPERT</span></td></tr>
+        <tr><td>Transmettre un bilan opérationnel au format SBAR conforme HAS</td><td>Communication clinique</td><td><span class="badge badge-red">EXPERT</span></td></tr>
+        <tr><td>Trier des victimes multiples avec la méthode SIEVE et badges SAMU 96</td><td>Triage</td><td><span class="badge badge-green">INTERMÉDIAIRE</span></td></tr>
+        <tr><td>Décider l'ordre d'actions optimal en situation terrain Arma 3 sous contraintes de score</td><td>Scénarios Arma 3</td><td><span class="badge badge-red">EXPERT</span></td></tr>
       </tbody>
     </table>
 
